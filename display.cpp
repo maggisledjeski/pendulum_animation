@@ -46,8 +46,29 @@ void display(void)
              (GLint)     10 );
     glPopMatrix();
 
+	glPushMatrix();
+	glTranslated(0.0,0.0,-6.0);
+	gluCylinder(gluNewQuadric(), 
+			(GLdouble) 0.05, //radius of the cylinder at z=0
+            (GLdouble) 0.05, //radius of the cylinder at z=height
+            (GLdouble) 4.0, //height of the cylinder
+            (GLint)    20,
+            (GLint)    20 );
+	glPopMatrix();
 
-    glFlush();
+    glPushMatrix();
+	glTranslated(0.0,0.0,-6.0);
+    //glRotated();
+	glColor3f (0.0,1.0,1.0);
+	gluCylinder(gluNewQuadric(),
+            (GLdouble) 0.05, //radius of the cylinder at z=0
+            (GLdouble) 0.05, //radius of the cylinder at z=height
+            (GLdouble) 2.0, //height of the cylinder
+            (GLint)    20,
+            (GLint)    20 );
+	glPopMatrix();
+	
+	glFlush();
 	//fps option 2 call here
 	showFPS();
     glutSwapBuffers();
