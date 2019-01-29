@@ -15,25 +15,37 @@ void display(void)
 
   	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     glLoadIdentity();   // Call this before setting the viewing position 
-    gluLookAt( 20.0,   0.0, 5.0,  // Eye
+    /*gluLookAt(0.0,0.0,0.0,
+			0.0,0.0,0.0,
+			0.0,0.0,1.0);
+	*/gluLookAt( 10.0,   0.0, 5.0,  // Eye
                 0.0,   0.0, 0.0,  // Center
                 0.0,   0.0, 1.0); // Up
-    glEnable(GL_DEPTH_TEST);
+    
+	glEnable(GL_DEPTH_TEST);
     glColor3f(0.0,1.0,0.0);
 
 	glPushMatrix();
     glScaled(1.0,1.0,-1.0);
-	glTranslated(2.0,0.0,0.0);
+	glTranslated(3.0,0.0,0.0);
     glColor3f (0.0,0.0,1.0);
     glRotated((double)180*theta/M_PI,1,0,0);
 	glRotated((double)180*theta/M_PI,0,0,1);
 	gluCylinder(gluNewQuadric(),
-            (GLdouble) 0.1,
-            (GLdouble) 0.1,
-            (GLdouble) 4.0,
+            (GLdouble) 0.1,	//radius of the cylinder at z=0
+            (GLdouble) 0.1,	//radius of the cylinder at z=height
+            (GLdouble) 4.0,	//height of the cylinder
             (GLint)    20,
             (GLint)    20 );
+    
+	glTranslated(0.0,0.0,4.0); //moves the sphere to the swinging end of the pendulum
+    glColor3f (1.0,0.0,0.0);
+    gluSphere(gluNewQuadric(),
+             (GLdouble) 0.5,	//radius
+             (GLint)     10,
+             (GLint)     10 );
     glPopMatrix();
+
 
     glFlush();
 	//fps option 2 call here
@@ -53,6 +65,7 @@ void drawString(GLuint x, GLuint y, void *font, const char* string)
 
 void showFPS()
 {
+	extern double omega;
 	extern unsigned frames;
 	extern int oldtime;
 	extern int WINDOW_HEIGHT;
@@ -73,6 +86,9 @@ void showFPS()
 	char *charstring = (char*) malloc(12*sizeof(char));
 	sprintf(charstring,"FPS: %6.1f",fps);
 	
+	char *omegastring = (char*) malloc(12*sizeof(char));
+	sprintf(omegastring,"Omega: %6.1f",omega);
+
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();
@@ -84,6 +100,7 @@ void showFPS()
 
 	glColor3f(255,255,0);
 	drawString(50,50,GLUT_BITMAP_HELVETICA_12,charstring);
+	drawString(50,35,GLUT_BITMAP_HELVETICA_12,omegastring);	
 
 	glPopMatrix();
 	glMatrixMode(GL_PROJECTION);

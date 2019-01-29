@@ -9,7 +9,11 @@ void reshape (int w, int h)
     GLdouble theta, aspectRatio;
 
    	float l, r, b, t, n, f;
-   	l = -1.5; r = 1.5;   // l=left, r=right
+   	//l = -1.0;	r = 1.0;
+	//b = -1.0;	t = 1.0;
+	//n = 1.0;	f = 20.0;
+	
+	l = -1.5; r = 1.5;   // l=left, r=right
    	b = -1.0; t = 1.0;   // b=bottom, t=top
    	n =  1.0; f = 20.0;  // n=near, f=far  
 
