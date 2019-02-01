@@ -15,19 +15,19 @@ void display(void)
 
   	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     glLoadIdentity();   // Call this before setting the viewing position 
-    /*gluLookAt(0.0,0.0,0.0,
+    gluLookAt(10.0,0.0,0.0,
 			0.0,0.0,0.0,
 			0.0,0.0,1.0);
-	*/gluLookAt( 10.0,   0.0, 5.0,  // Eye
+	/*gluLookAt( 10.0,   0.0, 5.0,  // Eye
                 0.0,   0.0, 0.0,  // Center
                 0.0,   0.0, 1.0); // Up
-    
+    */
 	glEnable(GL_DEPTH_TEST);
     glColor3f(0.0,1.0,0.0);
 
 	glPushMatrix();
     glScaled(1.0,1.0,-1.0);
-	glTranslated(3.0,0.0,0.0);
+	//glTranslated(3.0,0.0,0.0);
     glColor3f (0.0,0.0,1.0);
     glRotated((double)180*theta/M_PI,1,0,0);
 	glRotated((double)180*theta/M_PI,0,0,1);
@@ -47,22 +47,30 @@ void display(void)
     glPopMatrix();
 
 	glPushMatrix();
-	glTranslated(0.0,0.0,-6.0);
+	//glTranslated(0.0,0.0,0.5);
+	//glRotated(90.0,1,0,0);
+	//glRotated(90.0,0,1,0);
+	//glTranslated(0.0,0.0,2.0);
 	gluCylinder(gluNewQuadric(), 
 			(GLdouble) 0.05, //radius of the cylinder at z=0
             (GLdouble) 0.05, //radius of the cylinder at z=height
-            (GLdouble) 4.0, //height of the cylinder
+            (GLdouble) 0.25, //height of the cylinder
             (GLint)    20,
             (GLint)    20 );
 	glPopMatrix();
 
     glPushMatrix();
-	glTranslated(0.0,0.0,-6.0);
-    //glRotated();
+	glTranslated(0.0,0.0,1.0);
+	//glColor3f (0.0,1.0,1.0);
+	glRotated(90.0,0,1,0);
+    //glRotated(90.0,0,0,1);
+	//glTranslated(0.0,2.0,0.0);
+	//glRotated(90.0,0,0,1);
 	glColor3f (0.0,1.0,1.0);
+	//glTranslated(0.0,0.0,2.0);
 	gluCylinder(gluNewQuadric(),
-            (GLdouble) 0.05, //radius of the cylinder at z=0
-            (GLdouble) 0.05, //radius of the cylinder at z=height
+            (GLdouble) 0.5, //radius of the cylinder at z=0
+            (GLdouble) 0.5, //radius of the cylinder at z=height
             (GLdouble) 2.0, //height of the cylinder
             (GLint)    20,
             (GLint)    20 );
