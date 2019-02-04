@@ -2,7 +2,7 @@ CC = g++
 CFLAGS = -O
 LDLIBS =  -lglut -lGL -lGLU -lm
 HEADERS = includes.h prototypes.h
-OBJS = init.o reshape.o display.o physics.o step.o
+OBJS = init.o reshape.o display.o physics.o step.o keyboard.o
 
 run :   main.o $(OBJS)
 	$(CC) $(CFLAGS) main.o $(OBJS) -o run $(LDLIBS)
@@ -22,8 +22,11 @@ display.o : display.cpp $(HEADERS)
 physics.o : physics.cpp $(HEADERS)
 	$(CC) $(CFLAGS) physics.cpp -c
 
-step.0 : step.cpp $(HEADERS)
+step.o : step.cpp $(HEADERS)
 	$(CC) $(CFLAGS) step.cpp -c
+
+keyboard.o : keyboard.cpp $(HEADERS)
+	$(CC) $(CFLAGS) keyboard.cpp -c
 
 clean:
 	rm *.o

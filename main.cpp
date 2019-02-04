@@ -16,7 +16,7 @@ int main(int argc, char** argv)
     init();
 	//glutMouseFunc(mouse);
     //glutSpecialFunc(processSpecialKeys);
-    //glutKeyboardFunc(keyboard);
+    glutKeyboardFunc(keyboard);
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     glutIdleFunc(stepCall);

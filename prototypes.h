@@ -9,6 +9,7 @@ void step(double *t, double *theta, double *omega );
 void stepCall(void);
 void showFPS(void);
 void drawString(GLuint x, GLuint y, void *font, const char* string);
+void keyboard(unsigned char key, int x, int y);
 //#include "structs.h"
 
 /*void init(void);
