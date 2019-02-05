@@ -8,7 +8,7 @@ void stepCall()
     extern double t, theta, omega;
 
 	step(&t, &theta, &omega);	
-	
+	//cout << "ptime: " << t << endl;
 	glutPostRedisplay();
 }
 

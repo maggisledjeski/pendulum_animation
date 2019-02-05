@@ -207,6 +207,7 @@ void display(void)
 	
 	glFlush();
 	//fps option 2 call here
+	//omegaTime();
 	showFPS();
     omegaTime();
 //    framesPeriod();
@@ -243,15 +244,20 @@ void showFPS()
 {
 	extern double omega;
 	extern unsigned frames;
-	extern unsigned pframes;
+	extern int pframes;
 	extern int oldtime;
 	extern int WINDOW_HEIGHT;
 	extern int WINDOW_WIDTH;
+	extern double pttotal;
+
 	double width = WINDOW_WIDTH;
 	double height = WINDOW_HEIGHT;
+
 	static float fps;
+
 	frames++;
 	pframes++;
+	//cout << pframes << endl;
 	int currtime = glutGet(GLUT_ELAPSED_TIME);
 	
 	if(currtime - oldtime > 1000)
@@ -261,11 +267,17 @@ void showFPS()
 		frames = 0;
 	} 
 
-	char *charstring = (char*) malloc(12*sizeof(char));
-	sprintf(charstring,"FPS: %6.1f",fps);
+	char *fpsstring = (char*) malloc(12*sizeof(char));
+	sprintf(fpsstring,"FPS: %6.1f",fps);
 	
-	char *omegastring = (char*) malloc(12*sizeof(char));
-	sprintf(omegastring,"Omega: %6.1f",omega);
+	char *fppstring = (char*) malloc(12*sizeof(char));
+    sprintf(fppstring,"FPP: %6.1d",pframes);
+
+	//char *omegastring = (char*) malloc(12*sizeof(char));
+	//sprintf(omegastring,"Omega: %6.1f",omega);
+	
+	char *perstring = (char*) malloc(12*sizeof(char));
+	sprintf(perstring,"Period: %6.1f",pttotal);
 
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
@@ -277,15 +289,18 @@ void showFPS()
 	glLoadIdentity();
 
 	glColor3f(255,255,0);
-	drawString(50,50,GLUT_BITMAP_HELVETICA_12,charstring);
-	drawString(50,35,GLUT_BITMAP_HELVETICA_12,omegastring);	
+	drawString(50,50,GLUT_BITMAP_HELVETICA_12,fpsstring);
+	drawString(50,35,GLUT_BITMAP_HELVETICA_12,fppstring);	
+	drawString(50,20,GLUT_BITMAP_HELVETICA_12,perstring);
 
 	glPopMatrix();
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
 	glMatrixMode(GL_MODELVIEW);
 	
-	free(charstring);
+	free(fpsstring);
+	free(fppstring);
+	free(perstring);
 }
 
 #endif

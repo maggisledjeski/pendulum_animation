@@ -4,7 +4,7 @@
 #include "includes.h"
 
 unsigned frames = 0;
-unsigned pframes = 0;
+int pframes = 0;
 int oldtime = 0;
 int WINDOW_HEIGHT = 600;
 int WINDOW_WIDTH = 600;
@@ -19,5 +19,7 @@ bool sc2 = false;
 char osign = 'n';
 int oldptime = 0;
 int totaltime = 0;
+double oldppt = 0.0;
+double pttotal = 0.0;
 
 #endif

@@ -34,50 +34,71 @@ void omegaTime()
     extern int oldptime;
     extern int totaltime;
 	extern unsigned frames;
-	extern unsigned pframes;
+	extern int pframes;
+	extern double t;
+	extern double oldppt;
+	extern double pttotal;
 
+	double currpt = t;
+	//double pttotal;
     int currtime = glutGet(GLUT_ELAPSED_TIME);
-    
+    //pframes++;
     if(omega <= -0.0 && osign == 'n')
     {
         osign = 'n';
         totaltime = totaltime + (currtime - oldptime);
+		pttotal = pttotal + (currpt - oldppt);
         oldptime = currtime;
+		oldppt = currpt;
     } else if(omega > 0.0 && osign == 'p')
     {
         osign = 'p';
         totaltime = totaltime + (currtime - oldptime);
         oldptime = currtime;
+		pttotal = pttotal + (currpt - oldppt);
+        oldppt = currpt;
     } else if(omega <= -0.0 && osign == 'p' && sc1 == false && sc2 == false)
     {
         osign = 'n';
         sc1 = true;
         totaltime = totaltime + (currtime - oldptime);
         oldptime = currtime;
+		pttotal = pttotal + (currpt - oldppt);
+        oldppt = currpt;
     } else if(omega > 0.0 && osign == 'n' && sc1 == false && sc2 == false)
     {
         osign = 'p';
         sc1 = true;
         totaltime = totaltime + (currtime - oldptime);
         oldptime = currtime;
+		pttotal = pttotal + (currpt - oldppt);
+        oldppt = currpt;
     } else if(omega <= -0.0 && osign == 'p' && sc1 == true && sc2 == false)
     {
         osign = 'n';
         totaltime = totaltime + (currtime - oldptime);
+		pttotal = pttotal + (currpt - oldppt);
         cout << "twice: " << totaltime << endl;
 		cout << "pframes: " << pframes << endl;
+		cout << "actual pend period: " << pttotal << endl;
         sc1 = false;
         totaltime = 0;
+		pttotal = 0;
+        oldppt = currpt;
         oldptime = currtime;
 		pframes = 0;
     } else if(omega > 0.0 && osign == 'n' && sc1 == true && sc2 == false)
     {
         osign = 'p';
         totaltime = totaltime + (currtime - oldptime);
+		pttotal = pttotal + (currpt - oldppt);
         cout << "twice: " << totaltime << endl;
 		cout << "pframes: " << pframes << endl;
+		cout << "actual pend period: " << pttotal << endl;
         sc1 = false;
         totaltime = 0;
+		pttotal = 0;
+        oldppt = currpt;
         oldptime = currtime;
 		pframes = 0;
     }
