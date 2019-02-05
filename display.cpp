@@ -111,7 +111,98 @@ void display(void)
             (GLint)    20 );
     glPopMatrix();*/
 
+	/*top*/
+	glPushMatrix();
+	glTranslated(0.0,0.0,-2.5);
+	glRotated(45.0,0,0,1);
+	glColor3f(1.0,0.0,0.0);
+	glBegin(GL_POLYGON);
+	glVertex2f(-2.12,-2.12);	//left
+	glVertex2f(-2.12,2.12);	//back
+	glVertex2f(2.12,2.12);	//right
+	glVertex2f(2.12,-2.12);	//front
+	glEnd();
+	glPopMatrix();
 
+	/*bottom*/
+	glPushMatrix();
+    glTranslated(0.0,0.0,-3.0);
+    glRotated(45.0,0,0,1);
+    glColor3f(1.0,1.0,0.0);
+    glBegin(GL_POLYGON);
+    glVertex2f(-2.12,-2.12);  //left
+    glVertex2f(-2.12,2.12);   //back
+    glVertex2f(2.12,2.12);    //right
+    glVertex2f(2.12,-2.12);   //front
+    glEnd();
+    glPopMatrix();
+
+	/*person*/
+	glPushMatrix(); 
+	gluCylinder(gluNewQuadric(),
+            (GLdouble) 0.1, //radius of the cylinder at z=0
+            (GLdouble) 0.1, //radius of the cylinder at z=height
+            (GLdouble) 1.72, //height of the cylinder
+            (GLint)    20,
+            (GLint)    20 );
+    glPopMatrix();
+	/*head*/
+	glPushMatrix();
+	glTranslated(0.0,1.0,1.52);
+	gluSphere(gluNewQuadric(),
+             (GLdouble) 0.2,   //radius
+             (GLint)     10,
+             (GLint)     10 );
+    glPopMatrix();
+	/*body*/
+	glPushMatrix();
+	glTranslated(0.0,1.0,0.52);
+	gluCylinder(gluNewQuadric(),
+            (GLdouble) 0.05, //radius of the cylinder at z=0
+            (GLdouble) 0.05, //radius of the cylinder at z=height
+            (GLdouble) 0.8, //height of the cylinder
+            (GLint)    20,
+            (GLint)    20 );
+	glPopMatrix();
+	/*left leg*/
+    glPushMatrix();
+    glTranslated(0.0,1.0,0.52);
+    glRotated(-45.0,1,0,0);
+	glScaled(1.0,1.0,-1.0);
+	gluCylinder(gluNewQuadric(),
+            (GLdouble) 0.05, //radius of the cylinder at z=0
+            (GLdouble) 0.05, //radius of the cylinder at z=height
+            (GLdouble) 0.52, //height of the cylinder
+            (GLint)    20,
+            (GLint)    20 );
+    glPopMatrix();
+	 /*right leg*/
+    glPushMatrix();
+    glTranslated(0.0,1.0,0.52);
+    glRotated(45.0,1,0,0);
+    glScaled(1.0,1.0,-1.0);
+    gluCylinder(gluNewQuadric(),
+            (GLdouble) 0.05, //radius of the cylinder at z=0
+            (GLdouble) 0.05, //radius of the cylinder at z=height
+            (GLdouble) 0.52, //height of the cylinder
+            (GLint)    20,
+            (GLint)    20 );
+    glPopMatrix();
+	 /*arms*/
+    glPushMatrix();
+    glTranslated(0.0,1.35,0.9);
+    glRotated(90.0,0,1,0);
+    glRotated(90.0,1,0,0);
+	//glTranslated(0.0,0.3,0.0);
+    gluCylinder(gluNewQuadric(),
+            (GLdouble) 0.05, //radius of the cylinder at z=0
+            (GLdouble) 0.05, //radius of the cylinder at z=height
+            (GLdouble) 0.7, //height of the cylinder
+            (GLint)    20,
+            (GLint)    20 );
+    glPopMatrix();
+
+	
 	glFlush();
 	//fps option 2 call here
 	showFPS();
