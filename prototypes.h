@@ -5,6 +5,7 @@ void init(void);
 void display(void);
 void reshape (int , int );
 void checkFPS(int val);
+void omegaTime(void);//int val);
 void step(double *t, double *theta, double *omega );
 void stepCall(void);
 void showFPS(void);

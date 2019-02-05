@@ -45,7 +45,7 @@ void display(void)
 	glTranslated(0.0,0.0,1.0); //moves the sphere to the swinging end of the pendulum
     glColor3f (1.0,0.0,0.0);
     gluSphere(gluNewQuadric(),
-             (GLdouble) 0.5,	//radius
+             (GLdouble) 0.25,	//radius
              (GLint)     10,
              (GLint)     10 );
     glPopMatrix();
@@ -94,28 +94,47 @@ void display(void)
 	gluCylinder(gluNewQuadric(),
             (GLdouble) 3.0, //radius of the cylinder at z=0
             (GLdouble) 3.0, //radius of the cylinder at z=height
-            (GLdouble) 0.45, //height of the cylinder
+            (GLdouble) 0.5, //height of the cylinder
             (GLint)    4,
             (GLint)    20 );
     glPopMatrix();
 
-	glPushMatrix();
+	/*glPushMatrix();
     glTranslated(0.0,0.0,-3.0);
-	glRotated(90.0,1,1,0);
+    glRotated(90.0,1,1,0);//1,1,0
+    glColor3f (1.0,0.0,1.0);
     gluCylinder(gluNewQuadric(),
-            (GLdouble) 2.0, //radius of the cylinder at z=0
-            (GLdouble) 2.0, //radius of the cylinder at z=height
-            (GLdouble) 2.0, //height of the cylinder
+            (GLdouble) 3.0,//1.45, //radius of the cylinder at z=0
+            (GLdouble) 3.0,//0.45, //radius of the cylinder at z=height
+            (GLdouble) 3.0, //height of the cylinder
             (GLint)    4,
             (GLint)    20 );
-    glPopMatrix();
+    glPopMatrix();*/
 
 
 	glFlush();
 	//fps option 2 call here
 	showFPS();
+    omegaTime();
+//    framesPeriod();
     glutSwapBuffers();
 }
+
+/*void framesPeriod()
+{
+    extern double omega;
+    extern unsigned frames;
+    extern int oldptime;
+    
+    int currtime = glutGet(GLUT_ELAPSED_TIME);
+    if(currtime - oldptime > 4000)
+    {
+        //fps = frames*1000.0/(currtime-oldtime);
+        oldptime = currtime;
+        frames = 0;
+    }
+
+}*/
 
 void drawString(GLuint x, GLuint y, void *font, const char* string)
 {
@@ -138,15 +157,15 @@ void showFPS()
 	double height = WINDOW_HEIGHT;
 	static float fps;
 	frames++;
-	int currtime=glutGet(GLUT_ELAPSED_TIME);
+	int currtime = glutGet(GLUT_ELAPSED_TIME);
 	
 	if(currtime - oldtime > 1000)
 	{
 		fps = frames*1000.0/(currtime-oldtime);
 		oldtime = currtime;
 		frames = 0;
-	}
-	
+	} 
+
 	char *charstring = (char*) malloc(12*sizeof(char));
 	sprintf(charstring,"FPS: %6.1f",fps);
 	
