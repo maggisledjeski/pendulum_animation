@@ -13,9 +13,10 @@ void display(void)
 	extern double eyex;
 	extern double eyey;
 	extern double eyez;
+	extern unsigned pframes;
 
 	//used for fps option 3
-	//frames++;
+	//pframes++;
 
   	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     glLoadIdentity();   // Call this before setting the viewing position 
@@ -31,21 +32,21 @@ void display(void)
 
 	glPushMatrix();
     glScaled(1.0,1.0,-1.0);
-	glTranslated(2.0,0.0,0.0);
+	glTranslated(2.0,0.0,0.2);
     glColor3f (0.0,0.0,1.0);
     glRotated((double)180*theta/M_PI,1,0,0);
 	glRotated((double)180*theta/M_PI,0,0,1);
 	gluCylinder(gluNewQuadric(),
-            (GLdouble) 0.1,	//radius of the cylinder at z=0
-            (GLdouble) 0.1,	//radius of the cylinder at z=height
-            (GLdouble) 1.0,	//height of the cylinder
+            (GLdouble) 0.05,	//radius of the cylinder at z=0
+            (GLdouble) 0.05,	//radius of the cylinder at z=height
+            (GLdouble) 0.8,	//height of the cylinder
             (GLint)    20,
             (GLint)    20 );
     
-	glTranslated(0.0,0.0,1.0); //moves the sphere to the swinging end of the pendulum
+	glTranslated(0.0,0.0,0.8); //moves the sphere to the swinging end of the pendulum
     glColor3f (1.0,0.0,0.0);
     gluSphere(gluNewQuadric(),
-             (GLdouble) 0.25,	//radius
+             (GLdouble) 0.1,	//radius, diameter is .2 thus total length of pendulum is 1 meter
              (GLint)     10,
              (GLint)     10 );
     glPopMatrix();
@@ -65,13 +66,13 @@ void display(void)
 
 	/*horizontal pole*/
     glPushMatrix();
-	//glTranslated(0.0,0.0,1.0);
+	glTranslated(-0.2,0.0,0.0);
 	glRotated(90.0,0,1,0);
 	glColor3f (0.0,1.0,1.0);
 	gluCylinder(gluNewQuadric(),
             (GLdouble) 0.2, //radius of the cylinder at z=0
             (GLdouble) 0.2, //radius of the cylinder at z=height
-            (GLdouble) 2.0, //height of the cylinder
+            (GLdouble) 2.2, //height of the cylinder
             (GLint)    20,
             (GLint)    20 );
 	glPopMatrix();
@@ -139,6 +140,7 @@ void display(void)
 
 	/*person*/
 	glPushMatrix(); 
+	glTranslated(0.0,2.0,0.0);
 	gluCylinder(gluNewQuadric(),
             (GLdouble) 0.1, //radius of the cylinder at z=0
             (GLdouble) 0.1, //radius of the cylinder at z=height
@@ -241,6 +243,7 @@ void showFPS()
 {
 	extern double omega;
 	extern unsigned frames;
+	extern unsigned pframes;
 	extern int oldtime;
 	extern int WINDOW_HEIGHT;
 	extern int WINDOW_WIDTH;
@@ -248,6 +251,7 @@ void showFPS()
 	double height = WINDOW_HEIGHT;
 	static float fps;
 	frames++;
+	pframes++;
 	int currtime = glutGet(GLUT_ELAPSED_TIME);
 	
 	if(currtime - oldtime > 1000)

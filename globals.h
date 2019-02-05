@@ -4,6 +4,7 @@
 #include "includes.h"
 
 unsigned frames = 0;
+unsigned pframes = 0;
 int oldtime = 0;
 int WINDOW_HEIGHT = 600;
 int WINDOW_WIDTH = 600;

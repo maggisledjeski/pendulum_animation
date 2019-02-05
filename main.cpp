@@ -21,7 +21,7 @@ int main(int argc, char** argv)
     glutReshapeFunc(reshape);
     glutIdleFunc(stepCall);
     //used for fps option 3
-	//glutTimerFunc(0,omegaTime,0);
+	//glutTimerFunc(0,checkFPS,0);
 	glutMainLoop();
     return 0;
 }
@@ -33,6 +33,8 @@ void omegaTime()
     extern char osign;
     extern int oldptime;
     extern int totaltime;
+	extern unsigned frames;
+	extern unsigned pframes;
 
     int currtime = glutGet(GLUT_ELAPSED_TIME);
     
@@ -63,17 +65,21 @@ void omegaTime()
         osign = 'n';
         totaltime = totaltime + (currtime - oldptime);
         cout << "twice: " << totaltime << endl;
+		cout << "pframes: " << pframes << endl;
         sc1 = false;
         totaltime = 0;
         oldptime = currtime;
+		pframes = 0;
     } else if(omega > 0.0 && osign == 'n' && sc1 == true && sc2 == false)
     {
         osign = 'p';
         totaltime = totaltime + (currtime - oldptime);
         cout << "twice: " << totaltime << endl;
+		cout << "pframes: " << pframes << endl;
         sc1 = false;
         totaltime = 0;
         oldptime = currtime;
+		pframes = 0;
     }
     
 }
@@ -86,9 +92,10 @@ void checkFPS(int val)
 	if(0 != val)
 	{
 //		printf("The framerate is %d fps.\n", frames);
+		omegaTime();
 	}
 	
-	frames = 0;
+	//frames = 0;
 	glutTimerFunc(1000,checkFPS,1);
 }
 
