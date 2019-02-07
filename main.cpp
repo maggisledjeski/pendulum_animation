@@ -38,11 +38,12 @@ void omegaTime()
 	extern double t;
 	extern double oldppt;
 	extern double pttotal;
-
+	extern float dfr;
+	
 	double currpt = t;
-	//double pttotal;
+	
     int currtime = glutGet(GLUT_ELAPSED_TIME);
-    //pframes++;
+    
     if(omega <= -0.0 && osign == 'n')
     {
         osign = 'n';
@@ -78,10 +79,15 @@ void omegaTime()
         osign = 'n';
         totaltime = totaltime + (currtime - oldptime);
 		pttotal = pttotal + (currpt - oldppt);
-        cout << "twice: " << totaltime << endl;
+        cout << "spp: " << totaltime << endl;
 		cout << "pframes: " << pframes << endl;
 		cout << "actual pend period: " << pttotal << endl;
-        sc1 = false;
+        
+		//calculate dfr
+		dfr = (float) pframes/totaltime;
+		cout << "dfr: " << dfr << endl;
+		
+		sc1 = false;
         totaltime = 0;
 		pttotal = 0;
         oldppt = currpt;
@@ -92,10 +98,15 @@ void omegaTime()
         osign = 'p';
         totaltime = totaltime + (currtime - oldptime);
 		pttotal = pttotal + (currpt - oldppt);
-        cout << "twice: " << totaltime << endl;
+        cout << "spp: " << totaltime << endl;
 		cout << "pframes: " << pframes << endl;
 		cout << "actual pend period: " << pttotal << endl;
-        sc1 = false;
+        
+		//calculate dfr
+		dfr = (float) pframes/totaltime;
+        cout << "dfr: " << dfr << endl;
+		
+		sc1 = false;
         totaltime = 0;
 		pttotal = 0;
         oldppt = currpt;

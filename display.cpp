@@ -13,20 +13,14 @@ void display(void)
 	extern double eyex;
 	extern double eyey;
 	extern double eyez;
-	extern unsigned pframes;
-
-	//used for fps option 3
-	//pframes++;
-
-  	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+	extern unsigned pframes;	//frames per period
+	extern float dfr;	//desired frame rate
+	
+	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     glLoadIdentity();   // Call this before setting the viewing position 
    	gluLookAt(eyex,eyey,eyez,
 			0.0,0.0,0.0,
 			0.0,0.0,1.0);
-	/*gluLookAt( 10.0,   0.0, 5.0,  // Eye
-                0.0,   0.0, 0.0,  // Center
-                0.0,   0.0, 1.0); // Up
-    */
 	glEnable(GL_DEPTH_TEST);
     glColor3f(0.0,1.0,0.0);
 
@@ -204,31 +198,23 @@ void display(void)
             (GLint)    20 );
     glPopMatrix();
 
-	
 	glFlush();
-	//fps option 2 call here
-	//omegaTime();
+	
 	showFPS();
     omegaTime();
-//    framesPeriod();
-    glutSwapBuffers();
+	glutSwapBuffers();
+	glutLockFrameRate(dfr);
 }
 
-/*void framesPeriod()
+void glutLockFrameRate(float desiredFrameRate)
 {
-    extern double omega;
-    extern unsigned frames;
-    extern int oldptime;
+    int milliWait = (int)(1.0/desiredFrameRate*1000);
     
-    int currtime = glutGet(GLUT_ELAPSED_TIME);
-    if(currtime - oldptime > 4000)
-    {
-        //fps = frames*1000.0/(currtime-oldtime);
-        oldptime = currtime;
-        frames = 0;
-    }
-
-}*/
+    int startTime = glutGet(GLUT_ELAPSED_TIME);
+    
+	do{ }
+	while((glutGet(GLUT_ELAPSED_TIME)-startTime<milliWait));
+}
 
 void drawString(GLuint x, GLuint y, void *font, const char* string)
 {
@@ -240,7 +226,7 @@ void drawString(GLuint x, GLuint y, void *font, const char* string)
 	}
 }
 
-void showFPS()
+void showFPS()	//time for FPS
 {
 	extern double omega;
 	extern unsigned frames;
@@ -257,7 +243,7 @@ void showFPS()
 
 	frames++;
 	pframes++;
-	//cout << pframes << endl;
+
 	int currtime = glutGet(GLUT_ELAPSED_TIME);
 	
 	if(currtime - oldtime > 1000)

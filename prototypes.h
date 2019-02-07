@@ -11,6 +11,8 @@ void stepCall(void);
 void showFPS(void);
 void drawString(GLuint x, GLuint y, void *font, const char* string);
 void keyboard(unsigned char key, int x, int y);
+void glutLockFrameRate(float desiredFrameRate);
+
 //#include "structs.h"
 
 /*void init(void);

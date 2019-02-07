@@ -18,8 +18,9 @@ bool sc1 = false;
 bool sc2 = false;
 char osign = 'n';
 int oldptime = 0;
-int totaltime = 0;
-double oldppt = 0.0;
-double pttotal = 0.0;
+int totaltime = 0;	//my pendulum period time
+double oldppt = 0.0;	//old physics period time
+double pttotal = 0.0;	//physics period time
+float dfr = 60.0;	//desired frame rate
 
 #endif
