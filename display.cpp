@@ -14,6 +14,8 @@ void display(void)
 	extern unsigned pframes;	//frames per period
 	extern float dfr;	//desired frame rate
 	
+	//pframes++;
+	
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     glLoadIdentity();   // Call this before setting the viewing position 
    	gluLookAt(eyex,eyey,eyez,
@@ -171,6 +173,7 @@ void display(void)
 	
 	showFPS();
     omegaTime();
+	PeriodTime();
 	glutSwapBuffers();
 	glutLockFrameRate(dfr);
 }
@@ -203,7 +206,7 @@ void showFPS()	//time for FPS
 	extern int oldtime;
 	extern int WINDOW_HEIGHT;
 	extern int WINDOW_WIDTH;
-	//extern double pttotal;
+	extern double pttotal;
 	extern int totalFPP;
 	extern double totalPTime;
 
@@ -213,7 +216,7 @@ void showFPS()	//time for FPS
 	static float fps;
 
 	frames++;
-	pframes++;
+	//pframes++;
 
 	int currtime = glutGet(GLUT_ELAPSED_TIME);
 	
