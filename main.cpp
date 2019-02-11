@@ -84,7 +84,7 @@ void omegaTime()
 		cout << "actual pend period: " << pttotal << endl;
         
 		//calculate dfr
-		dfr = (float) pframes/totaltime;
+		//dfr = (float) pframes/totaltime;
 		cout << "dfr: " << dfr << endl;
 		
 		sc1 = false;
@@ -103,7 +103,7 @@ void omegaTime()
 		cout << "actual pend period: " << pttotal << endl;
         
 		//calculate dfr
-		dfr = (float) pframes/totaltime;
+		//dfr = (float) pframes/totaltime;
         cout << "dfr: " << dfr << endl;
 		
 		sc1 = false;

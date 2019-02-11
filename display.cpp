@@ -133,26 +133,19 @@ void display(void)
     glPopMatrix();
 
 	/*person*/
-	glPushMatrix(); 
-	glTranslated(0.0,2.0,0.0);
-	gluCylinder(gluNewQuadric(),
-            (GLdouble) 0.1, //radius of the cylinder at z=0
-            (GLdouble) 0.1, //radius of the cylinder at z=height
-            (GLdouble) 1.72, //height of the cylinder
-            (GLint)    20,
-            (GLint)    20 );
-    glPopMatrix();
 	/*head*/
 	glPushMatrix();
-	glTranslated(0.0,1.0,1.52);
+	//-2.5 -.2 + 1.52 = -1.18
+	glTranslated(0.0,1.0,-1.18);
 	gluSphere(gluNewQuadric(),
-             (GLdouble) 0.2,   //radius
+             (GLdouble) 0.2,   //radius (top of head at 1.72m)
              (GLint)     10,
              (GLint)     10 );
     glPopMatrix();
 	/*body*/
 	glPushMatrix();
-	glTranslated(0.0,1.0,0.52);
+	//-2.5 -.2 + .52 = -2.18
+	glTranslated(0.0,1.0,-2.18);
 	gluCylinder(gluNewQuadric(),
             (GLdouble) 0.05, //radius of the cylinder at z=0
             (GLdouble) 0.05, //radius of the cylinder at z=height
@@ -162,7 +155,8 @@ void display(void)
 	glPopMatrix();
 	/*left leg*/
     glPushMatrix();
-    glTranslated(0.0,1.0,0.52);
+    //-2.5 -.2 + .52 = -2.18
+	glTranslated(0.0,1.0,-2.18);
     glRotated(-45.0,1,0,0);
 	glScaled(1.0,1.0,-1.0);
 	gluCylinder(gluNewQuadric(),
@@ -174,7 +168,8 @@ void display(void)
     glPopMatrix();
 	 /*right leg*/
     glPushMatrix();
-    glTranslated(0.0,1.0,0.52);
+	//-2.5 -.2 + .52 = -2.18
+    glTranslated(0.0,1.0,-2.18);
     glRotated(45.0,1,0,0);
     glScaled(1.0,1.0,-1.0);
     gluCylinder(gluNewQuadric(),
@@ -186,7 +181,8 @@ void display(void)
     glPopMatrix();
 	 /*arms*/
     glPushMatrix();
-    glTranslated(0.0,1.35,0.9);
+	//-2.5 -.2 + .9 = -1.8
+    glTranslated(0.0,1.35,-1.8);
     glRotated(90.0,0,1,0);
     glRotated(90.0,1,0,0);
 	//glTranslated(0.0,0.3,0.0);
