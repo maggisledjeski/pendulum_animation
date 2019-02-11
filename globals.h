@@ -23,4 +23,8 @@ double oldppt = 0.0;	//old physics period time
 double pttotal = 0.0;	//physics period time
 float dfr = 60.0;	//desired frame rate
 
+int totalFPP = 0;
+double totalPTime = 0.0;
+
+
 #endif

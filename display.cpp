@@ -1,9 +1,7 @@
 #ifndef DISPLAY
 #define DISPLAY
 
-//#include <stdio.h>
 #include "includes.h"
-//#include "structs.h"
 #include "prototypes.h"
 
 void display(void)
@@ -45,19 +43,6 @@ void display(void)
              (GLint)     10 );
     glPopMatrix();
 
-	/*glPushMatrix();
-	//glTranslated(0.0,0.0,0.5);
-	//glRotated(90.0,1,0,0);
-	//glRotated(90.0,0,1,0);
-	//glTranslated(0.0,0.0,2.0);
-	gluCylinder(gluNewQuadric(), 
-			(GLdouble) 0.5, //radius of the cylinder at z=0
-            (GLdouble) 0.5, //radius of the cylinder at z=height
-            (GLdouble) 0.25, //height of the cylinder
-            (GLint)    20,
-            (GLint)    20 );
-	glPopMatrix();*/
-
 	/*horizontal pole*/
     glPushMatrix();
 	glTranslated(-0.2,0.0,0.0);
@@ -93,18 +78,6 @@ void display(void)
             (GLint)    4,
             (GLint)    20 );
     glPopMatrix();
-
-	/*glPushMatrix();
-    glTranslated(0.0,0.0,-3.0);
-    glRotated(90.0,1,1,0);//1,1,0
-    glColor3f (1.0,0.0,1.0);
-    gluCylinder(gluNewQuadric(),
-            (GLdouble) 3.0,//1.45, //radius of the cylinder at z=0
-            (GLdouble) 3.0,//0.45, //radius of the cylinder at z=height
-            (GLdouble) 3.0, //height of the cylinder
-            (GLint)    4,
-            (GLint)    20 );
-    glPopMatrix();*/
 
 	/*top*/
 	glPushMatrix();
@@ -230,7 +203,9 @@ void showFPS()	//time for FPS
 	extern int oldtime;
 	extern int WINDOW_HEIGHT;
 	extern int WINDOW_WIDTH;
-	extern double pttotal;
+	//extern double pttotal;
+	extern int totalFPP;
+	extern double totalPTime;
 
 	double width = WINDOW_WIDTH;
 	double height = WINDOW_HEIGHT;
@@ -253,13 +228,13 @@ void showFPS()	//time for FPS
 	sprintf(fpsstring,"FPS: %6.1f",fps);
 	
 	char *fppstring = (char*) malloc(12*sizeof(char));
-    sprintf(fppstring,"FPP: %6.1d",pframes);
+    sprintf(fppstring,"FPP: %6.1d",totalFPP);
 
 	//char *omegastring = (char*) malloc(12*sizeof(char));
 	//sprintf(omegastring,"Omega: %6.1f",omega);
 	
 	char *perstring = (char*) malloc(12*sizeof(char));
-	sprintf(perstring,"Period: %6.1f",pttotal);
+	sprintf(perstring,"Period: %6.2f",totalPTime);
 
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();

@@ -38,7 +38,8 @@ void omegaTime()
 	extern double t;
 	extern double oldppt;
 	extern double pttotal;
-	extern float dfr;
+	extern int totalFPP;
+	extern double totalPTime;
 	
 	double currpt = t;
 	
@@ -81,12 +82,9 @@ void omegaTime()
 		pttotal = pttotal + (currpt - oldppt);
         cout << "spp: " << totaltime << endl;
 		cout << "pframes: " << pframes << endl;
-		cout << "actual pend period: " << pttotal << endl;
-        
-		//calculate dfr
-		//dfr = (float) pframes/totaltime;
-		cout << "dfr: " << dfr << endl;
-		
+		cout << "actual pend period: " << pttotal << endl;		
+		totalFPP = pframes;
+		totalPTime = pttotal;
 		sc1 = false;
         totaltime = 0;
 		pttotal = 0;
@@ -100,12 +98,9 @@ void omegaTime()
 		pttotal = pttotal + (currpt - oldppt);
         cout << "spp: " << totaltime << endl;
 		cout << "pframes: " << pframes << endl;
-		cout << "actual pend period: " << pttotal << endl;
-        
-		//calculate dfr
-		//dfr = (float) pframes/totaltime;
-        cout << "dfr: " << dfr << endl;
-		
+		cout << "actual pend period: " << pttotal << endl;		
+		totalFPP = pframes;
+		totalPTime = pttotal;
 		sc1 = false;
         totaltime = 0;
 		pttotal = 0;
