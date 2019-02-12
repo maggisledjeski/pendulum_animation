@@ -2,7 +2,14 @@
 #define MAIN
 
 /*DFR = 100ish do the math with the final caluclations then solve for dfr to plug into lockrate
- * dfr = FPP/SPP */
+ * dfr = FPP/SPP 
+ * scenery
+ * level design
+ * object creation
+ * multiplayer
+ * physics
+ * camera
+ * character/character movement*/
 
 #include "includes.h"
 #include "prototypes.h"
@@ -97,6 +104,7 @@ void PeriodTime()
     extern double pttotal;
     extern int totalFPP;
     extern double totalPTime;
+	extern float dfr;
 
 	/*current period time based on physics function*/
     double currpt = t;
@@ -137,9 +145,9 @@ void PeriodTime()
     } else if(omega <= -0.0 && osign2 == 'p' && sc3 == true && sc4 == false)
     {
 		osign2 = 'n';
-        //tpt = tpt + (ct - opt);
         pttotal = pttotal + (currpt - oldppt);
-        //cout << "spp(tpt): " << tpt << endl;
+      	dfr = pframes/pttotal;
+		cout << "dfr: " << dfr << endl;  
         cout << "pframes: " << pframes << endl;
         cout << "actual pend period: " << pttotal << endl;
         totalFPP = pframes;
@@ -157,7 +165,9 @@ void PeriodTime()
         //tpt = tpt + (ct - opt);
         pttotal = pttotal + (currpt - oldppt);
         //cout << "spp(tpt): " << tpt << endl;
-        cout << "pframes: " << pframes << endl;
+        dfr = pframes/pttotal;
+        cout << "dfr: " << dfr << endl;
+		cout << "pframes: " << pframes << endl;
         cout << "actual pend period: " << pttotal << endl;
         totalFPP = pframes;
         totalPTime = pttotal;
