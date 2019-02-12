@@ -8,12 +8,10 @@
 int main(int argc, char** argv)
 {
     extern float dfr;
-	extern bool cma;
+	extern bool cma;	//if there exists an argument from the command line
 
-	//cout << "argc = " << argc << endl;
    	for(int i = 0; i < argc; i++)
     {
-		//cout << "argv[" << i << "] = " << argv[i] << endl;
 		dfr = (float) atoi(argv[i]);
 		cout << dfr << endl;
 		cma = true;
@@ -40,6 +38,7 @@ void omegaTime()
 {
     extern double omega;
     extern bool sc1;
+	extern bool sc2;
     extern char osign;
     extern int oldptime;
     extern int totaltime;
@@ -74,7 +73,7 @@ void omegaTime()
     {
         osign = 'n';
         totaltime = totaltime + (currtime - oldptime);
-		cout << "spp(omega): " << totaltime << endl;
+		/*set counting variables back to original to count*/
 		sc1 = false;
         totaltime = 0;
 		oldptime = currtime;
@@ -82,7 +81,7 @@ void omegaTime()
     {
         osign = 'p';
         totaltime = totaltime + (currtime - oldptime);
-		cout << "spp(omega): " << totaltime << endl;
+		/*set counting variables back to original to count*/
 		sc1 = false;
         totaltime = 0;
 		oldptime = currtime;
@@ -134,17 +133,14 @@ void PeriodTime()
     {
 		osign2 = 'n';
         pttotal = pttotal + (currpt - oldppt);
-      	cout << "cma: " << cma << endl;
-		if(cma == false)
+		if(cma == false)	//if no cma, calculate the dfr
 		{
 			dfr = pframes/pttotal;
 		}
-		cout << "dfr: " << dfr << endl;  
-        cout << "pframes: " << pframes << endl;
-        cout << "actual pend period: " << pttotal << endl;
-        totalFPP = pframes;
-        totalPTime = pttotal;
-        sc3 = false;
+        totalFPP = pframes;	//sets the total frames per period to be displayed on the screen
+        totalPTime = pttotal;	//sets the total time per period to be displayed on the screen
+        /*set counting variables back to original to count for next period*/
+		sc3 = false;
         pttotal = 0;
         oldppt = currpt;
         pframes = 0;
@@ -152,17 +148,14 @@ void PeriodTime()
     {
         osign2 = 'p';
         pttotal = pttotal + (currpt - oldppt);
-        cout << "cma: " << cma << endl;
-		if(cma == false)
+        if(cma == false)	//if no cma, calculate the dfr
 		{
 			dfr = pframes/pttotal;
         }
-		cout << "dfr: " << dfr << endl;
-		cout << "pframes: " << pframes << endl;
-        cout << "actual pend period: " << pttotal << endl;
-        totalFPP = pframes;
-        totalPTime = pttotal;
-        sc3 = false;
+		totalFPP = pframes;	//sets the total frames per period to be displayed on the screen
+        totalPTime = pttotal;	//sets the total time per period to be displayed on the screen
+        /*set counting variables back to original to count for next period*/
+		sc3 = false;
         pttotal = 0;
         oldppt = currpt;
         pframes = 0;

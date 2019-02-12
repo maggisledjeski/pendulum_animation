@@ -15,8 +15,6 @@ void display(void)
 	extern float dfr;	//desired frame rate
 	extern bool cma;
 
-	//pframes++;
-	
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     glLoadIdentity();   // Call this before setting the viewing position 
    	gluLookAt(eyex,eyey,eyez,
@@ -25,6 +23,7 @@ void display(void)
 	glEnable(GL_DEPTH_TEST);
     glColor3f(0.0,1.0,0.0);
 
+	/*pendulum sphere and rod*/
 	glPushMatrix();
     glScaled(1.0,1.0,-1.0);
 	glTranslated(2.0,0.0,0.2);
@@ -161,7 +160,6 @@ void display(void)
     glTranslated(0.0,1.35,-1.8);
     glRotated(90.0,0,1,0);
     glRotated(90.0,1,0,0);
-	//glTranslated(0.0,0.3,0.0);
     gluCylinder(gluNewQuadric(),
             (GLdouble) 0.05, //radius of the cylinder at z=0
             (GLdouble) 0.05, //radius of the cylinder at z=height
@@ -172,15 +170,14 @@ void display(void)
 
 	glFlush();
 	
-	showFPS();
-    omegaTime();
-	PeriodTime();
+	showFPS();	//shows the FPS, FPP, T
+    omegaTime();	//calculates the FPS
+	PeriodTime();	//calculates the FPP and T
 	
-	//cout << "yes" << endl;
-	//if(cma == true)
-	//{
+	if(cma == true)	//if there is a cma, change the framerate to show it
+	{
 		glutLockFrameRate(dfr);
-	//}//#endif
+	}
 	glutSwapBuffers();
 }
 
@@ -194,6 +191,7 @@ void glutLockFrameRate(float desiredFrameRate)
 	while((glutGet(GLUT_ELAPSED_TIME)-startTime<milliWait));
 }
 
+/*Draws onto the screen*/
 void drawString(GLuint x, GLuint y, void *font, const char* string)
 {
 	const char *ch;
@@ -221,8 +219,7 @@ void showFPS()	//time for FPS
 
 	static float fps;
 
-	frames++;
-	//pframes++;
+	frames++;	//increments the number of frames
 
 	int currtime = glutGet(GLUT_ELAPSED_TIME);
 	
@@ -238,9 +235,6 @@ void showFPS()	//time for FPS
 	
 	char *fppstring = (char*) malloc(12*sizeof(char));
     sprintf(fppstring,"FPP: %6.1d",totalFPP);
-
-	//char *omegastring = (char*) malloc(12*sizeof(char));
-	//sprintf(omegastring,"Omega: %6.1f",omega);
 	
 	char *perstring = (char*) malloc(12*sizeof(char));
 	sprintf(perstring,"Period: %6.2f",totalPTime);
