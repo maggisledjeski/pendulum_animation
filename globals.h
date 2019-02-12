@@ -3,6 +3,7 @@
 
 #include "includes.h"
 
+bool cma = false;
 unsigned frames = 0;
 int pframes = 0;
 int oldtime = 0;

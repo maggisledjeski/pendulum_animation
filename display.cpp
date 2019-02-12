@@ -13,7 +13,8 @@ void display(void)
 	extern double eyez;
 	extern unsigned pframes;	//frames per period
 	extern float dfr;	//desired frame rate
-	
+	extern bool cma;
+
 	//pframes++;
 	
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
@@ -174,8 +175,13 @@ void display(void)
 	showFPS();
     omegaTime();
 	PeriodTime();
+	
+	//cout << "yes" << endl;
+	//if(cma == true)
+	//{
+		glutLockFrameRate(dfr);
+	//}//#endif
 	glutSwapBuffers();
-	glutLockFrameRate(dfr);
 }
 
 void glutLockFrameRate(float desiredFrameRate)

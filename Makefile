@@ -1,4 +1,5 @@
 CC = g++
+CODE = #-DTOP
 CFLAGS = -O
 LDLIBS =  -lglut -lGL -lGLU -lm
 HEADERS = includes.h prototypes.h
@@ -17,7 +18,7 @@ reshape.o : reshape.cpp $(HEADERS)
 	$(CC) $(CFLAGS) reshape.cpp -c
 
 display.o : display.cpp $(HEADERS)
-	$(CC) $(CFLAGS) display.cpp -c
+	$(CC) $(CFLAGS) $(CODE) display.cpp -c
 
 physics.o : physics.cpp $(HEADERS)
 	$(CC) $(CFLAGS) physics.cpp -c
