@@ -107,67 +107,6 @@ void display(void)
     glEnd();
     glPopMatrix();
 
-	/*person*/
-	/*head*/
-	glPushMatrix();
-	//-2.5 -.2 + 1.52 = -1.18
-	glTranslated(0.0,1.0,-1.18);
-	gluSphere(gluNewQuadric(),
-             (GLdouble) 0.2,   //radius (top of head at 1.72m)
-             (GLint)     10,
-             (GLint)     10 );
-    glPopMatrix();
-	/*body*/
-	glPushMatrix();
-	//-2.5 -.2 + .52 = -2.18
-	glTranslated(0.0,1.0,-2.18);
-	gluCylinder(gluNewQuadric(),
-            (GLdouble) 0.05, //radius of the cylinder at z=0
-            (GLdouble) 0.05, //radius of the cylinder at z=height
-            (GLdouble) 0.8, //height of the cylinder
-            (GLint)    20,
-            (GLint)    20 );
-	glPopMatrix();
-	/*left leg*/
-    glPushMatrix();
-    //-2.5 -.2 + .52 = -2.18
-	glTranslated(0.0,1.0,-2.18);
-    glRotated(-45.0,1,0,0);
-	glScaled(1.0,1.0,-1.0);
-	gluCylinder(gluNewQuadric(),
-            (GLdouble) 0.05, //radius of the cylinder at z=0
-            (GLdouble) 0.05, //radius of the cylinder at z=height
-            (GLdouble) 0.52, //height of the cylinder
-            (GLint)    20,
-            (GLint)    20 );
-    glPopMatrix();
-	 /*right leg*/
-    glPushMatrix();
-	//-2.5 -.2 + .52 = -2.18
-    glTranslated(0.0,1.0,-2.18);
-    glRotated(45.0,1,0,0);
-    glScaled(1.0,1.0,-1.0);
-    gluCylinder(gluNewQuadric(),
-            (GLdouble) 0.05, //radius of the cylinder at z=0
-            (GLdouble) 0.05, //radius of the cylinder at z=height
-            (GLdouble) 0.52, //height of the cylinder
-            (GLint)    20,
-            (GLint)    20 );
-    glPopMatrix();
-	 /*arms*/
-    glPushMatrix();
-	//-2.5 -.2 + .9 = -1.8
-    glTranslated(0.0,1.35,-1.8);
-    glRotated(90.0,0,1,0);
-    glRotated(90.0,1,0,0);
-    gluCylinder(gluNewQuadric(),
-            (GLdouble) 0.05, //radius of the cylinder at z=0
-            (GLdouble) 0.05, //radius of the cylinder at z=height
-            (GLdouble) 0.7, //height of the cylinder
-            (GLint)    20,
-            (GLint)    20 );
-    glPopMatrix();
-
 	glFlush();
 	
 	showFPS();	//shows the FPS, FPP, T
