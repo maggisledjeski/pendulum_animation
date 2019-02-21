@@ -23,7 +23,7 @@ void display(void)
 	glEnable(GL_DEPTH_TEST);
     glColor3f(0.0,1.0,0.0);
 
-	/*pendulum sphere and rod*/
+	/*pend sphere and rod*/
 	glPushMatrix();
     glScaled(1.0,1.0,-1.0);
 	glTranslated(2.0,0.0,0.2);
@@ -45,7 +45,7 @@ void display(void)
              (GLint)     10 );
     glPopMatrix();
 
-	/*horizontal pole*/
+	/*pend horizontal pole*/
     glPushMatrix();
 	glTranslated(-0.2,0.0,0.0);
 	glRotated(90.0,0,1,0);
@@ -58,7 +58,7 @@ void display(void)
             (GLint)    20 );
 	glPopMatrix();
 	
-	/*vertical pole*/
+	/*pend vertical pole*/
 	glPushMatrix();
 	glTranslated(0.0,0.0,-3.0);
 	glColor3f (0.0,1.0,1.0);
@@ -70,7 +70,7 @@ void display(void)
             (GLint)    20 );
 	glPopMatrix();
 
-	/*base*/
+	/*pend base*/
 	glPushMatrix();
 	glTranslated(0.0,0.0,-3.0);
 	gluCylinder(gluNewQuadric(),
@@ -81,7 +81,7 @@ void display(void)
             (GLint)    20 );
     glPopMatrix();
 
-	/*top*/
+	/*pend base top*/
 	glPushMatrix();
 	glTranslated(0.0,0.0,-2.5);
 	glRotated(45.0,0,0,1);
@@ -94,7 +94,7 @@ void display(void)
 	glEnd();
 	glPopMatrix();
 
-	/*bottom*/
+	/*pend base bottom*/
 	glPushMatrix();
     glTranslated(0.0,0.0,-3.0);
     glRotated(45.0,0,0,1);
@@ -107,6 +107,76 @@ void display(void)
     glEnd();
     glPopMatrix();
 
+	/*table top*/
+	glPushMatrix();
+	glTranslated(0.0,0.0,-3.0);
+	glBegin(GL_POLYGON);
+	glVertex2f(-4,-4);	//back left  
+    glVertex2f(-4,4);   //back right
+    glVertex2f(4,4);    //front right
+    glVertex2f(4,-4);   //front left
+    glEnd();
+	glPopMatrix();
+	
+	/*table bottom*/
+	glPushMatrix();
+	glTranslated(0.0,0.0,-3.2);
+	glBegin(GL_POLYGON);
+    glVertex2f(-4,-4);  
+    glVertex2f(-4,4);   
+    glVertex2f(4,4);    
+    glVertex2f(4,-4);   
+    glEnd();
+	glPopMatrix();
+
+	/*table back*/
+	glPushMatrix();
+	glColor3f(0.0,1.0,0.0);
+    glTranslated(0.0,0.0,-3.2);
+    glBegin(GL_POLYGON);
+    glVertex3f(-4,-4,0);  //bottom left
+    glVertex3f(-4,-4,0.2);   //top left
+    glVertex3f(-4,4,0.2);    //top right
+    glVertex3f(-4,4,0);   //bottom right
+    glEnd();
+    glPopMatrix();
+
+	/*table front*/
+	glPushMatrix();
+    glColor3f(0.0,1.0,0.0);
+    glTranslated(0.0,0.0,-3.2);
+    glBegin(GL_POLYGON);
+    glVertex3f(4,4,0);  //right bottom 
+    glVertex3f(4,4,0.2);   //right top
+    glVertex3f(4,-4,0.2);    //left top
+    glVertex3f(4,-4,0);   //left bottom
+    glEnd();
+    glPopMatrix();
+
+	/*table left*/
+    glPushMatrix();
+    glColor3f(0.0,1.0,0.0);
+    glTranslated(0.0,0.0,-3.2);
+    glBegin(GL_POLYGON);
+    glVertex3f(4,-4,0);  //front bottom
+    glVertex3f(4,-4,0.2);   //front top
+    glVertex3f(-4,-4,0.2);    //back top
+    glVertex3f(-4,-4,0);   //back bottom
+    glEnd();
+    glPopMatrix();
+	
+	/*table right*/
+	glPushMatrix();
+    glColor3f(0.0,1.0,0.0);
+    glTranslated(0.0,0.0,-3.2);
+    glBegin(GL_POLYGON);
+    glVertex3f(4,4,0);  //front bottom
+    glVertex3f(4,4,0.2);   //front top
+    glVertex3f(-4,4,0.2);    //back top
+    glVertex3f(-4,4,0);   //back bottom
+    glEnd();
+    glPopMatrix();
+	
 	glFlush();
 	
 	showFPS();	//shows the FPS, FPP, T
