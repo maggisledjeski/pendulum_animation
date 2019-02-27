@@ -71,7 +71,7 @@ void display(void)
 	glPopMatrix();
 
 	/*pend base*/
-	glPushMatrix();
+	/*glPushMatrix();
 	glTranslated(0.0,0.0,-3.0);
 	gluCylinder(gluNewQuadric(),
             (GLdouble) 3.0, //radius of the cylinder at z=0
@@ -80,9 +80,9 @@ void display(void)
             (GLint)    4,
             (GLint)    20 );
     glPopMatrix();
-
+*/
 	/*pend base top*/
-	glPushMatrix();
+/*	glPushMatrix();
 	glTranslated(0.0,0.0,-2.5);
 	glRotated(45.0,0,0,1);
 	glColor3f(1.0,0.0,0.0);
@@ -93,9 +93,9 @@ void display(void)
 	glVertex2f(2.12,-2.12);	//front
 	glEnd();
 	glPopMatrix();
-
+*/
 	/*pend base bottom*/
-	glPushMatrix();
+/*	glPushMatrix();
     glTranslated(0.0,0.0,-3.0);
     glRotated(45.0,0,0,1);
     glColor3f(1.0,1.0,0.0);
@@ -106,126 +106,130 @@ void display(void)
     glVertex2f(2.12,-2.12);   //front
     glEnd();
     glPopMatrix();
-
+*/
 	/*tabletop top*/
 	glPushMatrix();
 	glTranslated(0.0,0.0,-3.0);
 	glBegin(GL_POLYGON);
-	glVertex2f(-4,-4);	//back left  
-    glVertex2f(-4,4);   //back right
-    glVertex2f(4,4);    //front right
-    glVertex2f(4,-4);   //front left
+	//2ft = 0.6096m
+	//1inch=0.0254m
+	glVertex2f(-1.0,-1.0);//0.6096,-0.6096);//-4,-4);	//back left  
+    glVertex2f(-1.0,1.0);//-4,4);   //back right
+    glVertex2f(1.0,1.0);//4,4);    //front right
+    glVertex2f(1.0,-1.0);//4,-4);   //front left
     glEnd();
 	glPopMatrix();
 	
 	/*tabletop bottom*/
 	glPushMatrix();
-	glTranslated(0.0,0.0,-3.2);
+	glTranslated(0.0,0.0,-3.0254);
 	glBegin(GL_POLYGON);
-    glVertex2f(-4,-4);  
-    glVertex2f(-4,4);   
-    glVertex2f(4,4);    
-    glVertex2f(4,-4);   
+    glVertex2f(-1.0,-1.0);//-4,-4);  
+    glVertex2f(-1.0,1.0);//-4,4);   
+    glVertex2f(1.0,1.0);//4,4);    
+    glVertex2f(1.0,-1.0);//4,-4);   
     glEnd();
 	glPopMatrix();
 
 	/*tabletop back*/
 	glPushMatrix();
 	glColor3f(0.0,1.0,0.0);
-    glTranslated(0.0,0.0,-3.2);
+    glTranslated(0.0,0.0,-3.0254);
     glBegin(GL_POLYGON);
-    glVertex3f(-4,-4,0);  //bottom left
-    glVertex3f(-4,-4,0.2);   //top left
-    glVertex3f(-4,4,0.2);    //top right
-    glVertex3f(-4,4,0);   //bottom right
+    glVertex3f(-1,-1,0);  //bottom left
+    glVertex3f(-1,-1,0.0254);   //top left
+    glVertex3f(-1,1,0.0254);    //top right
+    glVertex3f(-1,1,0);   //bottom right
     glEnd();
     glPopMatrix();
 
 	/*tabletop front*/
 	glPushMatrix();
     glColor3f(0.0,1.0,0.0);
-    glTranslated(0.0,0.0,-3.2);
+    glTranslated(0.0,0.0,-3.0254);
     glBegin(GL_POLYGON);
-    glVertex3f(4,4,0);  //right bottom 
-    glVertex3f(4,4,0.2);   //right top
-    glVertex3f(4,-4,0.2);    //left top
-    glVertex3f(4,-4,0);   //left bottom
+    glVertex3f(1,1,0);  //right bottom 
+    glVertex3f(1,1,0.0254);   //right top
+    glVertex3f(1,-1,0.0254);    //left top
+    glVertex3f(1,-1,0);   //left bottom
     glEnd();
     glPopMatrix();
 
 	/*tabletop left*/
     glPushMatrix();
     glColor3f(0.0,1.0,0.0);
-    glTranslated(0.0,0.0,-3.2);
+    glTranslated(0.0,0.0,-3.0254);
     glBegin(GL_POLYGON);
-    glVertex3f(4,-4,0);  //front bottom
-    glVertex3f(4,-4,0.2);   //front top
-    glVertex3f(-4,-4,0.2);    //back top
-    glVertex3f(-4,-4,0);   //back bottom
+    glVertex3f(1,-1,0);  //front bottom
+    glVertex3f(1,-1,0.0254);   //front top
+    glVertex3f(-1,-1,0.0254);    //back top
+    glVertex3f(-1,-1,0);   //back bottom
     glEnd();
     glPopMatrix();
 	
 	/*tabletop right*/
 	glPushMatrix();
     glColor3f(0.0,1.0,0.0);
-    glTranslated(0.0,0.0,-3.2);
+    glTranslated(0.0,0.0,-3.0254);
     glBegin(GL_POLYGON);
-    glVertex3f(4,4,0);  //front bottom
-    glVertex3f(4,4,0.2);   //front top
-    glVertex3f(-4,4,0.2);    //back top
-    glVertex3f(-4,4,0);   //back bottom
+    glVertex3f(1,1,0);  //front bottom
+    glVertex3f(1,1,0.0254);   //front top
+    glVertex3f(-1,1,0.0254);    //back top
+    glVertex3f(-1,1,0);   //back bottom
     glEnd();
     glPopMatrix();
 	
 	/*table leg front right*/
 	glPushMatrix();
 	//-3.2-2.0=5.2
-    glTranslated(4.0,4.0,-5.2);
+	//1.5ft = 0.4572m
+	//-3.0254 - 0.4572 = -3.4826
+    glTranslated(1.0,1.0,-3.4826);
     glRotated(45.0,0,0,1);
-	glTranslated(-0.5,0.0,0.0);
+	glTranslated(-0.0254,0.0,0.0);
 	gluCylinder(gluNewQuadric(),
-            (GLdouble) 0.5, //radius of the cylinder at z=0
-            (GLdouble) 0.5, //radius of the cylinder at z=height
-            (GLdouble) 2.0, //height of the cylinder
+            (GLdouble) 0.0254, //radius of the cylinder at z=0
+            (GLdouble) 0.0254, //radius of the cylinder at z=height
+            (GLdouble) 0.4572, //height of the cylinder
             (GLint)    4,
             (GLint)    20 );
     glPopMatrix();
 	
 	/*table leg front left*/
 	glPushMatrix();
-	glTranslated(4.0,-4.0,-5.2);
+	glTranslated(1.0,-1.0,-3.4826);
     glRotated(45.0,0,0,1);
-    glTranslated(0.0,0.5,0.0);
+    glTranslated(0.0,0.0254,0.0);
     gluCylinder(gluNewQuadric(),
-            (GLdouble) 0.5, //radius of the cylinder at z=0
-            (GLdouble) 0.5, //radius of the cylinder at z=height
-            (GLdouble) 2.0, //height of the cylinder
+            (GLdouble) 0.0254, //radius of the cylinder at z=0
+            (GLdouble) 0.0254, //radius of the cylinder at z=height
+            (GLdouble) 0.4572, //height of the cylinder
             (GLint)    4,
             (GLint)    20 );
     glPopMatrix();
 
 	/*table leg back left*/
     glPushMatrix();
-    glTranslated(-4.0,-4.0,-5.2);
+    glTranslated(-1.0,-1.0,-3.4826);
     glRotated(45.0,0,0,1);
-    glTranslated(0.5,0.0,0.0);
+    glTranslated(0.0254,0.0,0.0);
     gluCylinder(gluNewQuadric(),
-            (GLdouble) 0.5, //radius of the cylinder at z=0
-            (GLdouble) 0.5, //radius of the cylinder at z=height
-            (GLdouble) 2.0, //height of the cylinder
+            (GLdouble) 0.0254, //radius of the cylinder at z=0
+            (GLdouble) 0.0254, //radius of the cylinder at z=height
+            (GLdouble) 0.4572, //height of the cylinder
             (GLint)    4,
             (GLint)    20 );
     glPopMatrix();
 
 	/*table leg back right*/
 	glPushMatrix();
-    glTranslated(-4.0,4.0,-5.2);
+    glTranslated(-1.0,1.0,-3.4826);
     glRotated(45.0,0,0,1);
-    glTranslated(0.0,-0.5,0.0);
+    glTranslated(0.0,-0.0254,0.0);
     gluCylinder(gluNewQuadric(),
-            (GLdouble) 0.5, //radius of the cylinder at z=0
-            (GLdouble) 0.5, //radius of the cylinder at z=height
-            (GLdouble) 2.0, //height of the cylinder
+            (GLdouble) 0.0254, //radius of the cylinder at z=0
+            (GLdouble) 0.0254, //radius of the cylinder at z=height
+            (GLdouble) 0.4572, //height of the cylinder
             (GLint)    4,
             (GLint)    20 );
     glPopMatrix();
