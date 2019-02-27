@@ -107,7 +107,7 @@ void display(void)
     glEnd();
     glPopMatrix();
 
-	/*table top*/
+	/*tabletop top*/
 	glPushMatrix();
 	glTranslated(0.0,0.0,-3.0);
 	glBegin(GL_POLYGON);
@@ -118,7 +118,7 @@ void display(void)
     glEnd();
 	glPopMatrix();
 	
-	/*table bottom*/
+	/*tabletop bottom*/
 	glPushMatrix();
 	glTranslated(0.0,0.0,-3.2);
 	glBegin(GL_POLYGON);
@@ -129,7 +129,7 @@ void display(void)
     glEnd();
 	glPopMatrix();
 
-	/*table back*/
+	/*tabletop back*/
 	glPushMatrix();
 	glColor3f(0.0,1.0,0.0);
     glTranslated(0.0,0.0,-3.2);
@@ -141,7 +141,7 @@ void display(void)
     glEnd();
     glPopMatrix();
 
-	/*table front*/
+	/*tabletop front*/
 	glPushMatrix();
     glColor3f(0.0,1.0,0.0);
     glTranslated(0.0,0.0,-3.2);
@@ -153,7 +153,7 @@ void display(void)
     glEnd();
     glPopMatrix();
 
-	/*table left*/
+	/*tabletop left*/
     glPushMatrix();
     glColor3f(0.0,1.0,0.0);
     glTranslated(0.0,0.0,-3.2);
@@ -165,7 +165,7 @@ void display(void)
     glEnd();
     glPopMatrix();
 	
-	/*table right*/
+	/*tabletop right*/
 	glPushMatrix();
     glColor3f(0.0,1.0,0.0);
     glTranslated(0.0,0.0,-3.2);
@@ -177,6 +177,60 @@ void display(void)
     glEnd();
     glPopMatrix();
 	
+	/*table leg front right*/
+	glPushMatrix();
+	//-3.2-2.0=5.2
+    glTranslated(4.0,4.0,-5.2);
+    glRotated(45.0,0,0,1);
+	glTranslated(-0.5,0.0,0.0);
+	gluCylinder(gluNewQuadric(),
+            (GLdouble) 0.5, //radius of the cylinder at z=0
+            (GLdouble) 0.5, //radius of the cylinder at z=height
+            (GLdouble) 2.0, //height of the cylinder
+            (GLint)    4,
+            (GLint)    20 );
+    glPopMatrix();
+	
+	/*table leg front left*/
+	glPushMatrix();
+	glTranslated(4.0,-4.0,-5.2);
+    glRotated(45.0,0,0,1);
+    glTranslated(0.0,0.5,0.0);
+    gluCylinder(gluNewQuadric(),
+            (GLdouble) 0.5, //radius of the cylinder at z=0
+            (GLdouble) 0.5, //radius of the cylinder at z=height
+            (GLdouble) 2.0, //height of the cylinder
+            (GLint)    4,
+            (GLint)    20 );
+    glPopMatrix();
+
+	/*table leg back left*/
+    glPushMatrix();
+    glTranslated(-4.0,-4.0,-5.2);
+    glRotated(45.0,0,0,1);
+    glTranslated(0.5,0.0,0.0);
+    gluCylinder(gluNewQuadric(),
+            (GLdouble) 0.5, //radius of the cylinder at z=0
+            (GLdouble) 0.5, //radius of the cylinder at z=height
+            (GLdouble) 2.0, //height of the cylinder
+            (GLint)    4,
+            (GLint)    20 );
+    glPopMatrix();
+
+	/*table leg back right*/
+	glPushMatrix();
+    glTranslated(-4.0,4.0,-5.2);
+    glRotated(45.0,0,0,1);
+    glTranslated(0.0,-0.5,0.0);
+    gluCylinder(gluNewQuadric(),
+            (GLdouble) 0.5, //radius of the cylinder at z=0
+            (GLdouble) 0.5, //radius of the cylinder at z=height
+            (GLdouble) 2.0, //height of the cylinder
+            (GLint)    4,
+            (GLint)    20 );
+    glPopMatrix();
+
+
 	glFlush();
 	
 	showFPS();	//shows the FPS, FPP, T
