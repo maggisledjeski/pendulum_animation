@@ -14,11 +14,14 @@ void display(void)
 	extern unsigned pframes;	//frames per period
 	extern float dfr;	//desired frame rate
 	extern bool cma;
-
+	extern double centerx;
+	extern double centery;
+	extern double centerz;
+	
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     glLoadIdentity();   // Call this before setting the viewing position 
    	gluLookAt(eyex,eyey,eyez,
-			0.0,0.0,0.0,
+			centerx,centery,centerz,
 			0.0,0.0,1.0);
 	glEnable(GL_DEPTH_TEST);
     glColor3f(0.0,1.0,0.0);

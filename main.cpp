@@ -27,7 +27,8 @@ int main(int argc, char** argv)
     glutCreateWindow(argv[0]);
     init();
 	glutKeyboardFunc(keyboard);
-    glutDisplayFunc(display);
+    glutSpecialFunc(processSpecialKeys);
+	glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     glutIdleFunc(stepCall);
     glutMainLoop();
