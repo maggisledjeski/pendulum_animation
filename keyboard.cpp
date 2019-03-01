@@ -67,11 +67,13 @@ void keyboard(unsigned char key, int x, int y)
 	if(key == 'w')	//move forward
     {
         camerar = camerar - 1.0;
+		//cout << camerar << endl;
 		//eyex = eyex - 0.25;
     }
     if(key == 's')	//move backward
     {
         camerar = camerar + 1.0;
+		//cout << camerar << endl;
 		//eyex = eyex + 0.25;
     }
 
@@ -110,6 +112,7 @@ void processSpecialKeys(int key, int x, int y)
         {
             cameratheta = cameratheta + 360.0;
         }
+		//cout << cameratheta << endl;
 		//eyez = eyez + 0.2;
 		//cameratheta = cameratheta + 1.0;
     } else if(key == GLUT_KEY_PAGE_DOWN)
@@ -119,6 +122,7 @@ void processSpecialKeys(int key, int x, int y)
         {
             cameratheta = cameratheta - 360.0;
         }
+		//cout << cameratheta << endl;
 		//eyez = eyez - 0.2;
 		//cameratheta = cameratheta - 1.0;
     }

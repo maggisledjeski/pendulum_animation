@@ -240,6 +240,75 @@ void display(void)
             (GLint)    20 );
     glPopMatrix();
 
+	/*floor*/
+	glPushMatrix();
+    glTranslated(0.0,0.0,-3.4826);
+    glBegin(GL_POLYGON);
+    glVertex2f(-4.572,-4.572);  
+    glVertex2f(-4.572,4.572);   
+    glVertex2f(4.572,4.572);    
+    glVertex2f(4.572,-4.572);   
+    glEnd();    
+    glPopMatrix();
+
+	/*ceiling*/
+    glPushMatrix();
+    glTranslated(0.0,0.0,1.0);
+	glBegin(GL_POLYGON);
+    glVertex2f(-4.572,-4.572);
+    glVertex2f(-4.572,4.572);
+    glVertex2f(4.572,4.572);
+    glVertex2f(4.572,-4.572);
+    glEnd();
+    glPopMatrix();
+	
+	/*back wall*/
+    glPushMatrix();
+    glTranslated(0.0,0.0,-3.4826);
+    glColor3f(0.0,1.0,1.0);
+	glBegin(GL_POLYGON);
+    glVertex3f(-4.572,-4.572,0);
+    glVertex3f(-4.572,-4.572,4.4826);
+    glVertex3f(-4.572,4.572,4.4826);
+    glVertex3f(-4.572,4.572,0);
+    glEnd();
+    glPopMatrix();
+
+	/*left wall*/
+    glPushMatrix();
+    glTranslated(0.0,0.0,-3.4826);
+    glColor3f(0.0,1.0,1.0);
+    glBegin(GL_POLYGON);
+    glVertex3f(-4.572,-4.572,0);
+    glVertex3f(-4.572,-4.572,4.4826);
+    glVertex3f(4.572,-4.572,4.4826);
+    glVertex3f(4.572,-4.572,0);
+    glEnd();
+    glPopMatrix();
+
+	/*right wall*/
+    glPushMatrix();
+    glTranslated(0.0,0.0,-3.4826);
+    glColor3f(0.0,1.0,1.0);
+    glBegin(GL_POLYGON);
+    glVertex3f(4.572,4.572,0);
+    glVertex3f(4.572,4.572,4.4826);
+    glVertex3f(-4.572,4.572,4.4826);
+    glVertex3f(-4.572,4.572,0);
+    glEnd();
+    glPopMatrix();
+
+    /*left wall*/
+    glPushMatrix();
+    glTranslated(0.0,0.0,-3.4826);
+    glColor3f(0.0,1.0,1.0);
+    glBegin(GL_POLYGON);
+    glVertex3f(4.572,4.572,0);
+    glVertex3f(4.572,4.572,4.4826);
+    glVertex3f(4.572,-4.572,4.4826);
+    glVertex3f(4.572,-4.572,0);
+    glEnd();
+    glPopMatrix();
 
 	glFlush();
 	
