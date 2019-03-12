@@ -20,14 +20,16 @@ void display(void)
 	extern GLfloat camerar;
     extern GLfloat cameratheta;
     extern GLfloat cameraphi;
-		
+	
+	glEnable(GL_TEXTURE_2D);
+    glEnable(GL_DEPTH_TEST);
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-    glLoadIdentity();   // Call this before setting the viewing position 
+    
+	glLoadIdentity();   // Call this before setting the viewing position 
    	gluLookAt(/*eyex,eyey,eyez,*/camerar*sin(cameratheta*M_PI/180.0)*cos(cameraphi*M_PI/180.0),camerar*sin(cameratheta*M_PI/180.0)*sin(cameraphi*M_PI/180.0),camerar*cos(cameratheta*M_PI/180.0),
 			centerx,centery,centerz,
 			0.0,0.0,1.0);
-	glEnable(GL_DEPTH_TEST);
-    glColor3f(0.0,1.0,0.0);
+	glColor3f(0.0,1.0,0.0);
 
 	/*pend sphere and rod*/
 	glPushMatrix();

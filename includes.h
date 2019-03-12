@@ -9,6 +9,7 @@
 #include <iostream>
 #include <math.h>
 #include <cstdlib>
+#include "SOIL.h"
 using namespace std;
 
 #endif

@@ -1,8 +1,8 @@
 CC = g++
 CODE = #-DTOP
 CFLAGS = -O
-LDLIBS =  -lglut -lGL -lGLU -lm
-HEADERS = includes.h prototypes.h
+LDLIBS =  -lglut -lGL -lGLU -lm libSOIL.a
+HEADERS = SOIL.h globals.h includes.h prototypes.h
 OBJS = init.o reshape.o display.o physics.o step.o keyboard.o
 
 run :   main.o $(OBJS)
