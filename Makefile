@@ -1,9 +1,9 @@
 CC = g++
 CODE = #-DTOP
 CFLAGS = -O
-LDLIBS =  -lglut -lGL -lGLU -lm libSOIL.a
+LDLIBS =  -lglut -lGL -lGLU -lm -lGLEW libSOIL.a
 HEADERS = SOIL.h globals.h includes.h prototypes.h
-OBJS = init.o reshape.o display.o physics.o step.o keyboard.o
+OBJS = init.o reshape.o display.o physics.o step.o keyboard.o loadTextures.o
 
 run :   main.o $(OBJS)
 	$(CC) $(CFLAGS) main.o $(OBJS) -o run $(LDLIBS)
@@ -28,6 +28,9 @@ step.o : step.cpp $(HEADERS)
 
 keyboard.o : keyboard.cpp $(HEADERS)
 	$(CC) $(CFLAGS) keyboard.cpp -c
+
+loadTextures.o : loadTextures.cpp $(HEADERS)
+	$(CC) $(FLAGS) loadTextures.cpp -c
 
 clean:
 	rm *.o

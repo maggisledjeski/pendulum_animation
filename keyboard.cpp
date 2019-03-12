@@ -30,8 +30,8 @@ void keyboard(unsigned char key, int x, int y)
     	centerx = 0.0;
     	centery = 0.0;
     	centerz = 0.0;
-    	camerar = 15.0;
-    	cameratheta = 45.0;
+    	camerar = 10.0;
+    	cameratheta = 100.0;
     	cameraphi = 45.0;		
 	}
 	if(key == 'a')

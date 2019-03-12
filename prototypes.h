@@ -13,6 +13,7 @@ void keyboard(unsigned char key, int x, int y);
 void glutLockFrameRate(float desiredFrameRate);
 void PeriodTime(void);
 void processSpecialKeys(int key, int x, int y);
+void loadTextures(void);
 
 #endif
 

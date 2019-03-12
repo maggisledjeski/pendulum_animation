@@ -3,6 +3,7 @@
 
 #include "includes.h"
 #include "prototypes.h"
+//#include "globals.h"
 
 void display(void)
 {
@@ -11,7 +12,7 @@ void display(void)
 	extern double eyex;
 	extern double eyey;
 	extern double eyez;
-	extern unsigned pframes;	//frames per period
+	extern int pframes;	//frames per period
 	extern float dfr;	//desired frame rate
 	extern bool cma;
 	extern double centerx;
@@ -20,7 +21,8 @@ void display(void)
 	extern GLfloat camerar;
     extern GLfloat cameratheta;
     extern GLfloat cameraphi;
-	
+	extern GLuint textureID[1];
+
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_DEPTH_TEST);
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
@@ -243,15 +245,24 @@ void display(void)
     glPopMatrix();
 
 	/*floor*/
+	glBindTexture(GL_TEXTURE_2D, textureID[0]);
 	glPushMatrix();
     glTranslated(0.0,0.0,-3.4826);
-    glBegin(GL_POLYGON);
-    glVertex2f(-4.572,-4.572);  
-    glVertex2f(-4.572,4.572);   
-    glVertex2f(4.572,4.572);    
-    glVertex2f(4.572,-4.572);   
+    glColor3f(1.0,1.0,1.0);
+	glBegin(GL_POLYGON);
+    glTexCoord2d(-1,-1);	glVertex2f(-4.572,-4.572);  
+    glTexCoord2d(-1,1);	glVertex2f(-4.572,4.572);   
+    glTexCoord2d(1.0,1.0);	glVertex2f(4.572,4.572);    
+    glTexCoord2d(1.0,-1.0);	glVertex2f(4.572,-4.572);   
     glEnd();    
-    glPopMatrix();
+    /*
+	glBegin(GL_POLYGON);
+	glTexCoord2d(0.0,0.0);
+	glTexCoord2d(0.0,1.0);
+	glTexCoord2d(1.0,1.0);
+	glTexCoord2d(1.0,0.0);
+	glEnd();*/
+	glPopMatrix();
 
 	/*ceiling*/
     glPushMatrix();

@@ -25,7 +25,8 @@ int main(int argc, char** argv)
     glutInitWindowSize(WINDOW_HEIGHT, WINDOW_WIDTH);
     glutInitWindowPosition(100, 100);
     glutCreateWindow(argv[0]);
-    init();
+    glewInit();
+	init();
 	glutKeyboardFunc(keyboard);
     glutSpecialFunc(processSpecialKeys);
 	glutDisplayFunc(display);
