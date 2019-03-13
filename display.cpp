@@ -81,73 +81,81 @@ void display(void)
 
 	/*tabletop top*/
 	glPushMatrix();
+    glBindTexture(GL_TEXTURE_2D, textureID[2]);
 	glTranslated(0.0,0.0,-3.0);
+    glColor3f(1.0,1.0,1.0);
 	glBegin(GL_POLYGON);
 	//2ft = 0.6096m
 	//1inch=0.0254m
-	glVertex2f(-1.0,-1.0);//0.6096,-0.6096);//-4,-4);	//back left  
-    glVertex2f(-1.0,1.0);//-4,4);   //back right
-    glVertex2f(1.0,1.0);//4,4);    //front right
-    glVertex2f(1.0,-1.0);//4,-4);   //front left
+	glTexCoord2d(-1,-1);    glVertex2f(-1.0,-1.0);  
+    glTexCoord2d(-1,1);    glVertex2f(-1.0,1.0);
+    glTexCoord2d(1,1);    glVertex2f(1.0,1.0);
+    glTexCoord2d(1,-1);    glVertex2f(1.0,-1.0);
     glEnd();
 	glPopMatrix();
 	
 	/*tabletop bottom*/
 	glPushMatrix();
-	glTranslated(0.0,0.0,-3.0254);
+	glBindTexture(GL_TEXTURE_2D, textureID[2]);
+    glColor3f(1.0,1.0,1.0);
+    glTranslated(0.0,0.0,-3.0254);
 	glBegin(GL_POLYGON);
-    glVertex2f(-1.0,-1.0);//-4,-4);  
-    glVertex2f(-1.0,1.0);//-4,4);   
-    glVertex2f(1.0,1.0);//4,4);    
-    glVertex2f(1.0,-1.0);//4,-4);   
+    glTexCoord2d(-1,-1);    glVertex2f(-1.0,-1.0);  
+    glTexCoord2d(-1,1);    glVertex2f(-1.0,1.0);   
+    glTexCoord2d(1,1);    glVertex2f(1.0,1.0);    
+    glTexCoord2d(1,-1);    glVertex2f(1.0,-1.0);   
     glEnd();
 	glPopMatrix();
 
 	/*tabletop back*/
 	glPushMatrix();
-	glColor3f(0.0,1.0,0.0);
+    glBindTexture(GL_TEXTURE_2D, textureID[2]);
+	glColor3f(1.0,1.0,1.0);
     glTranslated(0.0,0.0,-3.0254);
     glBegin(GL_POLYGON);
-    glVertex3f(-1,-1,0);  //bottom left
-    glVertex3f(-1,-1,0.0254);   //top left
-    glVertex3f(-1,1,0.0254);    //top right
-    glVertex3f(-1,1,0);   //bottom right
+    glTexCoord2d(-1,-1);    glVertex3f(-1,-1,0);  //bottom left
+    glTexCoord2d(-1,1);    glVertex3f(-1,-1,0.0254);   //top left
+    glTexCoord2d(1,1);    glVertex3f(-1,1,0.0254);    //top right
+    glTexCoord2d(1,-1);    glVertex3f(-1,1,0);   //bottom right
     glEnd();
     glPopMatrix();
 
 	/*tabletop front*/
 	glPushMatrix();
-    glColor3f(0.0,1.0,0.0);
+    glBindTexture(GL_TEXTURE_2D, textureID[2]);
+    glColor3f(1.0,1.0,1.0);
     glTranslated(0.0,0.0,-3.0254);
     glBegin(GL_POLYGON);
-    glVertex3f(1,1,0);  //right bottom 
-    glVertex3f(1,1,0.0254);   //right top
-    glVertex3f(1,-1,0.0254);    //left top
-    glVertex3f(1,-1,0);   //left bottom
+    glTexCoord2d(-1,-1);    glVertex3f(1,1,0);  //right bottom 
+    glTexCoord2d(-1,1);    glVertex3f(1,1,0.0254);   //right top
+    glTexCoord2d(1,1);    glVertex3f(1,-1,0.0254);    //left top
+    glTexCoord2d(1,-1);    glVertex3f(1,-1,0);   //left bottom
     glEnd();
     glPopMatrix();
 
 	/*tabletop left*/
     glPushMatrix();
-    glColor3f(0.0,1.0,0.0);
+    glBindTexture(GL_TEXTURE_2D, textureID[2]);
+    glColor3f(1.0,1.0,1.0);
     glTranslated(0.0,0.0,-3.0254);
     glBegin(GL_POLYGON);
-    glVertex3f(1,-1,0);  //front bottom
-    glVertex3f(1,-1,0.0254);   //front top
-    glVertex3f(-1,-1,0.0254);    //back top
-    glVertex3f(-1,-1,0);   //back bottom
+    glTexCoord2d(-1,-1);    glVertex3f(1,-1,0);  //front bottom
+    glTexCoord2d(-1,1);    glVertex3f(1,-1,0.0254);   //front top
+    glTexCoord2d(1,1);    glVertex3f(-1,-1,0.0254);    //back top
+    glTexCoord2d(1,-1);    glVertex3f(-1,-1,0);   //back bottom
     glEnd();
     glPopMatrix();
 	
 	/*tabletop right*/
 	glPushMatrix();
-    glColor3f(0.0,1.0,0.0);
+    glBindTexture(GL_TEXTURE_2D, textureID[2]);
+    glColor3f(1.0,1.0,1.0);
     glTranslated(0.0,0.0,-3.0254);
     glBegin(GL_POLYGON);
-    glVertex3f(1,1,0);  //front bottom
-    glVertex3f(1,1,0.0254);   //front top
-    glVertex3f(-1,1,0.0254);    //back top
-    glVertex3f(-1,1,0);   //back bottom
+    glTexCoord2d(-1,-1);    glVertex3f(1,1,0);  //front bottom
+    glTexCoord2d(-1,1);    glVertex3f(1,1,0.0254);   //front top
+    glTexCoord2d(1,1);    glVertex3f(-1,1,0.0254);    //back top
+    glTexCoord2d(1,-1);    glVertex3f(-1,1,0);   //back bottom
     glEnd();
     glPopMatrix();
 	
