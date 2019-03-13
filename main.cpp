@@ -13,7 +13,7 @@ int main(int argc, char** argv)
    	for(int i = 0; i < argc; i++)
     {
 		dfr = (float) atoi(argv[i]);
-		cout << dfr << endl;
+		//cout << dfr << endl;
 		cma = true;
 	}
 	if(dfr == 0.0)
