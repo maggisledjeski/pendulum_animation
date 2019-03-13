@@ -38,7 +38,11 @@ GLfloat cameraphi = 45.0;
 int totalFPP = 0;
 double totalPTime = 0.0;
 
-GLuint textureID[3];
+GLUquadric *leg1;
+GLUquadric *leg2;
+GLUquadric *leg3;
+GLUquadric *leg4;
+GLuint textureID[4];
 
 
 #endif

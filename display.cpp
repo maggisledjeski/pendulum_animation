@@ -20,7 +20,11 @@ void display(void)
 	extern GLfloat camerar;
     extern GLfloat cameratheta;
     extern GLfloat cameraphi;
-	extern GLuint textureID[3];
+	extern GLuint textureID[4];
+    extern GLUquadric *leg1;
+    extern GLUquadric *leg2;
+    extern GLUquadric *leg3;
+    extern GLUquadric *leg4;
 
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_DEPTH_TEST);
@@ -161,64 +165,122 @@ void display(void)
 	
 	/*table leg front right*/
 	glPushMatrix();
-	//-3.2-2.0=5.2
+    //glBindTexture(GL_TEXTURE_2D, textureID[3]);
+	//glColor3f(1.0,1.0,0.0);
+    //-3.2-2.0=5.2
 	//1.5ft = 0.4572m
 	//-3.0254 - 0.4572 = -3.4826
     glTranslated(1.0,1.0,-3.4826);
     glRotated(45.0,0,0,1);
 	glTranslated(-0.0254,0.0,0.0);
-	gluCylinder(gluNewQuadric(),
+	#ifdef TEXTURE
+    glColor3f(1.0,1.0,1.0);
+    //glBindTexture(GL_TEXTURE_2D, textureID[3]);
+    gluCylinder(leg1,
             (GLdouble) 0.0254, //radius of the cylinder at z=0
             (GLdouble) 0.0254, //radius of the cylinder at z=height
             (GLdouble) 0.4572, //height of the cylinder
             (GLint)    4,
             (GLint)    20 );
+    #endif
+    #ifndef TEXTURE
+    glColor3f(0.0,0.0,0.0);
+    gluCylinder(gluNewQuadric(),
+            (GLdouble) 0.0254, //radius of the cylinder at z=0
+            (GLdouble) 0.0254, //radius of the cylinder at z=height
+            (GLdouble) 0.4572, //height of the cylinder
+            (GLint)    4,
+            (GLint)    20 );
+    #endif
     glPopMatrix();
 	
 	/*table leg front left*/
 	glPushMatrix();
-	glTranslated(1.0,-1.0,-3.4826);
+    glTranslated(1.0,-1.0,-3.4826);
     glRotated(45.0,0,0,1);
     glTranslated(0.0,0.0254,0.0);
+    #ifdef TEXTURE
+    //glBindTexture(GL_TEXTURE_2D, textureID[3]);
+    glColor3f(1.0,1.0,1.0);
+    gluCylinder(leg2,
+            (GLdouble) 0.0254, //radius of the cylinder at z=0
+            (GLdouble) 0.0254, //radius of the cylinder at z=height
+            (GLdouble) 0.4572, //height of the cylinder
+            (GLint)    4,
+            (GLint)    20 );
+    #endif
+    #ifndef TEXTURE 
+    glColor3f(0.0,0.0,0.0);
     gluCylinder(gluNewQuadric(),
             (GLdouble) 0.0254, //radius of the cylinder at z=0
             (GLdouble) 0.0254, //radius of the cylinder at z=height
             (GLdouble) 0.4572, //height of the cylinder
             (GLint)    4,
             (GLint)    20 );
+    #endif
+    //}
     glPopMatrix();
 
 	/*table leg back left*/
     glPushMatrix();
+    //glBindTexture(GL_TEXTURE_2D, textureID[3]);
+    //glColor3f(1.0,1.0,0.0);
     glTranslated(-1.0,-1.0,-3.4826);
     glRotated(45.0,0,0,1);
     glTranslated(0.0254,0.0,0.0);
+    #ifdef TEXTURE
+    //glBindTexture(GL_TEXTURE_2D, textureID[3]);
+    glColor3f(1.0,1.0,1.0);
+    gluCylinder(leg3,
+            (GLdouble) 0.0254, //radius of the cylinder at z=0
+            (GLdouble) 0.0254, //radius of the cylinder at z=height
+            (GLdouble) 0.4572, //height of the cylinder
+            (GLint)    4,
+            (GLint)    20 );
+    #else
+    glColor3f(1.0,1.0,0.0);
     gluCylinder(gluNewQuadric(),
             (GLdouble) 0.0254, //radius of the cylinder at z=0
             (GLdouble) 0.0254, //radius of the cylinder at z=height
             (GLdouble) 0.4572, //height of the cylinder
             (GLint)    4,
             (GLint)    20 );
+    #endif
     glPopMatrix();
 
 	/*table leg back right*/
 	glPushMatrix();
+    //glBindTexture(GL_TEXTURE_2D, textureID[3]);
+    //glColor3f(1.0,1.0,0.0);
     glTranslated(-1.0,1.0,-3.4826);
     glRotated(45.0,0,0,1);
     glTranslated(0.0,-0.0254,0.0);
+    #ifdef TEXTURE
+    glColor3f(1.0,1.0,1.0);
+    gluCylinder(leg4,
+            (GLdouble) 0.0254, //radius of the cylinder at z=0
+            (GLdouble) 0.0254, //radius of the cylinder at z=height
+            (GLdouble) 0.4572, //height of the cylinder
+            (GLint)    4,
+            (GLint)    20 );
+    #endif
+    #ifndef TEXTURE
+    glColor3f(0.0,0.0,0.0);
     gluCylinder(gluNewQuadric(),
             (GLdouble) 0.0254, //radius of the cylinder at z=0
             (GLdouble) 0.0254, //radius of the cylinder at z=height
             (GLdouble) 0.4572, //height of the cylinder
             (GLint)    4,
             (GLint)    20 );
+    #endif
     glPopMatrix();
 
 	/*floor*/
-	glBindTexture(GL_TEXTURE_2D, textureID[0]);
+	//glBindTexture(GL_TEXTURE_2D, textureID[0]);
 	glPushMatrix();
+    glBindTexture(GL_TEXTURE_2D, textureID[0]);
     glTranslated(0.0,0.0,-3.4826);
-    glColor3f(1.0,1.0,1.0);
+    glColor3f(0.0,1.0,1.0);
 	glBegin(GL_POLYGON);
     glTexCoord2d(-1,-1);	glVertex2f(-4.572,-4.572);  
     glTexCoord2d(-1,1);		glVertex2f(-4.572,4.572);   
@@ -293,7 +355,10 @@ void display(void)
     glPopMatrix();
 
 	glFlush();
-	
+    #ifdef TEXTURE
+    glDisable(GL_DEPTH_TEST);
+    glDisable(GL_TEXTURE_2D);
+	#endif
 	showFPS();	//shows the FPS, FPP, T
     omegaTime();	//calculates the FPS
 	PeriodTime();	//calculates the FPP and T
