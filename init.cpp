@@ -8,8 +8,9 @@ void init(void)
 {
    glClearColor (0.0, 0.0, 0.0, 0.0);
    glShadeModel (GL_FLAT);
-
+	#ifdef TEXTURE
 	loadTextures();
+	#endif
 }
 
 #endif
