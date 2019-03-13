@@ -3,7 +3,6 @@
 
 #include "includes.h"
 #include "prototypes.h"
-//#include "globals.h"
 
 void display(void)
 {
@@ -21,7 +20,7 @@ void display(void)
 	extern GLfloat camerar;
     extern GLfloat cameratheta;
     extern GLfloat cameraphi;
-	extern GLuint textureID[2];
+	extern GLuint textureID[3];
 
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_DEPTH_TEST);
@@ -222,12 +221,14 @@ void display(void)
 
 	/*ceiling*/
     glPushMatrix();
-    glTranslated(0.0,0.0,1.0);
+	glBindTexture(GL_TEXTURE_2D, textureID[1]);
+    glColor3f(1.0,1.0,1.0);
+	glTranslated(0.0,0.0,1.0);
 	glBegin(GL_POLYGON);
-    glVertex2f(-4.572,-4.572);
-    glVertex2f(-4.572,4.572);
-    glVertex2f(4.572,4.572);
-    glVertex2f(4.572,-4.572);
+    glTexCoord2d(-1,-1);	glVertex2f(-4.572,-4.572);
+    glTexCoord2d(-1,1);		glVertex2f(-4.572,4.572);
+    glTexCoord2d(1,1);		glVertex2f(4.572,4.572);
+    glTexCoord2d(1,-1);		glVertex2f(4.572,-4.572);
     glEnd();
     glPopMatrix();
 	
