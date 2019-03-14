@@ -13,7 +13,7 @@ int main(int argc, char** argv)
    	for(int i = 0; i < argc; i++)
     {
 		dfr = (float) atoi(argv[i]);
-		cout << dfr << endl;
+		//cout << dfr << endl;
 		cma = true;
 	}
 	if(dfr == 0.0)
@@ -25,9 +25,11 @@ int main(int argc, char** argv)
     glutInitWindowSize(WINDOW_HEIGHT, WINDOW_WIDTH);
     glutInitWindowPosition(100, 100);
     glutCreateWindow(argv[0]);
-    init();
+    glewInit();
+	init();
 	glutKeyboardFunc(keyboard);
-    glutDisplayFunc(display);
+    glutSpecialFunc(processSpecialKeys);
+	glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     glutIdleFunc(stepCall);
     glutMainLoop();

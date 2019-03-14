@@ -11,26 +11,46 @@ void display(void)
 	extern double eyex;
 	extern double eyey;
 	extern double eyez;
-	extern unsigned pframes;	//frames per period
+	extern int pframes;	//frames per period
 	extern float dfr;	//desired frame rate
 	extern bool cma;
+	extern double centerx;
+	extern double centery;
+	extern double centerz;
+	extern GLfloat camerar;
+    extern GLfloat cameratheta;
+    extern GLfloat cameraphi;
+	extern GLuint textureID[4];
+    extern GLUquadric *leg1;
+    extern GLUquadric *leg2;
+    extern GLUquadric *leg3;
+    extern GLUquadric *leg4;
+    extern GLUquadric *base1;
+    extern GLUquadric *base2;
+    extern GLUquadric *rod;
+    extern GLUquadric *sphere;
 
+	glEnable(GL_TEXTURE_2D);
+    glEnable(GL_DEPTH_TEST);
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-    glLoadIdentity();   // Call this before setting the viewing position 
-   	gluLookAt(eyex,eyey,eyez,
-			0.0,0.0,0.0,
+    
+	glLoadIdentity();   // Call this before setting the viewing position 
+   	gluLookAt(/*eyex,eyey,eyez,*/camerar*sin(cameratheta*M_PI/180.0)*cos(cameraphi*M_PI/180.0),camerar*sin(cameratheta*M_PI/180.0)*sin(cameraphi*M_PI/180.0),camerar*cos(cameratheta*M_PI/180.0),
+			centerx,centery,centerz,
 			0.0,0.0,1.0);
-	glEnable(GL_DEPTH_TEST);
-    glColor3f(0.0,1.0,0.0);
+	glColor3f(0.0,1.0,0.0);
 
-	/*pendulum sphere and rod*/
+	/*pend sphere and rod*/
 	glPushMatrix();
     glScaled(1.0,1.0,-1.0);
 	glTranslated(2.0,0.0,0.2);
-    glColor3f (0.0,0.0,1.0);
+    //glColor3f (0.0,0.0,1.0);
     glRotated((double)180*theta/M_PI,1,0,0);
 	glRotated((double)180*theta/M_PI,0,0,1);
-	gluCylinder(gluNewQuadric(),
+	#ifdef TEXTURE
+    glColor3f(1.0,1.0,1.0);
+    glBindTexture(GL_TEXTURE_2D, textureID[4]);
+    gluCylinder(rod,
             (GLdouble) 0.05,	//radius of the cylinder at z=0
             (GLdouble) 0.05,	//radius of the cylinder at z=height
             (GLdouble) 0.8,	//height of the cylinder
@@ -38,138 +58,470 @@ void display(void)
             (GLint)    20 );
     
 	glTranslated(0.0,0.0,0.8); //moves the sphere to the swinging end of the pendulum
-    glColor3f (1.0,0.0,0.0);
-    gluSphere(gluNewQuadric(),
+    gluSphere(sphere,
              (GLdouble) 0.1,	//radius, diameter is .2 thus total length of pendulum is 1 meter
              (GLint)     10,
              (GLint)     10 );
+    #endif
+    #ifndef TEXTURE
+    glColor3f(1.0,0.0,0.0);
+    gluCylinder(gluNewQuadric(),
+            (GLdouble) 0.05,    //radius of the cylinder at z=0
+            (GLdouble) 0.05,    //radius of the cylinder at z=height
+            (GLdouble) 0.8, //height of the cylinder
+            (GLint)    20,
+            (GLint)    20 );
+
+    glTranslated(0.0,0.0,0.8); //moves the sphere to the swinging end of the pendulum
+    glColor3f (0.0,0.0,1.0);
+    gluSphere(gluNewQuadric(),
+             (GLdouble) 0.1,    //radius, diameter is .2 thus total length of pendulum is 1 meter
+             (GLint)     10,
+             (GLint)     10 );
+    #endif
     glPopMatrix();
 
-	/*horizontal pole*/
+	/*pend horizontal pole*/
     glPushMatrix();
 	glTranslated(-0.2,0.0,0.0);
 	glRotated(90.0,0,1,0);
-	glColor3f (0.0,1.0,1.0);
-	gluCylinder(gluNewQuadric(),
+	#ifdef TEXTURE
+    glBindTexture(GL_TEXTURE_2D, textureID[3]);
+    glColor3f (1.0,1.0,1.0);
+	gluCylinder(base1,
             (GLdouble) 0.2, //radius of the cylinder at z=0
             (GLdouble) 0.2, //radius of the cylinder at z=height
             (GLdouble) 2.2, //height of the cylinder
             (GLint)    20,
             (GLint)    20 );
-	glPopMatrix();
+	#endif
+    #ifndef TEXTURE
+    glColor3f (0.0,0.0,0.0);
+    gluCylinder(gluNewQuadric(),
+            (GLdouble) 0.2, //radius of the cylinder at z=0
+            (GLdouble) 0.2, //radius of the cylinder at z=height
+            (GLdouble) 2.2, //height of the cylinder
+            (GLint)    20,
+            (GLint)    20 );
+    #endif
+    glPopMatrix();
 	
-	/*vertical pole*/
+	/*pend vertical pole*/
 	glPushMatrix();
 	glTranslated(0.0,0.0,-3.0);
-	glColor3f (0.0,1.0,1.0);
+	#ifdef TEXTURE
+    glColor3f(1.0,1.0,1.0);
+    gluCylinder(base2,//gluNewQuadric(),
+            (GLdouble) 0.2, //radius of the cylinder at z=0
+            (GLdouble) 0.2, //radius of the cylinder at z=height
+            (GLdouble) 3.0, //height of the cylinder
+            (GLint)    20,
+            (GLint)    20 );
+    #endif
+    #ifndef TEXTURE
+    glColor3f(0.0,0.0,0.0);
     gluCylinder(gluNewQuadric(),
             (GLdouble) 0.2, //radius of the cylinder at z=0
             (GLdouble) 0.2, //radius of the cylinder at z=height
             (GLdouble) 3.0, //height of the cylinder
             (GLint)    20,
             (GLint)    20 );
+    #endif
 	glPopMatrix();
 
-	/*base*/
-	glPushMatrix();
-	glTranslated(0.0,0.0,-3.0);
-	gluCylinder(gluNewQuadric(),
-            (GLdouble) 3.0, //radius of the cylinder at z=0
-            (GLdouble) 3.0, //radius of the cylinder at z=height
-            (GLdouble) 0.5, //height of the cylinder
-            (GLint)    4,
-            (GLint)    20 );
-    glPopMatrix();
-
-	/*top*/
-	glPushMatrix();
-	glTranslated(0.0,0.0,-2.5);
-	glRotated(45.0,0,0,1);
-	glColor3f(1.0,0.0,0.0);
-	glBegin(GL_POLYGON);
-	glVertex2f(-2.12,-2.12);	//left
-	glVertex2f(-2.12,2.12);	//back
-	glVertex2f(2.12,2.12);	//right
-	glVertex2f(2.12,-2.12);	//front
-	glEnd();
-	glPopMatrix();
-
-	/*bottom*/
+	/*tabletop top*/
 	glPushMatrix();
     glTranslated(0.0,0.0,-3.0);
-    glRotated(45.0,0,0,1);
-    glColor3f(1.0,1.0,0.0);
-    glBegin(GL_POLYGON);
-    glVertex2f(-2.12,-2.12);  //left
-    glVertex2f(-2.12,2.12);   //back
-    glVertex2f(2.12,2.12);    //right
-    glVertex2f(2.12,-2.12);   //front
+    #ifdef TEXTURE
+    glBindTexture(GL_TEXTURE_2D, textureID[2]);
+    glColor3f(1.0,1.0,1.0);
+	glBegin(GL_POLYGON);
+	//2ft = 0.6096m
+	//1inch=0.0254m
+	glTexCoord2d(-1,-1);    glVertex2f(-1.0,-1.0);  
+    glTexCoord2d(-1,1);    glVertex2f(-1.0,1.0);
+    glTexCoord2d(1,1);    glVertex2f(1.0,1.0);
+    glTexCoord2d(1,-1);    glVertex2f(1.0,-1.0);
     glEnd();
+    #endif
+	glPopMatrix();
+	
+	/*tabletop bottom*/
+	glPushMatrix();
+	glTranslated(0.0,0.0,-3.0254);
+    #ifdef TEXTURE
+    glBindTexture(GL_TEXTURE_2D, textureID[2]);
+    glColor3f(1.0,1.0,1.0);
+	glBegin(GL_POLYGON);
+    glTexCoord2d(-1,-1);    glVertex2f(-1.0,-1.0);  
+    glTexCoord2d(-1,1);    glVertex2f(-1.0,1.0);   
+    glTexCoord2d(1,1);    glVertex2f(1.0,1.0);    
+    glTexCoord2d(1,-1);    glVertex2f(1.0,-1.0);   
+    glEnd();
+    #endif
+    #ifndef TEXTURE
+    glColor3f(1.0,0.0,1.0);
+    glBegin(GL_POLYGON);
+    glVertex2f(-1.0,-1.0);
+    glVertex2f(-1.0,1.0);
+    glVertex2f(1.0,1.0);
+    glVertex2f(1.0,-1.0);
+    glEnd();
+    #endif
+	glPopMatrix();
+
+	/*tabletop back*/
+	glPushMatrix();
+    glTranslated(0.0,0.0,-3.0254);
+    #ifdef TEXTURE
+    glBindTexture(GL_TEXTURE_2D, textureID[2]);
+	glColor3f(1.0,1.0,1.0);
+    glBegin(GL_POLYGON);
+    glTexCoord2d(-1,-1);    glVertex3f(-1,-1,0);  //bottom left
+    glTexCoord2d(-1,1);    glVertex3f(-1,-1,0.0254);   //top left
+    glTexCoord2d(1,1);    glVertex3f(-1,1,0.0254);    //top right
+    glTexCoord2d(1,-1);    glVertex3f(-1,1,0);   //bottom right
+    glEnd();
+    #endif
+    #ifndef TEXTURE
+    glColor3f(1.0,0.0,1.0);
+    glBegin(GL_POLYGON);
+    glVertex3f(-1,-1,0);  //bottom left
+    glVertex3f(-1,-1,0.0254);   //top left
+    glVertex3f(-1,1,0.0254);    //top right
+    glVertex3f(-1,1,0);   //bottom right
+    glEnd();
+    #endif
     glPopMatrix();
 
-	/*person*/
-	/*head*/
+	/*tabletop front*/
 	glPushMatrix();
-	//-2.5 -.2 + 1.52 = -1.18
-	glTranslated(0.0,1.0,-1.18);
-	gluSphere(gluNewQuadric(),
-             (GLdouble) 0.2,   //radius (top of head at 1.72m)
-             (GLint)     10,
-             (GLint)     10 );
+    glTranslated(0.0,0.0,-3.0254);
+    #ifdef TEXTURE
+    glBindTexture(GL_TEXTURE_2D, textureID[2]);
+    glColor3f(1.0,1.0,1.0);
+    glBegin(GL_POLYGON);
+    glTexCoord2d(-1,-1);    glVertex3f(1,1,0);  //right bottom 
+    glTexCoord2d(-1,1);    glVertex3f(1,1,0.0254);   //right top
+    glTexCoord2d(1,1);    glVertex3f(1,-1,0.0254);    //left top
+    glTexCoord2d(1,-1);    glVertex3f(1,-1,0);   //left bottom
+    glEnd();
+    #endif
+    #ifndef TEXTURE
+    glColor3f(1.0,0.0,1.0);
+    glBegin(GL_POLYGON);
+    glVertex3f(1,1,0);  //right bottom
+    glVertex3f(1,1,0.0254);   //right top
+    glVertex3f(1,-1,0.0254);    //left top
+    glVertex3f(1,-1,0);   //left bottom
+    glEnd();
+    #endif
     glPopMatrix();
-	/*body*/
+
+	/*tabletop left*/
+    glPushMatrix();
+    glTranslated(0.0,0.0,-3.0254);
+    #ifdef TEXTURE
+    glBindTexture(GL_TEXTURE_2D, textureID[2]);
+    glColor3f(1.0,1.0,1.0);
+    glBegin(GL_POLYGON);
+    glTexCoord2d(-1,-1);    glVertex3f(1,-1,0);  //front bottom
+    glTexCoord2d(-1,1);    glVertex3f(1,-1,0.0254);   //front top
+    glTexCoord2d(1,1);    glVertex3f(-1,-1,0.0254);    //back top
+    glTexCoord2d(1,-1);    glVertex3f(-1,-1,0);   //back bottom
+    glEnd();
+    #endif
+    #ifndef TEXTURE
+    glColor3f(1.0,0.0,1.0);
+    glBegin(GL_POLYGON);
+    glVertex3f(1,-1,0);  //front bottom
+    glVertex3f(1,-1,0.0254);   //front top
+    glVertex3f(-1,-1,0.0254);    //back top
+    glVertex3f(-1,-1,0);   //back bottom
+    glEnd();
+    #endif
+    glPopMatrix();
+	
+	/*tabletop right*/
 	glPushMatrix();
-	//-2.5 -.2 + .52 = -2.18
-	glTranslated(0.0,1.0,-2.18);
-	gluCylinder(gluNewQuadric(),
-            (GLdouble) 0.05, //radius of the cylinder at z=0
-            (GLdouble) 0.05, //radius of the cylinder at z=height
-            (GLdouble) 0.8, //height of the cylinder
-            (GLint)    20,
+    glTranslated(0.0,0.0,-3.0254);
+    #ifdef TEXTURE
+    glBindTexture(GL_TEXTURE_2D, textureID[2]);
+    glColor3f(1.0,1.0,1.0);
+    glBegin(GL_POLYGON);
+    glTexCoord2d(-1,-1);    glVertex3f(1,1,0);  //front bottom
+    glTexCoord2d(-1,1);    glVertex3f(1,1,0.0254);   //front top
+    glTexCoord2d(1,1);    glVertex3f(-1,1,0.0254);    //back top
+    glTexCoord2d(1,-1);    glVertex3f(-1,1,0);   //back bottom
+    glEnd();
+    #endif
+    #ifndef TEXTURE
+    glColor3f(1.0,0.0,1.0);
+    glBegin(GL_POLYGON);
+    glVertex3f(1,1,0);  //front bottom
+    glVertex3f(1,1,0.0254);   //front top
+    glVertex3f(-1,1,0.0254);    //back top
+    glVertex3f(-1,1,0);   //back bottom
+    glEnd();
+    #endif
+    glPopMatrix();
+	
+	/*table leg front right*/
+	glPushMatrix();
+    //-3.2-2.0=5.2
+	//1.5ft = 0.4572m
+	//-3.0254 - 0.4572 = -3.4826
+    glTranslated(1.0,1.0,-3.4826);
+    glRotated(45.0,0,0,1);
+	glTranslated(-0.0254,0.0,0.0);
+	#ifdef TEXTURE
+    glColor3f(1.0,1.0,1.0);
+    glBindTexture(GL_TEXTURE_2D, textureID[3]);
+    gluCylinder(leg1,
+            (GLdouble) 0.0254, //radius of the cylinder at z=0
+            (GLdouble) 0.0254, //radius of the cylinder at z=height
+            (GLdouble) 0.4572, //height of the cylinder
+            (GLint)    4,
             (GLint)    20 );
+    #endif
+    #ifndef TEXTURE
+    glColor3f(0.0,0.0,0.0);
+    gluCylinder(gluNewQuadric(),
+            (GLdouble) 0.0254, //radius of the cylinder at z=0
+            (GLdouble) 0.0254, //radius of the cylinder at z=height
+            (GLdouble) 0.4572, //height of the cylinder
+            (GLint)    4,
+            (GLint)    20 );
+    #endif
+    glPopMatrix();
+	
+	/*table leg front left*/
+	glPushMatrix();
+    glTranslated(1.0,-1.0,-3.4826);
+    glRotated(45.0,0,0,1);
+    glTranslated(0.0,0.0254,0.0);
+    #ifdef TEXTURE
+    glBindTexture(GL_TEXTURE_2D, textureID[3]);
+    glColor3f(1.0,1.0,1.0);
+    gluCylinder(leg2,
+            (GLdouble) 0.0254, //radius of the cylinder at z=0
+            (GLdouble) 0.0254, //radius of the cylinder at z=height
+            (GLdouble) 0.4572, //height of the cylinder
+            (GLint)    4,
+            (GLint)    20 );
+    #endif
+    #ifndef TEXTURE 
+    glColor3f(0.0,0.0,0.0);
+    gluCylinder(gluNewQuadric(),
+            (GLdouble) 0.0254, //radius of the cylinder at z=0
+            (GLdouble) 0.0254, //radius of the cylinder at z=height
+            (GLdouble) 0.4572, //height of the cylinder
+            (GLint)    4,
+            (GLint)    20 );
+    #endif
+    //}
+    glPopMatrix();
+
+	/*table leg back left*/
+    glPushMatrix();
+    glTranslated(-1.0,-1.0,-3.4826);
+    glRotated(45.0,0,0,1);
+    glTranslated(0.0254,0.0,0.0);
+    #ifdef TEXTURE
+    glBindTexture(GL_TEXTURE_2D, textureID[3]);
+    glColor3f(1.0,1.0,1.0);
+    gluCylinder(leg3,
+            (GLdouble) 0.0254, //radius of the cylinder at z=0
+            (GLdouble) 0.0254, //radius of the cylinder at z=height
+            (GLdouble) 0.4572, //height of the cylinder
+            (GLint)    4,
+            (GLint)    20 );
+    #else
+    glColor3f(0.0,0.0,0.0);
+    gluCylinder(gluNewQuadric(),
+            (GLdouble) 0.0254, //radius of the cylinder at z=0
+            (GLdouble) 0.0254, //radius of the cylinder at z=height
+            (GLdouble) 0.4572, //height of the cylinder
+            (GLint)    4,
+            (GLint)    20 );
+    #endif
+    glPopMatrix();
+
+	/*table leg back right*/
+	glPushMatrix();
+    glTranslated(-1.0,1.0,-3.4826);
+    glRotated(45.0,0,0,1);
+    glTranslated(0.0,-0.0254,0.0);
+    #ifdef TEXTURE
+    glBindTexture(GL_TEXTURE_2D, textureID[3]);
+    glColor3f(1.0,1.0,1.0);
+    gluCylinder(leg4,
+            (GLdouble) 0.0254, //radius of the cylinder at z=0
+            (GLdouble) 0.0254, //radius of the cylinder at z=height
+            (GLdouble) 0.4572, //height of the cylinder
+            (GLint)    4,
+            (GLint)    20 );
+    #endif
+    #ifndef TEXTURE
+    glColor3f(0.0,0.0,0.0);
+    gluCylinder(gluNewQuadric(),
+            (GLdouble) 0.0254, //radius of the cylinder at z=0
+            (GLdouble) 0.0254, //radius of the cylinder at z=height
+            (GLdouble) 0.4572, //height of the cylinder
+            (GLint)    4,
+            (GLint)    20 );
+    #endif
+    glPopMatrix();
+
+	/*floor*/
+	glPushMatrix();
+    glTranslated(0.0,0.0,-3.4826);
+    #ifdef TEXTURE
+    glBindTexture(GL_TEXTURE_2D, textureID[0]);
+    glColor3f(1.0,1.0,1.0);
+	glBegin(GL_POLYGON);
+    glTexCoord2d(-1,-1);	glVertex2f(-4.572,-4.572);  
+    glTexCoord2d(-1,1);		glVertex2f(-4.572,4.572);   
+    glTexCoord2d(1.0,1.0);	glVertex2f(4.572,4.572);    
+    glTexCoord2d(1.0,-1.0);	glVertex2f(4.572,-4.572);   
+    glEnd();
+    #endif
+    #ifndef TEXTURE
+    glColor3f(0.0,1.0,1.0);
+    glBegin(GL_POLYGON);
+    glVertex2f(-4.572,-4.572);
+    glVertex2f(-4.572,4.572);
+    glVertex2f(4.572,4.572);
+    glVertex2f(4.572,-4.572);
+    glEnd();
+    #endif    
 	glPopMatrix();
-	/*left leg*/
+
+	/*ceiling*/
     glPushMatrix();
-    //-2.5 -.2 + .52 = -2.18
-	glTranslated(0.0,1.0,-2.18);
-    glRotated(-45.0,1,0,0);
-	glScaled(1.0,1.0,-1.0);
-	gluCylinder(gluNewQuadric(),
-            (GLdouble) 0.05, //radius of the cylinder at z=0
-            (GLdouble) 0.05, //radius of the cylinder at z=height
-            (GLdouble) 0.52, //height of the cylinder
-            (GLint)    20,
-            (GLint)    20 );
+    glTranslated(0.0,0.0,1.0);
+	#ifdef TEXTURE
+    glBindTexture(GL_TEXTURE_2D, textureID[1]);
+    glColor3f(1.0,1.0,1.0);
+	glBegin(GL_POLYGON);
+    glTexCoord2d(-1,-1);	glVertex2f(-4.572,-4.572);
+    glTexCoord2d(-1,1);		glVertex2f(-4.572,4.572);
+    glTexCoord2d(1,1);		glVertex2f(4.572,4.572);
+    glTexCoord2d(1,-1);		glVertex2f(4.572,-4.572);
+    glEnd();
+    #endif
+    #ifndef TEXTURE
+    glColor3f(0.0,1.0,1.0);
+    glBegin(GL_POLYGON);
+    glVertex2f(-4.572,-4.572);
+    glVertex2f(-4.572,4.572);
+    glVertex2f(4.572,4.572);
+    glVertex2f(4.572,-4.572);
+    glEnd();
+    #endif
     glPopMatrix();
-	 /*right leg*/
+	
+	/*back wall*/
     glPushMatrix();
-	//-2.5 -.2 + .52 = -2.18
-    glTranslated(0.0,1.0,-2.18);
-    glRotated(45.0,1,0,0);
-    glScaled(1.0,1.0,-1.0);
-    gluCylinder(gluNewQuadric(),
-            (GLdouble) 0.05, //radius of the cylinder at z=0
-            (GLdouble) 0.05, //radius of the cylinder at z=height
-            (GLdouble) 0.52, //height of the cylinder
-            (GLint)    20,
-            (GLint)    20 );
+	glTranslated(0.0,0.0,-3.4826);
+    #ifdef TEXTURE
+    glBindTexture(GL_TEXTURE_2D, textureID[1]);
+    glColor3f(1.0,1.0,1.0);
+	glBegin(GL_POLYGON);
+    glTexCoord2d(-1,-1);	glVertex3f(-4.572,-4.572,0);
+    glTexCoord2d(-1,1);		glVertex3f(-4.572,-4.572,4.4826);
+    glTexCoord2d(1,1);		glVertex3f(-4.572,4.572,4.4826);
+    glTexCoord2d(1,-1);		glVertex3f(-4.572,4.572,0);
+    glEnd();
+    #endif
+    #ifndef TEXTURE
+    glColor3f(1.0,1.0,0.0);
+    glBegin(GL_POLYGON);
+    glVertex3f(-4.572,-4.572,0);
+    glVertex3f(-4.572,-4.572,4.4826);
+    glVertex3f(-4.572,4.572,4.4826);
+    glVertex3f(-4.572,4.572,0);
+    glEnd();
+    #endif
     glPopMatrix();
-	 /*arms*/
+
+	/*left wall*/
     glPushMatrix();
-	//-2.5 -.2 + .9 = -1.8
-    glTranslated(0.0,1.35,-1.8);
-    glRotated(90.0,0,1,0);
-    glRotated(90.0,1,0,0);
-    gluCylinder(gluNewQuadric(),
-            (GLdouble) 0.05, //radius of the cylinder at z=0
-            (GLdouble) 0.05, //radius of the cylinder at z=height
-            (GLdouble) 0.7, //height of the cylinder
-            (GLint)    20,
-            (GLint)    20 );
+    glTranslated(0.0,0.0,-3.4826);
+	#ifdef TEXTURE
+    glBindTexture(GL_TEXTURE_2D, textureID[1]);
+    glColor3f(1.0,1.0,1.0);
+    glBegin(GL_POLYGON);
+    glTexCoord2d(-1,-1);	glVertex3f(-4.572,-4.572,0);
+    glTexCoord2d(-1,1);		glVertex3f(-4.572,-4.572,4.4826);
+    glTexCoord2d(1,1);		glVertex3f(4.572,-4.572,4.4826);
+    glTexCoord2d(1,-1);		glVertex3f(4.572,-4.572,0);
+    glEnd();
+    #endif 
+    #ifndef TEXTURE
+    glColor3f(1.0,1.0,0.0);
+    glBegin(GL_POLYGON);
+    glVertex3f(-4.572,-4.572,0);
+    glVertex3f(-4.572,-4.572,4.4826);
+    glVertex3f(4.572,-4.572,4.4826);
+    glVertex3f(4.572,-4.572,0);
+    glEnd();
+    #endif
+    glPopMatrix();
+
+	/*right wall*/
+    glPushMatrix();
+    glTranslated(0.0,0.0,-3.4826);
+    #ifdef TEXTURE
+	glBindTexture(GL_TEXTURE_2D, textureID[1]);
+    glColor3f(1.0,1.0,1.0);
+    glBegin(GL_POLYGON);
+    glTexCoord2d(-1,-1);	glVertex3f(4.572,4.572,0);
+    glTexCoord2d(-1,1);		glVertex3f(4.572,4.572,4.4826);
+    glTexCoord2d(1,1);		glVertex3f(-4.572,4.572,4.4826);
+    glTexCoord2d(1,-1);		glVertex3f(-4.572,4.572,0);
+    glEnd();
+    #endif
+    #ifndef TEXTURE
+    glColor3f(1.0,1.0,0.0);
+    glBegin(GL_POLYGON);
+    glVertex3f(4.572,4.572,0);
+    glVertex3f(4.572,4.572,4.4826);
+    glVertex3f(-4.572,4.572,4.4826);
+    glVertex3f(-4.572,4.572,0);
+    glEnd();
+    #endif
+    glPopMatrix();
+
+    /*left wall*/
+    glPushMatrix();
+    glTranslated(0.0,0.0,-3.4826);
+    #ifdef TEXTURE
+	glBindTexture(GL_TEXTURE_2D, textureID[1]);
+    glColor3f(1.0,1.0,1.0);
+    glBegin(GL_POLYGON);
+    glTexCoord2d(-1,-1);	glVertex3f(4.572,4.572,0);
+    glTexCoord2d(-1,1);		glVertex3f(4.572,4.572,4.4826);
+    glTexCoord2d(1,1);		glVertex3f(4.572,-4.572,4.4826);
+    glTexCoord2d(1,-1);		glVertex3f(4.572,-4.572,0);
+    glEnd();
+    #endif
+    #ifndef TEXTURE
+    glColor3f(1.0,1.0,0.0);
+    glBegin(GL_POLYGON);
+    glVertex3f(4.572,4.572,0);
+    glVertex3f(4.572,4.572,4.4826);
+    glVertex3f(4.572,-4.572,4.4826);
+    glVertex3f(4.572,-4.572,0);
+    glEnd();
+    #endif
     glPopMatrix();
 
 	glFlush();
-	
+    #ifdef TEXTURE
+    glDisable(GL_DEPTH_TEST);
+    glDisable(GL_TEXTURE_2D);
+	#endif
 	showFPS();	//shows the FPS, FPP, T
     omegaTime();	//calculates the FPS
 	PeriodTime();	//calculates the FPP and T

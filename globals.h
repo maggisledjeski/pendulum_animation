@@ -28,9 +28,25 @@ int totaltime = 0;	//my pendulum period time
 double oldppt = 0.0;	//old physics period time
 double pttotal = 0.0;	//physics period time
 float dfr;// = 60.0;	//desired frame rate
+double centerx = 0.0;
+double centery = 0.0;
+double centerz = 0.0;
+GLfloat camerar = 10.0;//15.0;
+GLfloat cameratheta = 100.0;//75.0;//15.0;//45.0;
+GLfloat cameraphi = 45.0;
 
 int totalFPP = 0;
 double totalPTime = 0.0;
+
+GLUquadric *leg1;
+GLUquadric *leg2;
+GLUquadric *leg3;
+GLUquadric *leg4;
+GLUquadric *base1;
+GLUquadric *base2;
+GLUquadric *rod;
+GLUquadric *sphere;
+GLuint textureID[5];
 
 
 #endif
