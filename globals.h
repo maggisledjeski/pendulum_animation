@@ -44,6 +44,8 @@ GLUquadric *leg3;
 GLUquadric *leg4;
 GLUquadric *base1;
 GLUquadric *base2;
+GLUquadric *rod;
+GLUquadric *sphere;
 GLuint textureID[4];
 
 
