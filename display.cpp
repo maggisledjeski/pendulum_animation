@@ -49,7 +49,8 @@ void display(void)
 	glRotated((double)180*theta/M_PI,0,0,1);
 	#ifdef TEXTURE
     glColor3f(1.0,1.0,1.0);
-    gluCylinder(gluNewQuadric(),
+    glBindTexture(GL_TEXTURE_2D, textureID[4]);
+    gluCylinder(rod,
             (GLdouble) 0.05,	//radius of the cylinder at z=0
             (GLdouble) 0.05,	//radius of the cylinder at z=height
             (GLdouble) 0.8,	//height of the cylinder
@@ -57,8 +58,7 @@ void display(void)
             (GLint)    20 );
     
 	glTranslated(0.0,0.0,0.8); //moves the sphere to the swinging end of the pendulum
-    //glColor3f (1.0,0.0,0.0);
-    gluSphere(gluNewQuadric(),
+    gluSphere(sphere,
              (GLdouble) 0.1,	//radius, diameter is .2 thus total length of pendulum is 1 meter
              (GLint)     10,
              (GLint)     10 );
