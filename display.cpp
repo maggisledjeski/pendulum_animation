@@ -25,6 +25,8 @@ void display(void)
     extern GLUquadric *leg2;
     extern GLUquadric *leg3;
     extern GLUquadric *leg4;
+    extern GLUquadric *base1;
+    extern GLUquadric *base2;
 
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_DEPTH_TEST);
@@ -62,25 +64,48 @@ void display(void)
     glPushMatrix();
 	glTranslated(-0.2,0.0,0.0);
 	glRotated(90.0,0,1,0);
-	glColor3f (0.0,1.0,1.0);
-	gluCylinder(gluNewQuadric(),
+	#ifdef TEXTURE
+    glBindTexture(GL_TEXTURE_2D, textureID[3]);
+    glColor3f (1.0,1.0,1.0);
+	gluCylinder(base1,
             (GLdouble) 0.2, //radius of the cylinder at z=0
             (GLdouble) 0.2, //radius of the cylinder at z=height
             (GLdouble) 2.2, //height of the cylinder
             (GLint)    20,
             (GLint)    20 );
-	glPopMatrix();
+	#endif
+    #ifndef TEXTURE
+    glColor3f (0.0,0.0,0.0);
+    gluCylinder(gluNewQuadric(),
+            (GLdouble) 0.2, //radius of the cylinder at z=0
+            (GLdouble) 0.2, //radius of the cylinder at z=height
+            (GLdouble) 2.2, //height of the cylinder
+            (GLint)    20,
+            (GLint)    20 );
+    #endif
+    glPopMatrix();
 	
 	/*pend vertical pole*/
 	glPushMatrix();
 	glTranslated(0.0,0.0,-3.0);
-	glColor3f (0.0,1.0,1.0);
+	#ifdef TEXTURE
+    glColor3f(1.0,1.0,1.0);
+    gluCylinder(base2,//gluNewQuadric(),
+            (GLdouble) 0.2, //radius of the cylinder at z=0
+            (GLdouble) 0.2, //radius of the cylinder at z=height
+            (GLdouble) 3.0, //height of the cylinder
+            (GLint)    20,
+            (GLint)    20 );
+    #endif
+    #ifndef TEXTURE
+    glColor3f(0.0,0.0,0.0);
     gluCylinder(gluNewQuadric(),
             (GLdouble) 0.2, //radius of the cylinder at z=0
             (GLdouble) 0.2, //radius of the cylinder at z=height
             (GLdouble) 3.0, //height of the cylinder
             (GLint)    20,
             (GLint)    20 );
+    #endif
 	glPopMatrix();
 
 	/*tabletop top*/
@@ -222,8 +247,6 @@ void display(void)
 	
 	/*table leg front right*/
 	glPushMatrix();
-    //glBindTexture(GL_TEXTURE_2D, textureID[3]);
-	//glColor3f(1.0,1.0,0.0);
     //-3.2-2.0=5.2
 	//1.5ft = 0.4572m
 	//-3.0254 - 0.4572 = -3.4826
@@ -232,7 +255,7 @@ void display(void)
 	glTranslated(-0.0254,0.0,0.0);
 	#ifdef TEXTURE
     glColor3f(1.0,1.0,1.0);
-    //glBindTexture(GL_TEXTURE_2D, textureID[3]);
+    glBindTexture(GL_TEXTURE_2D, textureID[3]);
     gluCylinder(leg1,
             (GLdouble) 0.0254, //radius of the cylinder at z=0
             (GLdouble) 0.0254, //radius of the cylinder at z=height
@@ -257,7 +280,7 @@ void display(void)
     glRotated(45.0,0,0,1);
     glTranslated(0.0,0.0254,0.0);
     #ifdef TEXTURE
-    //glBindTexture(GL_TEXTURE_2D, textureID[3]);
+    glBindTexture(GL_TEXTURE_2D, textureID[3]);
     glColor3f(1.0,1.0,1.0);
     gluCylinder(leg2,
             (GLdouble) 0.0254, //radius of the cylinder at z=0
@@ -280,13 +303,11 @@ void display(void)
 
 	/*table leg back left*/
     glPushMatrix();
-    //glBindTexture(GL_TEXTURE_2D, textureID[3]);
-    //glColor3f(1.0,1.0,0.0);
     glTranslated(-1.0,-1.0,-3.4826);
     glRotated(45.0,0,0,1);
     glTranslated(0.0254,0.0,0.0);
     #ifdef TEXTURE
-    //glBindTexture(GL_TEXTURE_2D, textureID[3]);
+    glBindTexture(GL_TEXTURE_2D, textureID[3]);
     glColor3f(1.0,1.0,1.0);
     gluCylinder(leg3,
             (GLdouble) 0.0254, //radius of the cylinder at z=0
@@ -307,12 +328,11 @@ void display(void)
 
 	/*table leg back right*/
 	glPushMatrix();
-    //glBindTexture(GL_TEXTURE_2D, textureID[3]);
-    //glColor3f(1.0,1.0,0.0);
     glTranslated(-1.0,1.0,-3.4826);
     glRotated(45.0,0,0,1);
     glTranslated(0.0,-0.0254,0.0);
     #ifdef TEXTURE
+    glBindTexture(GL_TEXTURE_2D, textureID[3]);
     glColor3f(1.0,1.0,1.0);
     gluCylinder(leg4,
             (GLdouble) 0.0254, //radius of the cylinder at z=0
@@ -333,9 +353,7 @@ void display(void)
     glPopMatrix();
 
 	/*floor*/
-	//glBindTexture(GL_TEXTURE_2D, textureID[0]);
 	glPushMatrix();
-    //glBindTexture(GL_TEXTURE_2D, textureID[0]);
     glTranslated(0.0,0.0,-3.4826);
     #ifdef TEXTURE
     glBindTexture(GL_TEXTURE_2D, textureID[0]);
