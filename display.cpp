@@ -380,10 +380,10 @@ void display(void)
     glBindTexture(GL_TEXTURE_2D, textureID[0]);
     glColor3f(1.0,1.0,1.0);
 	glBegin(GL_POLYGON);
-    glTexCoord2d(-1,-1);	glVertex2f(-4.572,-4.572);  
-    glTexCoord2d(-1,1);		glVertex2f(-4.572,4.572);   
-    glTexCoord2d(1.0,1.0);	glVertex2f(4.572,4.572);    
-    glTexCoord2d(1.0,-1.0);	glVertex2f(4.572,-4.572);   
+    glTexCoord2d(-1,-1);	glVertex2f(-9,-9);//-4.572,-4.572);  
+    glTexCoord2d(-1,1);		glVertex2f(-9,9);//-4.572,4.572);   
+    glTexCoord2d(1.0,1.0);	glVertex2f(9,9);//4.572,4.572);    
+    glTexCoord2d(1.0,-1.0);	glVertex2f(9,-9);//4.572,-4.572);   
     glEnd();
     #endif
     #ifndef TEXTURE
@@ -404,10 +404,10 @@ void display(void)
     glBindTexture(GL_TEXTURE_2D, textureID[1]);
     glColor3f(1.0,1.0,1.0);
 	glBegin(GL_POLYGON);
-    glTexCoord2d(-1,-1);	glVertex2f(-4.572,-4.572);
-    glTexCoord2d(-1,1);		glVertex2f(-4.572,4.572);
-    glTexCoord2d(1,1);		glVertex2f(4.572,4.572);
-    glTexCoord2d(1,-1);		glVertex2f(4.572,-4.572);
+    glTexCoord2d(-1,-1);	glVertex2f(-9,-9);//-4.572,-4.572);
+    glTexCoord2d(-1,1);		glVertex2f(-9,9);//-4.572,4.572);
+    glTexCoord2d(1,1);		glVertex2f(9,9);//4.572,4.572);
+    glTexCoord2d(1,-1);		glVertex2f(9,-9);//4.572,-4.572);
     glEnd();
     #endif
     #ifndef TEXTURE
@@ -432,10 +432,10 @@ void display(void)
     glBindTexture(GL_TEXTURE_2D, textureID[1]);
     glColor3f(1.0,1.0,1.0);
 	glBegin(GL_POLYGON);
-    glTexCoord2d(-1,-1);	glVertex3f(-4.572,-4.572,0);
-    glTexCoord2d(-1,1);		glVertex3f(-4.572,-4.572,4.4826);
-    glTexCoord2d(1,1);		glVertex3f(-4.572,4.572,4.4826);
-    glTexCoord2d(1,-1);		glVertex3f(-4.572,4.572,0);
+    glTexCoord2d(-1,-1);	glVertex3f(-9,-9,0);
+    glTexCoord2d(-1,1);		glVertex3f(-9,-9,5);
+    glTexCoord2d(1,1);		glVertex3f(-9,9,5);
+    glTexCoord2d(1,-1);		glVertex3f(-9,9,0);
     glEnd();
     #endif
     #ifndef TEXTURE
@@ -456,10 +456,10 @@ void display(void)
     glBindTexture(GL_TEXTURE_2D, textureID[1]);
     glColor3f(1.0,1.0,1.0);
     glBegin(GL_POLYGON);
-    glTexCoord2d(-1,-1);	glVertex3f(-4.572,-4.572,0);
-    glTexCoord2d(-1,1);		glVertex3f(-4.572,-4.572,4.4826);
-    glTexCoord2d(1,1);		glVertex3f(4.572,-4.572,4.4826);
-    glTexCoord2d(1,-1);		glVertex3f(4.572,-4.572,0);
+    glTexCoord2d(-1,-1);	glVertex3f(-9,-9,0);
+    glTexCoord2d(-1,1);		glVertex3f(-9,-9,5);
+    glTexCoord2d(1,1);		glVertex3f(9,-9,5);
+    glTexCoord2d(1,-1);		glVertex3f(9,-9,0);
     glEnd();
     #endif 
     #ifndef TEXTURE
@@ -484,10 +484,10 @@ void display(void)
 	glBindTexture(GL_TEXTURE_2D, textureID[1]);
     glColor3f(1.0,1.0,1.0);
     glBegin(GL_POLYGON);
-    glTexCoord2d(-1,-1);	glVertex3f(4.572,4.572,0);
-    glTexCoord2d(-1,1);		glVertex3f(4.572,4.572,4.4826);
-    glTexCoord2d(1,1);		glVertex3f(-4.572,4.572,4.4826);
-    glTexCoord2d(1,-1);		glVertex3f(-4.572,4.572,0);
+    glTexCoord2d(-1,-1);	glVertex3f(9,9,0);
+    glTexCoord2d(-1,1);		glVertex3f(9,9,5);
+    glTexCoord2d(1,1);		glVertex3f(-9,9,5);
+    glTexCoord2d(1,-1);		glVertex3f(-9,9,0);
     glEnd();
     #endif
     #ifndef TEXTURE
@@ -512,10 +512,10 @@ void display(void)
 	glBindTexture(GL_TEXTURE_2D, textureID[1]);
     glColor3f(1.0,1.0,1.0);
     glBegin(GL_POLYGON);
-    glTexCoord2d(-1,-1);	glVertex3f(4.572,4.572,0);
-    glTexCoord2d(-1,1);		glVertex3f(4.572,4.572,4.4826);
-    glTexCoord2d(1,1);		glVertex3f(4.572,-4.572,4.4826);
-    glTexCoord2d(1,-1);		glVertex3f(4.572,-4.572,0);
+    glTexCoord2d(-1,-1);	glVertex3f(9,9,0);
+    glTexCoord2d(-1,1);		glVertex3f(9,9,5);
+    glTexCoord2d(1,1);		glVertex3f(9,-9,5);
+    glTexCoord2d(1,-1);		glVertex3f(9,-9,0);
     glEnd();
     #endif
     #ifndef TEXTURE
