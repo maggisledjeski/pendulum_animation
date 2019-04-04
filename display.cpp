@@ -30,10 +30,12 @@ void display(void)
     extern GLUquadric *rod;
     extern GLUquadric *sphere;
 
-	cout << centerx << "     " << centery << "     " << centerz << endl;
-	cout << camerar << endl;
+	//cout << centerx << "     " << centery << "     " << centerz << endl;
+	//cout << camerar << endl;
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_DEPTH_TEST);
+	glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     
 	glLoadIdentity();   // Call this before setting the viewing position 
@@ -41,6 +43,17 @@ void display(void)
 			centerx,centery,centerz,
 			0.0,0.0,1.0);
 	glColor3f(0.0,1.0,0.0);
+
+	/*LIGHTINGGGG*/
+	GLfloat position0[] = { 0.0, 0.0, 1.0, 0.0 };
+	glPushMatrix();
+   	glLightfv(GL_LIGHT0, GL_POSITION, position0);
+   	glTranslated(0.0, 0.0, 1.5);
+   	glDisable(GL_LIGHTING);
+   	glColor3f(0.0, 1.0, 1.0);
+   	glutWireCube(0.1);
+   	glEnable (GL_LIGHTING);
+	glPopMatrix ();
 
 	/*pend sphere and rod*/
 	glPushMatrix();

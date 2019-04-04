@@ -16,7 +16,7 @@ void init(void)
     extern GLUquadric *sphere;
 
     glClearColor (0.0, 0.0, 0.0, 0.0);
-    glShadeModel (GL_FLAT);
+    glShadeModel (GL_SMOOTH);
 	#ifdef TEXTURE
 	loadTextures();
     leg1 = gluNewQuadric();
