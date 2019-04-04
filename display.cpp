@@ -29,32 +29,43 @@ void display(void)
     extern GLUquadric *base2;
     extern GLUquadric *rod;
     extern GLUquadric *sphere;
-
+	
 	//cout << centerx << "     " << centery << "     " << centerz << endl;
 	//cout << camerar << endl;
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_DEPTH_TEST);
-	glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     
 	glLoadIdentity();   // Call this before setting the viewing position 
    	gluLookAt(/*eyex,eyey,eyez,*/camerar*sin(cameratheta*M_PI/180.0)*cos(cameraphi*M_PI/180.0),camerar*sin(cameratheta*M_PI/180.0)*sin(cameraphi*M_PI/180.0),camerar*cos(cameratheta*M_PI/180.0),
 			centerx,centery,centerz,
 			0.0,0.0,1.0);
-	glColor3f(0.0,1.0,0.0);
+	//glColor3f(0.0,1.0,0.0);
 
 	/*LIGHTINGGGG*/
+	#ifdef LIGHTING
+	glClearColor(0.0,0.0,0.0,0.0);
+	glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+    GLfloat emission_on[] = { 0.5, 0.5, 0.5, 1.0};
+    GLfloat emission_off[] = { 0.0, 0.0, 0.0, 1.0};
+	GLfloat on[] = { 1.0, 1.0, 1.0, 1.0 };
 	GLfloat position0[] = { 0.0, 0.0, 1.0, 0.0 };
-	glPushMatrix();
+	
+	//glPushMatrix();
    	glLightfv(GL_LIGHT0, GL_POSITION, position0);
-   	glTranslated(0.0, 0.0, 1.5);
-   	glDisable(GL_LIGHTING);
-   	glColor3f(0.0, 1.0, 1.0);
-   	glutWireCube(0.1);
-   	glEnable (GL_LIGHTING);
-	glPopMatrix ();
+   	glLightfv(GL_LIGHT0, GL_SPECULAR, on);
+   	glLightfv(GL_LIGHT0, GL_DIFFUSE, on);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, on);
+	//glTranslated(0.0, 0.0, 1.5);
+   	//glDisable(GL_LIGHTING);
+   	//glColor3f(0.0, 1.0, 1.0);
+   	//glutWireCube(0.1);
+   	//glEnable (GL_LIGHTING);
+	//glPopMatrix ();
+	#endif
 
+	//glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission_on);	
 	/*pend sphere and rod*/
 	glPushMatrix();
     glScaled(1.0,1.0,-1.0);
@@ -62,6 +73,7 @@ void display(void)
     //glColor3f (0.0,0.0,1.0);
     glRotated((double)180*theta/M_PI,1,0,0);
 	glRotated((double)180*theta/M_PI,0,0,1);
+	//glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission_on);
 	#ifdef TEXTURE
     glColor3f(1.0,1.0,1.0);
     glBindTexture(GL_TEXTURE_2D, textureID[4]);
@@ -94,6 +106,7 @@ void display(void)
              (GLint)     10,
              (GLint)     10 );
     #endif
+	//glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission_off);
     glPopMatrix();
 
 	/*pend horizontal pole*/
@@ -147,6 +160,7 @@ void display(void)
 	/*tabletop top*/
 	glPushMatrix();
     glTranslated(0.0,0.0,-3.0);
+	//glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission_on);
     #ifdef TEXTURE
     glBindTexture(GL_TEXTURE_2D, textureID[2]);
     glColor3f(1.0,1.0,1.0);
@@ -159,6 +173,16 @@ void display(void)
     glTexCoord2d(1,-1);    glVertex2f(1.0,-1.0);
     glEnd();
     #endif
+	#ifndef TEXTURE
+    glColor3f(1.0,0.0,1.0);
+    glBegin(GL_POLYGON);
+    glVertex2f(-1.0,-1.0);
+    glVertex2f(-1.0,1.0);
+    glVertex2f(1.0,1.0);
+    glVertex2f(1.0,-1.0);
+    glEnd();
+    #endif
+	//glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission_off);
 	glPopMatrix();
 	
 	/*tabletop bottom*/
