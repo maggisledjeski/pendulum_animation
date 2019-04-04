@@ -112,6 +112,7 @@ void processSpecialKeys(int key, int x, int y)
         {
             cameratheta = cameratheta + 360.0;
         }
+		centerz = centerz + 0.2;
 		//cout << cameratheta << endl;
 		//eyez = eyez + 0.2;
 		//cameratheta = cameratheta + 1.0;
@@ -122,6 +123,7 @@ void processSpecialKeys(int key, int x, int y)
         {
             cameratheta = cameratheta - 360.0;
         }
+		centerz = centerz - 0.2;
 		//cout << cameratheta << endl;
 		//eyez = eyez - 0.2;
 		//cameratheta = cameratheta - 1.0;
