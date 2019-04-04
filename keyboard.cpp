@@ -107,23 +107,29 @@ void processSpecialKeys(int key, int x, int y)
 		//cout << "right -> x: " << centerx << " y: " << centery << endl;
     } else if(key == GLUT_KEY_PAGE_UP)
     {
-        cameratheta = cameratheta - 1.0;
-        if(cameratheta < 0.0)
-        {
-            cameratheta = cameratheta + 360.0;
-        }
-		centerz = centerz + 0.2;
+        if(centerz < 0.9)
+		{
+			cameratheta = cameratheta - 1.0;
+        	if(cameratheta < 0.0)
+        	{
+            	cameratheta = cameratheta + 360.0;
+        	}
+			centerz = centerz + 0.1;
+		}
 		//cout << cameratheta << endl;
 		//eyez = eyez + 0.2;
 		//cameratheta = cameratheta + 1.0;
     } else if(key == GLUT_KEY_PAGE_DOWN)
     {
-        cameratheta = cameratheta + 1.0;
-        if(cameratheta > 360.0)
-        {
-            cameratheta = cameratheta - 360.0;
-        }
-		centerz = centerz - 0.2;
+        if(centerz > 0.0)
+		{
+			cameratheta = cameratheta + 1.0;
+        	if(cameratheta > 360.0)
+        	{
+            	cameratheta = cameratheta - 360.0;
+        	}
+			centerz = centerz - 0.1;
+		}
 		//cout << cameratheta << endl;
 		//eyez = eyez - 0.2;
 		//cameratheta = cameratheta - 1.0;
