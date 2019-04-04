@@ -30,7 +30,7 @@ void keyboard(unsigned char key, int x, int y)
     	centerx = 0.0;
     	centery = 0.0;
     	centerz = 0.0;
-    	camerar = 10.0;
+    	camerar = 9.0;
     	cameratheta = 100.0;
     	cameraphi = 45.0;		
 	}
@@ -66,14 +66,18 @@ void keyboard(unsigned char key, int x, int y)
 
 	if(key == 'w')	//move forward
     {
-        camerar = camerar - 1.0;
-		//cout << camerar << endl;
+        if(camerar > 1.0)
+		{
+			camerar = camerar - 1.0;
+		}//cout << camerar << endl;
 		//eyex = eyex - 0.25;
     }
     if(key == 's')	//move backward
     {
-        camerar = camerar + 1.0;
-		//cout << camerar << endl;
+        if(camerar < 9.0)
+		{
+			camerar = camerar + 1.0;
+		}//cout << camerar << endl;
 		//eyex = eyex + 0.25;
     }
 
@@ -91,20 +95,30 @@ void processSpecialKeys(int key, int x, int y)
 	
 	if(key == GLUT_KEY_UP)	//pan up
     {
-        centerz = centerz + 0.2;
+        if(centerz < 0.9)
+		{
+			centerz = centerz + 0.2;
+		}
     } else if(key == GLUT_KEY_DOWN)	//pan down
     {
-        centerz = centerz - 0.2;
+       if(centerz > 0.0)
+		{
+			centerz = centerz - 0.2;
+		}
     } else if(key == GLUT_KEY_LEFT)	//pan left
     {
-        centerx = centerx - 0.2;
-		centery = centery - 0.2;
-		//cout << "left -> x: " << centerx << " y: " << centery << endl; 
+        if((centerx > 0.2) && (centery > 0.2))
+		{
+			centerx = centerx - 0.2;
+			centery = centery - 0.2;
+		}//cout << "left -> x: " << centerx << " y: " << centery << endl; 
     } else if(key == GLUT_KEY_RIGHT)	//pan right
     {
-        centerx = centerx + 0.2;
-		centery = centery + 0.2;
-		//cout << "right -> x: " << centerx << " y: " << centery << endl;
+        if((centerx < 0.6) && (centery < 0.6))
+		{
+			centerx = centerx + 0.2;
+			centery = centery + 0.2;
+		}//cout << "right -> x: " << centerx << " y: " << centery << endl;
     } else if(key == GLUT_KEY_PAGE_UP)
     {
         if(centerz < 0.9)

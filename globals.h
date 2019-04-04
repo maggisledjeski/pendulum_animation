@@ -31,7 +31,7 @@ float dfr;// = 60.0;	//desired frame rate
 double centerx = 0.0;
 double centery = 0.0;
 double centerz = 0.0;
-GLfloat camerar = 10.0;//15.0;
+GLfloat camerar = 9.0;//10.0;//15.0;
 GLfloat cameratheta = 100.0;//75.0;//15.0;//45.0;
 GLfloat cameraphi = 45.0;
 

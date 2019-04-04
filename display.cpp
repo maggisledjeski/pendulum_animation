@@ -30,8 +30,8 @@ void display(void)
     extern GLUquadric *rod;
     extern GLUquadric *sphere;
 
-	cout << centerz << endl;
-	
+	cout << centerx << "     " << centery << "     " << centerz << endl;
+	cout << camerar << endl;
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_DEPTH_TEST);
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
