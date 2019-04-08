@@ -42,7 +42,6 @@ void keyboard(unsigned char key, int x, int y)
             cameraphi = cameraphi + 360.0;
         }
 		eyey = eyey - 0.25;
-		//cout << "d: " << eyey << endl;
 	}
 	if(key == 'd')
 	{
@@ -52,9 +51,7 @@ void keyboard(unsigned char key, int x, int y)
             cameraphi = cameraphi - 360.0;
         }
 		eyey = eyey + 0.25;
-		//cout << "a: " << eyey << endl;
 	}
-	
 	if(key == 'x')	
     {
         eyez = eyez + 0.25;
@@ -69,16 +66,14 @@ void keyboard(unsigned char key, int x, int y)
         if(camerar > 1.0)
 		{
 			camerar = camerar - 1.0;
-		}//cout << camerar << endl;
-		//eyex = eyex - 0.25;
+		}
     }
     if(key == 's')	//move backward
     {
         if(camerar < 9.0)
 		{
 			camerar = camerar + 1.0;
-		}//cout << camerar << endl;
-		//eyex = eyex + 0.25;
+		}
     }
 
 }
@@ -107,21 +102,21 @@ void processSpecialKeys(int key, int x, int y)
 		}
     } else if(key == GLUT_KEY_LEFT)	//pan left
     {
-        if((centerx > 0.2) && (centery > 0.2))
+        if((centerx > -2.6) && (centery > -2.6))
 		{
 			centerx = centerx - 0.2;
 			centery = centery - 0.2;
-		}//cout << "left -> x: " << centerx << " y: " << centery << endl; 
+		} 
     } else if(key == GLUT_KEY_RIGHT)	//pan right
     {
-        if((centerx < 0.6) && (centery < 0.6))
+        if((centerx < 2.6) && (centery < 2.6))
 		{
 			centerx = centerx + 0.2;
 			centery = centery + 0.2;
-		}//cout << "right -> x: " << centerx << " y: " << centery << endl;
-    } else if(key == GLUT_KEY_PAGE_UP)
+		}
+    } else if(key == GLUT_KEY_PAGE_UP)	//move up
     {
-        if(centerz < 0.9)
+        if(cameratheta > 90.0)
 		{
 			cameratheta = cameratheta - 1.0;
         	if(cameratheta < 0.0)
@@ -130,12 +125,9 @@ void processSpecialKeys(int key, int x, int y)
         	}
 			centerz = centerz + 0.1;
 		}
-		//cout << cameratheta << endl;
-		//eyez = eyez + 0.2;
-		//cameratheta = cameratheta + 1.0;
-    } else if(key == GLUT_KEY_PAGE_DOWN)
+    } else if(key == GLUT_KEY_PAGE_DOWN)	//move down
     {
-        if(centerz > 0.0)
+        if(cameratheta < 101.0)
 		{
 			cameratheta = cameratheta + 1.0;
         	if(cameratheta > 360.0)
@@ -144,9 +136,6 @@ void processSpecialKeys(int key, int x, int y)
         	}
 			centerz = centerz - 0.1;
 		}
-		//cout << cameratheta << endl;
-		//eyez = eyez - 0.2;
-		//cameratheta = cameratheta - 1.0;
     }
 
 }
