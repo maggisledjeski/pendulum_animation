@@ -49,15 +49,23 @@ void display(void)
     glEnable(GL_LIGHT0);
     GLfloat emission_on[] = { 0.5, 0.5, 0.5, 1.0};
     GLfloat emission_off[] = { 0.0, 0.0, 0.0, 1.0};
-	GLfloat a_on[] = { -1.0,-1.0,-1.0,1.0};//0.2, 0.2, 0.2, 1.0};
+	GLfloat a_on[] = { 0.6,0.6,0.6,1.0};//0.2, 0.2, 0.2, 1.0};
     GLfloat a_off[] = { 0.0, 0.0, 0.0, 1.0};
-	GLfloat d_on[] = { 0.1, 0.5, 0.8, 1.0};
+	GLfloat d_on[] = { 0.3, 0.5, 0.8, 1.0};
     GLfloat d_off[] = { 0.0, 0.0, 0.0, 1.0};
-	GLfloat s_on[] = { 0.5, 0.5, 0.5, 1.0};
+	GLfloat s_on[] = { 0.2, 0.2, 0.2, 1.0};
     GLfloat s_off[] = { 0.0, 0.0, 0.0, 1.0};
 	GLfloat on[] = { 1.0, 1.0, 1.0, 1.0 };
 	GLfloat position0[] = { 0.0, 0.0, 1.0, 0.0 };
-	
+
+	/*Material Properties*/
+	GLfloat a_mat[] = { 0.9, 0.7, 0.0, 1.0};
+    GLfloat d_mat[] = { 0.0, 0.5, 0.0, 1.0};
+    GLfloat s_mat[] = { 0.0, 0.0, 0.2, 1.0};
+	GLfloat a_mat1[] = { 0.9, 0.9, 0.9, 1.0};
+    GLfloat d_mat1[] = { 0.7, 0.0, 0.0, 1.0};
+    GLfloat s_mat1[] = { 0.0, 0.6, 0.0, 1.0};
+
    	glPushMatrix();
 	glLightfv(GL_LIGHT0, GL_POSITION, position0);
    	glLightfv(GL_LIGHT0, GL_EMISSION, emission_off);
@@ -81,9 +89,9 @@ void display(void)
 	glRotated((double)180*theta/M_PI,0,0,1);
 	#ifdef LIGHTING
 	glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission_off);
-	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_on);
-	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_on);
-	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_on);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_mat);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_mat1);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_mat1);
 	#endif
 	#ifdef TEXTURE
     glColor3f(1.0,1.0,1.0);
@@ -131,10 +139,10 @@ void display(void)
 	glTranslated(-0.2,0.0,0.0);
 	#ifdef LIGHTING
     glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission_off);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_on);
-    #endif
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_mat);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_mat1);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_mat);
+	#endif
 	glRotated(90.0,0,1,0);
 	#ifdef TEXTURE
     glBindTexture(GL_TEXTURE_2D, textureID[3]);
@@ -161,10 +169,10 @@ void display(void)
 	glPushMatrix();
 	#ifdef LIGHTING
     glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission_off);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_on);
-    #endif
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_mat);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_mat);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_mat1);
+	#endif
 	glTranslated(0.0,0.0,-3.0);
 	#ifdef TEXTURE
     glColor3f(1.0,1.0,1.0);
@@ -190,10 +198,10 @@ void display(void)
 	glPushMatrix();
     #ifdef LIGHTING
     glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission_off);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_on);
-    #endif
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_mat);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_mat1);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_mat1);
+	#endif
 	glTranslated(0.0,0.0,-3.0);
 	//glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission_on);
     #ifdef TEXTURE
@@ -230,10 +238,10 @@ void display(void)
 	glPushMatrix();
 	#ifdef LIGHTING
     glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission_off);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_on);
-    #endif
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_mat);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_mat1);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_mat);
+	#endif
 	glTranslated(0.0,0.0,-3.0254);
     #ifdef TEXTURE
     glBindTexture(GL_TEXTURE_2D, textureID[2]);
@@ -260,10 +268,10 @@ void display(void)
 	glPushMatrix();
     #ifdef LIGHTING
     glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission_off);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_on);
-    #endif
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_mat);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_mat);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_mat1);
+	#endif
 	glTranslated(0.0,0.0,-3.0254);
     #ifdef TEXTURE
     glBindTexture(GL_TEXTURE_2D, textureID[2]);
@@ -290,10 +298,10 @@ void display(void)
 	glPushMatrix();
     #ifdef LIGHTING
     glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission_off);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_on);
-    #endif
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_mat);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_mat1);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_mat1);
+	#endif
 	glTranslated(0.0,0.0,-3.0254);
     #ifdef TEXTURE
     glBindTexture(GL_TEXTURE_2D, textureID[2]);
@@ -320,10 +328,10 @@ void display(void)
     glPushMatrix();
     #ifdef LIGHTING
     glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission_off);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_on);
-    #endif
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_mat);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_mat1);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_mat);
+	#endif
 	glTranslated(0.0,0.0,-3.0254);
     #ifdef TEXTURE
     glBindTexture(GL_TEXTURE_2D, textureID[2]);
@@ -350,10 +358,10 @@ void display(void)
 	glPushMatrix();
     #ifdef LIGHTING
     glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission_off);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_on);
-    #endif
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_mat);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_mat);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_mat1);
+	#endif
 	glTranslated(0.0,0.0,-3.0254);
     #ifdef TEXTURE
     glBindTexture(GL_TEXTURE_2D, textureID[2]);
@@ -383,10 +391,10 @@ void display(void)
 	//-3.0254 - 0.4572 = -3.4826
     #ifdef LIGHTING
     glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission_off);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_on);
-    #endif
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_mat);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_mat1);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_mat1);
+	#endif
 	glTranslated(1.0,1.0,-3.4826);
     glRotated(45.0,0,0,1);
 	glTranslated(-0.0254,0.0,0.0);
@@ -415,10 +423,10 @@ void display(void)
 	glPushMatrix();
     #ifdef LIGHTING
     glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission_off);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_on);
-    #endif
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_mat);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_mat1);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_mat);
+	#endif
 	glTranslated(1.0,-1.0,-3.4826);
     glRotated(45.0,0,0,1);
     glTranslated(0.0,0.0254,0.0);
@@ -448,10 +456,10 @@ void display(void)
     glPushMatrix();
     #ifdef LIGHTING
     glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission_off);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_on);
-    #endif
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_mat);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_mat);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_mat1);
+	#endif
 	glTranslated(-1.0,-1.0,-3.4826);
     glRotated(45.0,0,0,1);
     glTranslated(0.0254,0.0,0.0);
@@ -479,10 +487,10 @@ void display(void)
 	glPushMatrix();
     #ifdef LIGHTING
     glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission_off);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_on);
-    #endif
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_mat);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_mat1);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_mat1);
+	#endif
 	glTranslated(-1.0,1.0,-3.4826);
     glRotated(45.0,0,0,1);
     glTranslated(0.0,-0.0254,0.0);
@@ -512,9 +520,9 @@ void display(void)
     glTranslated(0.0,0.0,-3.4826);
     #ifdef LIGHTING
     glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission_off);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_on);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_mat);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_mat);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_mat);
 	#endif
 	#ifdef TEXTURE
     glBindTexture(GL_TEXTURE_2D, textureID[0]);
@@ -545,9 +553,9 @@ void display(void)
     glTranslated(0.0,0.0,1.5);
 	#ifdef LIGHTING
     glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission_off);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_on);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_mat);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_mat);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_mat);
 	#endif
 	#ifdef TEXTURE
     glBindTexture(GL_TEXTURE_2D, textureID[1]);
@@ -582,9 +590,9 @@ void display(void)
 	glTranslated(0.0,0.0,-3.4826);
     #ifdef LIGHTING
     glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission_off);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_on);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_mat);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_mat);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_mat);
 	#endif
 	#ifdef TEXTURE
     glBindTexture(GL_TEXTURE_2D, textureID[1]);
@@ -615,9 +623,9 @@ void display(void)
     glTranslated(0.0,0.0,-3.4826);
 	#ifdef LIGHTING
     glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission_off);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_on);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_mat);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_mat);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_mat);
 	#endif
 	#ifdef TEXTURE
     glBindTexture(GL_TEXTURE_2D, textureID[1]);
@@ -652,9 +660,9 @@ void display(void)
     glTranslated(0.0,0.0,-3.4826);
     #ifdef LIGHTING
     glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission_off);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_on);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_mat);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_mat);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_mat);
 	#endif
 	#ifdef TEXTURE
 	glBindTexture(GL_TEXTURE_2D, textureID[1]);
@@ -689,9 +697,9 @@ void display(void)
     glTranslated(0.0,0.0,-3.4826);
     #ifdef LIGHTING
     glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission_off);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_on);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_on);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, a_mat);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_mat);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, d_mat);
 	#endif
 	#ifdef TEXTURE
 	glBindTexture(GL_TEXTURE_2D, textureID[1]);
