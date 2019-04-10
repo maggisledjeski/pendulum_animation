@@ -15,7 +15,7 @@ void reshape (int w, int h)
 	
 	l = -1.5; r = 1.5;   // l=left, r=right
    	b = -1.0; t = 1.0;   // b=bottom, t=top
-   	n =  1.0; f = 20.0;  // n=near, f=far  
+   	n =  1.0; f = 40.0;//20.0;  // n=near, f=far  
 
    	glViewport (0, 0, (GLsizei) w, (GLsizei) h);
    	glMatrixMode (GL_PROJECTION);

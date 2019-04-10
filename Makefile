@@ -1,5 +1,6 @@
 CC = g++
-CODE = #-DTEXTURE
+TEX = #-DTEXTURE
+LIT = #-DLIGHTING
 CFLAGS = -O
 LDLIBS =  -lglut -lGL -lGLU -lm -lGLEW libSOIL.a
 HEADERS = SOIL.h globals.h includes.h prototypes.h
@@ -12,13 +13,13 @@ main.o : main.cpp $(HEADERS)
 	$(CC) $(CFLAGS) main.cpp -c
 
 init.o : init.cpp $(HEADERS)
-	$(CC) $(CFLAGS) $(CODE) init.cpp -c
+	$(CC) $(CFLAGS) $(TEX) $(LIT) init.cpp -c
 
 reshape.o : reshape.cpp $(HEADERS)
 	$(CC) $(CFLAGS) reshape.cpp -c
 
 display.o : display.cpp $(HEADERS)
-	$(CC) $(CFLAGS) $(CODE) display.cpp -c
+	$(CC) $(CFLAGS) $(TEX) $(LIT) display.cpp -c
 
 physics.o : physics.cpp $(HEADERS)
 	$(CC) $(CFLAGS) physics.cpp -c

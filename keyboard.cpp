@@ -30,7 +30,7 @@ void keyboard(unsigned char key, int x, int y)
     	centerx = 0.0;
     	centery = 0.0;
     	centerz = 0.0;
-    	camerar = 10.0;
+    	camerar = 9.0;
     	cameratheta = 100.0;
     	cameraphi = 45.0;		
 	}
@@ -42,7 +42,6 @@ void keyboard(unsigned char key, int x, int y)
             cameraphi = cameraphi + 360.0;
         }
 		eyey = eyey - 0.25;
-		//cout << "d: " << eyey << endl;
 	}
 	if(key == 'd')
 	{
@@ -52,9 +51,7 @@ void keyboard(unsigned char key, int x, int y)
             cameraphi = cameraphi - 360.0;
         }
 		eyey = eyey + 0.25;
-		//cout << "a: " << eyey << endl;
 	}
-	
 	if(key == 'x')	
     {
         eyez = eyez + 0.25;
@@ -66,15 +63,17 @@ void keyboard(unsigned char key, int x, int y)
 
 	if(key == 'w')	//move forward
     {
-        camerar = camerar - 1.0;
-		//cout << camerar << endl;
-		//eyex = eyex - 0.25;
+        if(camerar > 1.0)
+		{
+			camerar = camerar - 1.0;
+		}
     }
     if(key == 's')	//move backward
     {
-        camerar = camerar + 1.0;
-		//cout << camerar << endl;
-		//eyex = eyex + 0.25;
+        if(camerar < 9.0)
+		{
+			camerar = camerar + 1.0;
+		}
     }
 
 }
@@ -91,40 +90,52 @@ void processSpecialKeys(int key, int x, int y)
 	
 	if(key == GLUT_KEY_UP)	//pan up
     {
-        centerz = centerz + 0.2;
+        if(centerz < 0.9)
+		{
+			centerz = centerz + 0.2;
+		}
     } else if(key == GLUT_KEY_DOWN)	//pan down
     {
-        centerz = centerz - 0.2;
+       if(centerz > 0.0)
+		{
+			centerz = centerz - 0.2;
+		}
     } else if(key == GLUT_KEY_LEFT)	//pan left
     {
-        centerx = centerx - 0.2;
-		centery = centery - 0.2;
-		//cout << "left -> x: " << centerx << " y: " << centery << endl; 
+        if((centerx > -2.6) && (centery > -2.6))
+		{
+			centerx = centerx - 0.2;
+			centery = centery - 0.2;
+		} 
     } else if(key == GLUT_KEY_RIGHT)	//pan right
     {
-        centerx = centerx + 0.2;
-		centery = centery + 0.2;
-		//cout << "right -> x: " << centerx << " y: " << centery << endl;
-    } else if(key == GLUT_KEY_PAGE_UP)
+        if((centerx < 2.6) && (centery < 2.6))
+		{
+			centerx = centerx + 0.2;
+			centery = centery + 0.2;
+		}
+    } else if(key == GLUT_KEY_PAGE_UP)	//move up
     {
-        cameratheta = cameratheta - 1.0;
-        if(cameratheta < 0.0)
-        {
-            cameratheta = cameratheta + 360.0;
-        }
-		//cout << cameratheta << endl;
-		//eyez = eyez + 0.2;
-		//cameratheta = cameratheta + 1.0;
-    } else if(key == GLUT_KEY_PAGE_DOWN)
+        if(cameratheta > 90.0)
+		{
+			cameratheta = cameratheta - 1.0;
+        	if(cameratheta < 0.0)
+        	{
+            	cameratheta = cameratheta + 360.0;
+        	}
+			centerz = centerz + 0.1;
+		}
+    } else if(key == GLUT_KEY_PAGE_DOWN)	//move down
     {
-        cameratheta = cameratheta + 1.0;
-        if(cameratheta > 360.0)
-        {
-            cameratheta = cameratheta - 360.0;
-        }
-		//cout << cameratheta << endl;
-		//eyez = eyez - 0.2;
-		//cameratheta = cameratheta - 1.0;
+        if(cameratheta < 101.0)
+		{
+			cameratheta = cameratheta + 1.0;
+        	if(cameratheta > 360.0)
+        	{
+            	cameratheta = cameratheta - 360.0;
+        	}
+			centerz = centerz - 0.1;
+		}
     }
 
 }
