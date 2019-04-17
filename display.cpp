@@ -55,7 +55,7 @@ void display(void)
 	GLfloat s_on[] = { 0.2, 0.2, 0.2, 1.0};
     GLfloat s_off[] = { 0.0, 0.0, 0.0, 1.0};
 	GLfloat on[] = { 1.0, 1.0, 1.0, 1.0 };
-	GLfloat position0[] = { 0.0, 0.0, 1.0, 0.0 };
+	GLfloat position0[] = { 0.0, 0.0, 1.0, 1.0 };
 
 	/*Material Properties*/
 	GLfloat a_mat[] = { 0.9, 0.7, 0.0, 1.0};
