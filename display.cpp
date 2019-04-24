@@ -30,8 +30,6 @@ void display(void)
     extern GLUquadric *rod;
     extern GLUquadric *sphere;
 	
-	cout << centerx << "     " << centery << "     " << centerz << endl;
-	cout << camerar << "     " << cameratheta << "     " << cameraphi << endl;
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_DEPTH_TEST);
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
@@ -46,7 +44,9 @@ void display(void)
 	glClearColor(0.0,0.0,0.0,0.0);
 	glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
-    GLfloat emission_on[] = { 0.5, 0.5, 0.5, 1.0};
+	glEnable(GL_LIGHT1);
+    glEnable(GL_COLOR_MATERIAL);
+	GLfloat emission_on[] = { 0.5, 0.5, 0.5, 1.0};
     GLfloat emission_off[] = { 0.0, 0.0, 0.0, 1.0};
 	GLfloat a_on[] = { 0.6,0.6,0.6,1.0};//0.2, 0.2, 0.2, 1.0};
     GLfloat a_off[] = { 0.0, 0.0, 0.0, 1.0};
@@ -64,8 +64,8 @@ void display(void)
 	GLfloat a_mat1[] = { 0.9, 0.9, 0.9, 1.0};
     GLfloat d_mat1[] = { 0.7, 0.0, 0.0, 1.0};
     GLfloat s_mat1[] = { 0.0, 0.6, 0.0, 1.0};
-
-   	glPushMatrix();
+	
+	glPushMatrix();
 	glLightfv(GL_LIGHT0, GL_POSITION, position0);
    	glLightfv(GL_LIGHT0, GL_EMISSION, emission_off);
     glLightfv(GL_LIGHT0, GL_SPECULAR, s_on);
@@ -73,6 +73,29 @@ void display(void)
 	glLightfv(GL_LIGHT0, GL_AMBIENT, a_on);
 	glTranslated(0.0,0.0,1.0);
 	glDisable (GL_LIGHTING);
+    glColor3f (0.0, 1.0, 1.0);
+    glutWireCube (0.1);
+    glEnable (GL_LIGHTING);
+	glPopMatrix();
+
+	/*Spotlight*/
+	glPushMatrix();
+	glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 7.0);
+    glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 30.0);
+    glLightf(GL_LIGHT1, GL_LINEAR_ATTENUATION, 0.0);
+	
+	float *light1 = (float*) malloc(4*sizeof(float));
+    light1[0]= 4.0; light1[1] = 0.0; light1[2]=1.0; light1[3] = 1.0;
+    glLightfv(GL_LIGHT1, GL_POSITION, light1);
+    light1[0]= 0.0; light1[1] = 0.0; light1[2]=0.5; light1[3] = 1.0;
+    glLightfv(GL_LIGHT1, GL_DIFFUSE, light1);
+    glLightfv(GL_LIGHT1, GL_SPECULAR, light1);
+	
+	float *direction1 = (float*) malloc(3*sizeof(float));
+   	direction1[0]= 0.0; direction1[1] =0.0; direction1[2]=-1.0;
+   	glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, direction1);
+	glTranslated(4.0,0.0,1.0);
+    glDisable (GL_LIGHTING);
     glColor3f (0.0, 1.0, 1.0);
     glutWireCube (0.1);
     glEnable (GL_LIGHTING);
@@ -188,7 +211,7 @@ void display(void)
 	glPushMatrix();
     #ifdef LIGHTING
     glDisable(GL_COLOR_MATERIAL);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_mat1);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_mat);
     glEnable(GL_COLOR_MATERIAL);
     glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 	#endif
