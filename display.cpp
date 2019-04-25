@@ -48,7 +48,7 @@ void display(void)
     glEnable(GL_COLOR_MATERIAL);
 	GLfloat emission_on[] = { 0.5, 0.5, 0.5, 1.0};
     GLfloat emission_off[] = { 0.0, 0.0, 0.0, 1.0};
-	GLfloat a_on[] = { 0.6,0.6,0.6,1.0};//0.2, 0.2, 0.2, 1.0};
+	GLfloat a_on[] = { 0.01,0.01,0.01,1.0};//0.6,0.6,0.6,1.0};//0.2, 0.2, 0.2, 1.0};
     GLfloat a_off[] = { 0.0, 0.0, 0.0, 1.0};
 	GLfloat d_on[] = { 0.3, 0.5, 0.8, 1.0};
     GLfloat d_off[] = { 0.0, 0.0, 0.0, 1.0};
@@ -85,16 +85,16 @@ void display(void)
     glLightf(GL_LIGHT1, GL_LINEAR_ATTENUATION, 0.0);
 	
 	float *light1 = (float*) malloc(4*sizeof(float));
-    light1[0]= 4.0; light1[1] = 0.0; light1[2]=1.0; light1[3] = 1.0;
+    light1[0]= 2.0; light1[1] = 0.0; light1[2]=2.0; light1[3] = 1.0;
     glLightfv(GL_LIGHT1, GL_POSITION, light1);
-    light1[0]= 0.0; light1[1] = 0.0; light1[2]=0.5; light1[3] = 1.0;
+    light1[0]= 0.0; light1[1] = 0.5; light1[2]=0.0; light1[3] = 1.0;
     glLightfv(GL_LIGHT1, GL_DIFFUSE, light1);
     glLightfv(GL_LIGHT1, GL_SPECULAR, light1);
 	
 	float *direction1 = (float*) malloc(3*sizeof(float));
    	direction1[0]= 0.0; direction1[1] =0.0; direction1[2]=-1.0;
    	glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, direction1);
-	glTranslated(4.0,0.0,1.0);
+	glTranslated(2.0,0.0,1.0);
     glDisable (GL_LIGHTING);
     glColor3f (0.0, 1.0, 1.0);
     glutWireCube (0.1);
