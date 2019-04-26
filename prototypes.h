@@ -14,6 +14,6 @@ void glutLockFrameRate(float desiredFrameRate);
 void PeriodTime(void);
 void processSpecialKeys(int key, int x, int y);
 void loadTextures(void);
-
+void showPhysics(void);
 #endif
 
