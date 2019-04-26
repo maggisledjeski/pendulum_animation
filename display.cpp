@@ -29,13 +29,14 @@ void display(void)
     extern GLUquadric *base2;
     extern GLUquadric *rod;
     extern GLUquadric *sphere;
-	
+	extern GLUquadric *spot;
+
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_DEPTH_TEST);
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     
 	glLoadIdentity();   // Call this before setting the viewing position 
-   	gluLookAt(/*eyex,eyey,eyez,*/camerar*sin(cameratheta*M_PI/180.0)*cos(cameraphi*M_PI/180.0),camerar*sin(cameratheta*M_PI/180.0)*sin(cameraphi*M_PI/180.0),camerar*cos(cameratheta*M_PI/180.0),
+   	gluLookAt(camerar*sin(cameratheta*M_PI/180.0)*cos(cameraphi*M_PI/180.0),camerar*sin(cameratheta*M_PI/180.0)*sin(cameraphi*M_PI/180.0),camerar*cos(cameratheta*M_PI/180.0),
 			centerx,centery,centerz,
 			0.0,0.0,1.0);
 
@@ -95,10 +96,38 @@ void display(void)
    	direction1[0]= 0.0; direction1[1] =0.0; direction1[2]=-1.0;
    	glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, direction1);
 	glTranslated(2.0,0.0,1.0);
-    glDisable (GL_LIGHTING);
-    glColor3f (0.0, 1.0, 1.0);
-    glutWireCube (0.1);
-    glEnable (GL_LIGHTING);
+    glDisable(GL_LIGHTING);
+    glColor3f(1.0, 1.0, 1.0);
+ 	/*cone*/
+    gluCylinder(spot,
+            (GLdouble) 0.2,    //radius of the cylinder at z=0
+            (GLdouble) 0.05,    //radius of the cylinder at z=height
+            (GLdouble) 0.8, //height of the cylinder
+            (GLint)    20,
+            (GLint)    20 );
+	glEnable(GL_LIGHTING);
+	glTranslated(0.0,-2.0,-5.0);
+	glPushMatrix();
+	glTranslated(1.5,0.5,0.0);
+	gluCylinder(base1,
+            (GLdouble) 0.15, //radius of the cylinder at z=0
+            (GLdouble) 0.15, //radius of the cylinder at z=height
+            (GLdouble) 5.5, //height of the cylinder
+            (GLint)    20,
+            (GLint)    20 );
+	glPopMatrix();
+	glPushMatrix();
+	glTranslated(2.0,-0.3,0.0);
+	glRotated(90.0,1,1,0);
+    glTranslated(-3.7,4.0,-3.0);
+	glColor3f (1.0,1.0,1.0);
+    gluCylinder(base1,
+            (GLdouble) 0.05, //radius of the cylinder at z=0
+            (GLdouble) 0.05, //radius of the cylinder at z=height
+            (GLdouble) 2.2, //height of the cylinder
+            (GLint)    20,
+            (GLint)    20 );
+	glPopMatrix();
 	glPopMatrix();
 	#endif
 

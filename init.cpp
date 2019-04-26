@@ -14,7 +14,8 @@ void init(void)
     extern GLUquadric *base2;
     extern GLUquadric *rod;
     extern GLUquadric *sphere;
-
+	extern GLUquadric *spot;
+	
     glClearColor (0.0, 0.0, 0.0, 0.0);
     glShadeModel (GL_SMOOTH);
 	#ifdef TEXTURE
@@ -35,7 +36,9 @@ void init(void)
     gluQuadricTexture(rod, GL_TRUE);
     sphere = gluNewQuadric();
     gluQuadricTexture(sphere, GL_TRUE);
-    #endif
+    spot = gluNewQuadric();
+	gluQuadricTexture(spot, GL_TRUE);
+	#endif
 }
 
 #endif
