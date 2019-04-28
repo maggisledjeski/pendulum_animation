@@ -3,6 +3,7 @@
 
 #include "includes.h"
 #include "prototypes.h"
+#include "structs.h"
 
 void display(void)
 {
@@ -881,6 +882,8 @@ void showPhysics()
 void drawPhysics(void)
 {
 	extern double theta;
+	extern list <vertex> vList;
+
 	double gxmin = 0.0;
 	double gymin = 0.0;
 	double vxmin = 510.0;
@@ -896,14 +899,24 @@ void drawPhysics(void)
 	/*Calculate the derivative of theta*/
 		
 	/*Calculate the screen points*/
+	vertex v;
 	double screenx = gxmin + vxmin + ((x - fxmin)/(fxmax - fxmin)) * (vxmax - vxmin);
 	double screeny = gymin + vymin + ((y - fymin)/(fymax - fymin)) * (vymax - vymin);
 	//cout << screenx << " " << screeny << endl;
+	v.x = screenx;
+	v.y = screeny;
+	vList.push_back(v);
 	/*Draw the screen points*/
 	glColor3f(0.0,0.0,0.0);
-	glBegin(GL_LINES);
-	glVertex2f(0.0,0.0);
-	glVertex2f(screenx,screeny);
+	glBegin(GL_POINTS);//LINES);
+	//glVertex2f(0.0,0.0);
+	//glVertex2f(screenx,screeny);
+
+	for(list<vertex>::iterator it=vList.begin(); it!=vList.end(); it++)
+    {
+        glVertex2f((*it).x,(*it).y);
+    }
+
 	glEnd();
 }
 #endif

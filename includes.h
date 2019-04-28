@@ -11,8 +11,8 @@
 #include <iostream>
 #include <math.h>
 #include <cstdlib>
-//#include <GL/glew.h>
 #include "SOIL.h"
+#include <list> 
 using namespace std;
 
 #endif

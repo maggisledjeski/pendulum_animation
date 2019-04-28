@@ -2,6 +2,7 @@
 #define GLOBALS
 
 #include "includes.h"
+#include "structs.h"
 
 bool cma = false;
 unsigned frames = 0;
@@ -49,5 +50,6 @@ GLUquadric *sphere;
 GLUquadric *spot;
 GLuint textureID[5];
 
+list <vertex> vList;
 
 #endif

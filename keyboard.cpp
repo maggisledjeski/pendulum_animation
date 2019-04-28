@@ -56,7 +56,7 @@ void keyboard(unsigned char key, int x, int y)
 	if(key == 'g' && physics == false)	
     {
         physics = true;
-    } else
+    } else if(key == 'g' && physics == true)
 	{
 		physics = false;
 	}
