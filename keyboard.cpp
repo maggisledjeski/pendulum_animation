@@ -18,7 +18,7 @@ void keyboard(unsigned char key, int x, int y)
     extern GLfloat cameraphi;
 	extern bool physics;
 	extern list <vertex> vList;
-	extern double kadd;
+	extern double a;
 
 	/*exits the program if q or Q is clicked*/
 	if(key == 'q' || key == 'Q') 
@@ -71,7 +71,7 @@ void keyboard(unsigned char key, int x, int y)
 	}
 	if(key == 'k')
 	{
-		kadd = 5.0;	
+		 a = 100.0;//5.0;	
 	}
 	if(key == 'w')	//move forward
     {

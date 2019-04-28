@@ -886,31 +886,31 @@ void showPhysics()
 
 	#ifdef TEXTURE
 	glColor3f(1.0,1.0,1.0);
-    glRecti(500.0,0.0,600.0,105.0);
+    glRecti(455.0,0.0,600.0,130.0);
 	#endif
 	drawPhysics();
-	char *fpsstring = (char*) malloc(sizeof(char));
-    sprintf(fpsstring,"X");
-	char *string = (char*) malloc(sizeof(char));
-    sprintf(string,"Y");
+	char *fpsstring = (char*) malloc(5*sizeof(char));
+    sprintf(fpsstring,"Theta");
+	char *string = (char*) malloc(5*sizeof(char));
+    sprintf(string,"Omega");
 	/*text*/
     glColor3f(0.0,0.0,0.0);
-    drawString(592,10,GLUT_BITMAP_HELVETICA_12,fpsstring);
-    drawString(505,92,GLUT_BITMAP_HELVETICA_12,string);
+    drawString(560,10,GLUT_BITMAP_HELVETICA_12,fpsstring);
+    drawString(460,115,GLUT_BITMAP_HELVETICA_12,string);
 	/*y-axis*/	
 	glBegin(GL_LINES);
-    glVertex3f(510.0,90.0,0.0);
-    glVertex3f(510.0,10.0,0.0);
+    glVertex3f(480.0,110.0,0.0);
+    glVertex3f(480.0,10.0,0.0);
     glEnd();
 	/*x-axis*/
 	glBegin(GL_LINES);
-    glVertex3f(590.0,10.0,0.0);
-    glVertex3f(510.0,10.0,0.0);
+    glVertex3f(555.0,10.0,0.0);
+    glVertex3f(480.0,10.0,0.0);
     glEnd();
 	/*white background*/	
 	#ifndef TEXTURE
 	glColor3f(1.0,1.0,1.0);
-    glRecti(500.0,0.0,600.0,105.0);
+    glRecti(455.0,0.0,600.0,130.0);
 	#endif
 	glPopMatrix();
     glMatrixMode(GL_PROJECTION);
@@ -928,10 +928,10 @@ void calculatePhysics(double x, double y)
 
 	double gxmin = 0.0;
 	double gymin = 0.0;
-	double vxmin = 510.0;
+	double vxmin = 480.0;
 	double vymin = 10.0;
-	double vxmax = 590.0;
-	double vymax = 90.0;
+	double vxmax = 555.0;
+	double vymax = 110.0;
 	double fxmin = -3.0;
 	double fymin = -3.0;
 	double fxmax = 3.0;
