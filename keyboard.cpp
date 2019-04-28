@@ -3,7 +3,7 @@
 
 #include "includes.h"
 #include "prototypes.h"
-//#include "globals.h"
+#include "structs.h"
 
 void keyboard(unsigned char key, int x, int y)
 {
@@ -17,6 +17,7 @@ void keyboard(unsigned char key, int x, int y)
     extern GLfloat cameratheta;
     extern GLfloat cameraphi;
 	extern bool physics;
+	extern list <vertex> vList;
 
 	/*exits the program if q or Q is clicked*/
 	if(key == 'q' || key == 'Q') 
@@ -59,6 +60,13 @@ void keyboard(unsigned char key, int x, int y)
     } else if(key == 'g' && physics == true)
 	{
 		physics = false;
+	}
+	if(key == 'c')
+	{
+		while(!vList.empty())
+  		{
+     		vList.pop_front();
+  		}
 	}
 	if(key == 'w')	//move forward
     {
