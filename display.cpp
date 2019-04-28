@@ -846,7 +846,7 @@ void showPhysics()
     glLoadIdentity();
 
 //	glClear(GL_DEPTH_BUFFER_BIT);	
-	
+	drawPhysics();
 	char *fpsstring = (char*) malloc(sizeof(char));
     sprintf(fpsstring,"X");
 	char *string = (char*) malloc(sizeof(char));
@@ -876,5 +876,34 @@ void showPhysics()
 	
 	free(fpsstring);
 	free(string);
+}
+/*Calulates and draws the physics in the pop-up display*/
+void drawPhysics(void)
+{
+	extern double theta;
+	double gxmin = 0.0;
+	double gymin = 0.0;
+	double vxmin = 510.0;
+	double vymin = 10.0;
+	double vxmax = 590.0;
+	double vymax = 90.0;
+	double fxmin = 0.0;
+	double fymin = 0.0;
+	double fxmax = 150.0;
+	double fymax = 200.0;
+	double x = 5.0;
+	double y = 105.0;
+	/*Calculate the derivative of theta*/
+		
+	/*Calculate the screen points*/
+	double screenx = gxmin + vxmin + ((x - fxmin)/(fxmax - fxmin)) * (vxmax - vxmin);
+	double screeny = gymin + vymin + ((y - fymin)/(fymax - fymin)) * (vymax - vymin);
+	//cout << screenx << " " << screeny << endl;
+	/*Draw the screen points*/
+	glColor3f(0.0,0.0,0.0);
+	glBegin(GL_LINES);
+	glVertex2f(0.0,0.0);
+	glVertex2f(screenx,screeny);
+	glEnd();
 }
 #endif
