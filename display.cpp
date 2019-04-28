@@ -30,6 +30,7 @@ void display(void)
     extern GLUquadric *rod;
     extern GLUquadric *sphere;
 	extern GLUquadric *spot;
+	extern bool physics;
 
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_DEPTH_TEST);
@@ -736,7 +737,10 @@ void display(void)
 	showFPS();	//shows the FPS, FPP, T
     omegaTime();	//calculates the FPS
 	PeriodTime();	//calculates the FPP and T
-	
+	if(physics == true)
+	{
+		showPhysics();	
+	}
 	if(cma == true)	//if there is a cma, change the framerate to show it
 	{
 		glutLockFrameRate(dfr);
@@ -826,4 +830,51 @@ void showFPS()	//time for FPS
 	free(perstring);
 }
 
+/*builds the physics display window*/
+void showPhysics()
+{
+	extern int WINDOW_HEIGHT;
+    extern int WINDOW_WIDTH;
+
+	glMatrixMode(GL_PROJECTION);
+    glPushMatrix();
+    glLoadIdentity();
+    gluOrtho2D(0.0,(double) WINDOW_WIDTH,0.0,(double) WINDOW_HEIGHT);
+
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glLoadIdentity();
+
+//	glClear(GL_DEPTH_BUFFER_BIT);	
+	
+	char *fpsstring = (char*) malloc(sizeof(char));
+    sprintf(fpsstring,"X");
+	char *string = (char*) malloc(sizeof(char));
+    sprintf(string,"Y");
+	/*text*/
+    glColor3f(0.0,0.0,0.0);
+    drawString(592,10,GLUT_BITMAP_HELVETICA_12,fpsstring);
+    drawString(505,92,GLUT_BITMAP_HELVETICA_12,string);
+	/*y-axis*/	
+	glBegin(GL_LINES);
+    glVertex3f(510.0,90.0,0.0);
+    glVertex3f(510.0,10.0,0.0);
+    glEnd();
+	/*x-axis*/
+	glBegin(GL_LINES);
+    glVertex3f(590.0,10.0,0.0);
+    glVertex3f(510.0,10.0,0.0);
+    glEnd();
+	/*white background*/	
+	glColor3f(1.0,1.0,1.0);
+    glRecti(500.0,0.0,600.0,105.0);
+	    
+	glPopMatrix();
+    glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
+    glMatrixMode(GL_MODELVIEW);
+	
+	free(fpsstring);
+	free(string);
+}
 #endif

@@ -16,6 +16,7 @@ void keyboard(unsigned char key, int x, int y)
     extern GLfloat camerar;
     extern GLfloat cameratheta;
     extern GLfloat cameraphi;
+	extern bool physics;
 
 	/*exits the program if q or Q is clicked*/
 	if(key == 'q' || key == 'Q') 
@@ -52,15 +53,13 @@ void keyboard(unsigned char key, int x, int y)
         }
 		eyey = eyey + 0.25;
 	}
-	if(key == 'x')	
+	if(key == 'g' && physics == false)	
     {
-        eyez = eyez + 0.25;
-    }
-    if(key == 'v')	
-    {
-        eyez = eyez - 0.25;
-    }
-
+        physics = true;
+    } else
+	{
+		physics = false;
+	}
 	if(key == 'w')	//move forward
     {
         if(camerar > 1.0)
