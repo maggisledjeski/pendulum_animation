@@ -82,53 +82,83 @@ void display(void)
 	glPopMatrix();
 
 	/*Spotlight*/
+	glDisable(GL_COLOR_MATERIAL);
 	glPushMatrix();
 	glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 7.0);
     glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 30.0);
     glLightf(GL_LIGHT1, GL_LINEAR_ATTENUATION, 0.0);
-	
 	float *light1 = (float*) malloc(4*sizeof(float));
     light1[0]= 2.0; light1[1] = 0.0; light1[2]=2.0; light1[3] = 1.0;
     glLightfv(GL_LIGHT1, GL_POSITION, light1);
     light1[0]= 0.0; light1[1] = 0.5; light1[2]=0.0; light1[3] = 1.0;
     glLightfv(GL_LIGHT1, GL_DIFFUSE, light1);
     glLightfv(GL_LIGHT1, GL_SPECULAR, light1);
-	
 	float *direction1 = (float*) malloc(3*sizeof(float));
    	direction1[0]= 0.0; direction1[1] =0.0; direction1[2]=-1.0;
    	glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, direction1);
 	glTranslated(2.0,0.0,1.0);
     glDisable(GL_LIGHTING);
-    glColor3f(1.0, 1.0, 1.0);
+    //glPushMatrix();
+	glColor3f(1.0, 1.0, 1.0);
  	/*cone*/
-    gluCylinder(spot,
+    #ifdef TEXTURE
+	gluCylinder(spot,
             (GLdouble) 0.2,    //radius of the cylinder at z=0
             (GLdouble) 0.05,    //radius of the cylinder at z=height
             (GLdouble) 0.8, //height of the cylinder
             (GLint)    20,
             (GLint)    20 );
+	#endif
+	#ifndef TEXTURE
+	gluCylinder(gluNewQuadric(),
+            (GLdouble) 0.2,    //radius of the cylinder at z=0
+            (GLdouble) 0.05,    //radius of the cylinder at z=height
+            (GLdouble) 0.8, //height of the cylinder
+            (GLint)    20,
+            (GLint)    20 );
+	#endif
 	glEnable(GL_LIGHTING);
 	glTranslated(0.0,-2.0,-5.0);
 	glPushMatrix();
 	glTranslated(1.5,0.5,0.0);
-	gluCylinder(base1,
+	#ifdef TEXTURE
+    gluCylinder(base1,
             (GLdouble) 0.15, //radius of the cylinder at z=0
             (GLdouble) 0.15, //radius of the cylinder at z=height
             (GLdouble) 5.5, //height of the cylinder
             (GLint)    20,
             (GLint)    20 );
+    #endif
+	#ifndef TEXTURE
+	gluCylinder(gluNewQuadric(),//base1,
+            (GLdouble) 0.15, //radius of the cylinder at z=0
+            (GLdouble) 0.15, //radius of the cylinder at z=height
+            (GLdouble) 5.5, //height of the cylinder
+            (GLint)    20,
+            (GLint)    20 );
+	#endif
 	glPopMatrix();
 	glPushMatrix();
 	glTranslated(2.0,-0.3,0.0);
 	glRotated(90.0,1,1,0);
     glTranslated(-3.7,4.0,-3.0);
 	glColor3f (1.0,1.0,1.0);
+	#ifdef TEXTURE
     gluCylinder(base1,
             (GLdouble) 0.05, //radius of the cylinder at z=0
             (GLdouble) 0.05, //radius of the cylinder at z=height
             (GLdouble) 2.2, //height of the cylinder
             (GLint)    20,
             (GLint)    20 );
+    #endif
+	#ifndef TEXTURE
+    gluCylinder(gluNewQuadric(),//base1,
+            (GLdouble) 0.05, //radius of the cylinder at z=0
+            (GLdouble) 0.05, //radius of the cylinder at z=height
+            (GLdouble) 2.2, //height of the cylinder
+            (GLint)    20,
+            (GLint)    20 );
+	#endif
 	glPopMatrix();
 	glPopMatrix();
 	#endif
@@ -746,6 +776,10 @@ void display(void)
 	{
 		glutLockFrameRate(dfr);
 	}
+	#ifdef LIGHTING
+	free(light1);
+	free(direction1);
+	#endif
 	glutSwapBuffers();
 }
 
@@ -836,7 +870,8 @@ void showPhysics()
 {
 	extern int WINDOW_HEIGHT;
     extern int WINDOW_WIDTH;
-
+	glDisable(GL_LIGHTING);
+	glDisable(GL_TEXTURE_2D);
 	glMatrixMode(GL_PROJECTION);
     glPushMatrix();
     glLoadIdentity();
@@ -845,8 +880,14 @@ void showPhysics()
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glLoadIdentity();
+	
+	glDisable(GL_CULL_FACE);
+	glClear(GL_DEPTH_BUFFER_BIT);	
 
-//	glClear(GL_DEPTH_BUFFER_BIT);	
+	#ifdef TEXTURE
+	glColor3f(1.0,1.0,1.0);
+    glRecti(500.0,0.0,600.0,105.0);
+	#endif
 	drawPhysics();
 	char *fpsstring = (char*) malloc(sizeof(char));
     sprintf(fpsstring,"X");
@@ -867,9 +908,10 @@ void showPhysics()
     glVertex3f(510.0,10.0,0.0);
     glEnd();
 	/*white background*/	
+	#ifndef TEXTURE
 	glColor3f(1.0,1.0,1.0);
     glRecti(500.0,0.0,600.0,105.0);
-	    
+	#endif
 	glPopMatrix();
     glMatrixMode(GL_PROJECTION);
     glPopMatrix();
@@ -879,7 +921,7 @@ void showPhysics()
 	free(string);
 }
 /*Calulates and draws the physics in the pop-up display*/
-void drawPhysics(void)
+void calculatePhysics(double x, double y)
 {
 	extern double theta;
 	extern list <vertex> vList;
@@ -890,13 +932,10 @@ void drawPhysics(void)
 	double vymin = 10.0;
 	double vxmax = 590.0;
 	double vymax = 90.0;
-	double fxmin = 0.0;
-	double fymin = 0.0;
-	double fxmax = 150.0;
-	double fymax = 200.0;
-	double x = 5.0;
-	double y = 105.0;
-	/*Calculate the derivative of theta*/
+	double fxmin = -3.0;
+	double fymin = -3.0;
+	double fxmax = 3.0;
+	double fymax = 3.0;
 		
 	/*Calculate the screen points*/
 	vertex v;
@@ -906,17 +945,18 @@ void drawPhysics(void)
 	v.x = screenx;
 	v.y = screeny;
 	vList.push_back(v);
+}
+
+void drawPhysics(void)
+{	
+	extern list <vertex> vList;
 	/*Draw the screen points*/
 	glColor3f(0.0,0.0,0.0);
-	glBegin(GL_POINTS);//LINES);
-	//glVertex2f(0.0,0.0);
-	//glVertex2f(screenx,screeny);
-
+	glBegin(GL_POINTS);
 	for(list<vertex>::iterator it=vList.begin(); it!=vList.end(); it++)
     {
         glVertex2f((*it).x,(*it).y);
     }
-
 	glEnd();
 }
 #endif

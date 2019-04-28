@@ -15,6 +15,7 @@ void PeriodTime(void);
 void processSpecialKeys(int key, int x, int y);
 void loadTextures(void);
 void showPhysics(void);
+void calculatePhysics(double x, double y);
 void drawPhysics(void);
 #endif
 

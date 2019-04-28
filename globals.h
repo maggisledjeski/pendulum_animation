@@ -3,7 +3,7 @@
 
 #include "includes.h"
 #include "structs.h"
-
+double kadd = 0.0;
 bool cma = false;
 unsigned frames = 0;
 int pframes = 0;
