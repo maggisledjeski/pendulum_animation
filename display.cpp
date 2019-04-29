@@ -3,6 +3,7 @@
 
 #include "includes.h"
 #include "prototypes.h"
+#include "structs.h"
 
 void display(void)
 {
@@ -29,15 +30,15 @@ void display(void)
     extern GLUquadric *base2;
     extern GLUquadric *rod;
     extern GLUquadric *sphere;
-	
-	cout << centerx << "     " << centery << "     " << centerz << endl;
-	cout << camerar << "     " << cameratheta << "     " << cameraphi << endl;
+	extern GLUquadric *spot;
+	extern bool physics;
+
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_DEPTH_TEST);
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     
 	glLoadIdentity();   // Call this before setting the viewing position 
-   	gluLookAt(/*eyex,eyey,eyez,*/camerar*sin(cameratheta*M_PI/180.0)*cos(cameraphi*M_PI/180.0),camerar*sin(cameratheta*M_PI/180.0)*sin(cameraphi*M_PI/180.0),camerar*cos(cameratheta*M_PI/180.0),
+   	gluLookAt(camerar*sin(cameratheta*M_PI/180.0)*cos(cameraphi*M_PI/180.0),camerar*sin(cameratheta*M_PI/180.0)*sin(cameraphi*M_PI/180.0),camerar*cos(cameratheta*M_PI/180.0),
 			centerx,centery,centerz,
 			0.0,0.0,1.0);
 
@@ -46,9 +47,11 @@ void display(void)
 	glClearColor(0.0,0.0,0.0,0.0);
 	glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
-    GLfloat emission_on[] = { 0.5, 0.5, 0.5, 1.0};
+	glEnable(GL_LIGHT1);
+    glEnable(GL_COLOR_MATERIAL);
+	GLfloat emission_on[] = { 0.5, 0.5, 0.5, 1.0};
     GLfloat emission_off[] = { 0.0, 0.0, 0.0, 1.0};
-	GLfloat a_on[] = { 0.6,0.6,0.6,1.0};//0.2, 0.2, 0.2, 1.0};
+	GLfloat a_on[] = { 0.01,0.01,0.01,1.0};//0.6,0.6,0.6,1.0};//0.2, 0.2, 0.2, 1.0};
     GLfloat a_off[] = { 0.0, 0.0, 0.0, 1.0};
 	GLfloat d_on[] = { 0.3, 0.5, 0.8, 1.0};
     GLfloat d_off[] = { 0.0, 0.0, 0.0, 1.0};
@@ -64,8 +67,8 @@ void display(void)
 	GLfloat a_mat1[] = { 0.9, 0.9, 0.9, 1.0};
     GLfloat d_mat1[] = { 0.7, 0.0, 0.0, 1.0};
     GLfloat s_mat1[] = { 0.0, 0.6, 0.0, 1.0};
-
-   	glPushMatrix();
+	
+	glPushMatrix();
 	glLightfv(GL_LIGHT0, GL_POSITION, position0);
    	glLightfv(GL_LIGHT0, GL_EMISSION, emission_off);
     glLightfv(GL_LIGHT0, GL_SPECULAR, s_on);
@@ -76,6 +79,87 @@ void display(void)
     glColor3f (0.0, 1.0, 1.0);
     glutWireCube (0.1);
     glEnable (GL_LIGHTING);
+	glPopMatrix();
+
+	/*Spotlight*/
+	glDisable(GL_COLOR_MATERIAL);
+	glPushMatrix();
+	glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 7.0);
+    glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 30.0);
+    glLightf(GL_LIGHT1, GL_LINEAR_ATTENUATION, 0.0);
+	float *light1 = (float*) malloc(4*sizeof(float));
+    light1[0]= 2.0; light1[1] = 0.0; light1[2]=2.0; light1[3] = 1.0;
+    glLightfv(GL_LIGHT1, GL_POSITION, light1);
+    light1[0]= 0.0; light1[1] = 0.5; light1[2]=0.0; light1[3] = 1.0;
+    glLightfv(GL_LIGHT1, GL_DIFFUSE, light1);
+    glLightfv(GL_LIGHT1, GL_SPECULAR, light1);
+	float *direction1 = (float*) malloc(3*sizeof(float));
+   	direction1[0]= 0.0; direction1[1] =0.0; direction1[2]=-1.0;
+   	glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, direction1);
+	glTranslated(2.0,0.0,1.0);
+    glDisable(GL_LIGHTING);
+    //glPushMatrix();
+	glColor3f(1.0, 1.0, 1.0);
+ 	/*cone*/
+    #ifdef TEXTURE
+	gluCylinder(spot,
+            (GLdouble) 0.2,    //radius of the cylinder at z=0
+            (GLdouble) 0.05,    //radius of the cylinder at z=height
+            (GLdouble) 0.8, //height of the cylinder
+            (GLint)    20,
+            (GLint)    20 );
+	#endif
+	#ifndef TEXTURE
+	gluCylinder(gluNewQuadric(),
+            (GLdouble) 0.2,    //radius of the cylinder at z=0
+            (GLdouble) 0.05,    //radius of the cylinder at z=height
+            (GLdouble) 0.8, //height of the cylinder
+            (GLint)    20,
+            (GLint)    20 );
+	#endif
+	glEnable(GL_LIGHTING);
+	glTranslated(0.0,-2.0,-5.0);
+	glPushMatrix();
+	glTranslated(1.5,0.5,0.0);
+	#ifdef TEXTURE
+    gluCylinder(base1,
+            (GLdouble) 0.15, //radius of the cylinder at z=0
+            (GLdouble) 0.15, //radius of the cylinder at z=height
+            (GLdouble) 5.5, //height of the cylinder
+            (GLint)    20,
+            (GLint)    20 );
+    #endif
+	#ifndef TEXTURE
+	gluCylinder(gluNewQuadric(),//base1,
+            (GLdouble) 0.15, //radius of the cylinder at z=0
+            (GLdouble) 0.15, //radius of the cylinder at z=height
+            (GLdouble) 5.5, //height of the cylinder
+            (GLint)    20,
+            (GLint)    20 );
+	#endif
+	glPopMatrix();
+	glPushMatrix();
+	glTranslated(2.0,-0.3,0.0);
+	glRotated(90.0,1,1,0);
+    glTranslated(-3.7,4.0,-3.0);
+	glColor3f (1.0,1.0,1.0);
+	#ifdef TEXTURE
+    gluCylinder(base1,
+            (GLdouble) 0.05, //radius of the cylinder at z=0
+            (GLdouble) 0.05, //radius of the cylinder at z=height
+            (GLdouble) 2.2, //height of the cylinder
+            (GLint)    20,
+            (GLint)    20 );
+    #endif
+	#ifndef TEXTURE
+    gluCylinder(gluNewQuadric(),//base1,
+            (GLdouble) 0.05, //radius of the cylinder at z=0
+            (GLdouble) 0.05, //radius of the cylinder at z=height
+            (GLdouble) 2.2, //height of the cylinder
+            (GLint)    20,
+            (GLint)    20 );
+	#endif
+	glPopMatrix();
 	glPopMatrix();
 	#endif
 
@@ -188,7 +272,7 @@ void display(void)
 	glPushMatrix();
     #ifdef LIGHTING
     glDisable(GL_COLOR_MATERIAL);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_mat1);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, s_mat);
     glEnable(GL_COLOR_MATERIAL);
     glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 	#endif
@@ -684,11 +768,18 @@ void display(void)
 	showFPS();	//shows the FPS, FPP, T
     omegaTime();	//calculates the FPS
 	PeriodTime();	//calculates the FPP and T
-	
+	if(physics == true)
+	{
+		showPhysics();	
+	}
 	if(cma == true)	//if there is a cma, change the framerate to show it
 	{
 		glutLockFrameRate(dfr);
 	}
+	#ifdef LIGHTING
+	free(light1);
+	free(direction1);
+	#endif
 	glutSwapBuffers();
 }
 
@@ -774,4 +865,98 @@ void showFPS()	//time for FPS
 	free(perstring);
 }
 
+/*builds the physics display window*/
+void showPhysics()
+{
+	extern int WINDOW_HEIGHT;
+    extern int WINDOW_WIDTH;
+	glDisable(GL_LIGHTING);
+	glDisable(GL_TEXTURE_2D);
+	glMatrixMode(GL_PROJECTION);
+    glPushMatrix();
+    glLoadIdentity();
+    gluOrtho2D(0.0,(double) WINDOW_WIDTH,0.0,(double) WINDOW_HEIGHT);
+
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glLoadIdentity();
+	
+	glDisable(GL_CULL_FACE);
+	glClear(GL_DEPTH_BUFFER_BIT);	
+
+	#ifdef TEXTURE
+	glColor3f(1.0,1.0,1.0);
+    glRecti(455.0,0.0,600.0,130.0);
+	#endif
+	drawPhysics();
+	char *fpsstring = (char*) malloc(5*sizeof(char));
+    sprintf(fpsstring,"Theta");
+	char *string = (char*) malloc(5*sizeof(char));
+    sprintf(string,"Omega");
+	/*text*/
+    glColor3f(0.0,0.0,0.0);
+    drawString(560,10,GLUT_BITMAP_HELVETICA_12,fpsstring);
+    drawString(460,115,GLUT_BITMAP_HELVETICA_12,string);
+	/*y-axis*/	
+	glBegin(GL_LINES);
+    glVertex3f(480.0,110.0,0.0);
+    glVertex3f(480.0,10.0,0.0);
+    glEnd();
+	/*x-axis*/
+	glBegin(GL_LINES);
+    glVertex3f(555.0,10.0,0.0);
+    glVertex3f(480.0,10.0,0.0);
+    glEnd();
+	/*white background*/	
+	#ifndef TEXTURE
+	glColor3f(1.0,1.0,1.0);
+    glRecti(455.0,0.0,600.0,130.0);
+	#endif
+	glPopMatrix();
+    glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
+    glMatrixMode(GL_MODELVIEW);
+	
+	free(fpsstring);
+	free(string);
+}
+/*Calulates and draws the physics in the pop-up display*/
+void calculatePhysics(double x, double y)
+{
+	extern double theta;
+	extern list <vertex> vList;
+
+	double gxmin = 0.0;
+	double gymin = 0.0;
+	double vxmin = 480.0;
+	double vymin = 10.0;
+	double vxmax = 555.0;
+	double vymax = 110.0;
+	double fxmin = -3.0;
+	double fymin = -3.0;
+	double fxmax = 3.0;
+	double fymax = 3.0;
+		
+	/*Calculate the screen points*/
+	vertex v;
+	double screenx = gxmin + vxmin + ((x - fxmin)/(fxmax - fxmin)) * (vxmax - vxmin);
+	double screeny = gymin + vymin + ((y - fymin)/(fymax - fymin)) * (vymax - vymin);
+	//cout << screenx << " " << screeny << endl;
+	v.x = screenx;
+	v.y = screeny;
+	vList.push_back(v);
+}
+
+void drawPhysics(void)
+{	
+	extern list <vertex> vList;
+	/*Draw the screen points*/
+	glColor3f(0.0,0.0,0.0);
+	glBegin(GL_POINTS);
+	for(list<vertex>::iterator it=vList.begin(); it!=vList.end(); it++)
+    {
+        glVertex2f((*it).x,(*it).y);
+    }
+	glEnd();
+}
 #endif

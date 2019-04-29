@@ -2,6 +2,7 @@
 #define INCLUDES 
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <GL/glew.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
@@ -10,8 +11,8 @@
 #include <iostream>
 #include <math.h>
 #include <cstdlib>
-//#include <GL/glew.h>
 #include "SOIL.h"
+#include <list> 
 using namespace std;
 
 #endif
